@@ -1,0 +1,20 @@
+* {
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "calibri-font-family";
+	src: url($lib/fonts/calibri-font-family/calibri-regular.ttf);
+}
+
+body {
+	background-color: #F2D7F9;
+	margin: 0;
+	padding: 0;
+	color: #3B3E29;
+	font-family: "calibri-font-family";
+}
+
+img {
+	width: 100%;
+}
