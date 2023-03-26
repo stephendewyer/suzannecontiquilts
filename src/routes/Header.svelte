@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import Hamburger from '$lib/components/navigation/Hamburger.svelte'
 	import logo from '$lib/images/logo/Suzanne_Nigro_Conti_Quilts_logo_02.svg';
 	import stitches from '$lib/images/icons/stitches_02.svg';
 </script>
@@ -64,6 +65,9 @@
 				
 			</li>
 		</ul>
+		<div class="mobile_nav_toggle_button">
+			<Hamburger />
+		</div>
 	</nav>
 </header>
 
@@ -142,6 +146,44 @@
 		position: absolute;
 		width: 6rem;
 		top: 1.5rem;
+	}
+
+	@media (min-width: 750px) {
+
+		.mobile_nav_toggle_button {
+			display: none;
+		}
+
+	}
+
+	@media (max-width: 750px) {
+
+		.main_nav_tabs_left {
+			display: none;
+		}
+
+		.main_nav_tabs_right {
+			display: none;
+		}
+
+		nav {
+			max-width: 100%;
+			margin: 0;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 1rem 0 1rem;
+		}
+
+		.logo_container {
+			width: 100%;
+			align-items: flex-start;
+		}
+
+		.logo {
+			width: 100%;
+			max-width: 8rem;
+		}
+
 	}
 
 </style>
