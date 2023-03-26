@@ -178,6 +178,10 @@
             margin: auto auto 1rem 0;
         }
 
+        .footer_nav_tab_active {
+            margin: auto auto 1rem 0;
+        }
+
         .copyright {
             font-size: 1.25rem;
             text-align: left;

@@ -3,6 +3,8 @@
 	import Hamburger from '$lib/components/navigation/Hamburger.svelte'
 	import logo from '$lib/images/logo/Suzanne_Nigro_Conti_Quilts_logo_02.svg';
 	import stitches from '$lib/images/icons/stitches_02.svg';
+
+	export let sideDrawer = false;
 </script>
 
 <header>
@@ -66,7 +68,7 @@
 			</li>
 		</ul>
 		<div class="mobile_nav_toggle_button">
-			<Hamburger />
+			<Hamburger bind:open={sideDrawer}/>
 		</div>
 	</nav>
 </header>
