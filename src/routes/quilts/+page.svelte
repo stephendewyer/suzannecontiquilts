@@ -1,6 +1,6 @@
 <script>
 	import quilts from '$lib/data/quilts.json';
-
+	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 </script>
 
 <svelte:head>
@@ -21,6 +21,9 @@
 					<h2 class="quilt_name">
 						{quilt.name}
 					</h2>
+					<PrimaryButton>
+						view
+					</PrimaryButton>
 				</div>
 				
 			</div>
@@ -55,11 +58,15 @@
 
 	.quilt_info_container {
 		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.quilt_name {
 		text-align: center;
 		color: #15060B;
+		margin: 0 auto 1rem auto;
 	}
 
 </style>
