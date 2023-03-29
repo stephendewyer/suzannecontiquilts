@@ -60,7 +60,7 @@
         height: 100%;
         width: 100%;
         background-color: #DCEBC3;
-        left: 0;
+        left: 2rem;
         right: 0;
         transform: translateX(100%);
         transition: transform 0.3s ease-in-out;

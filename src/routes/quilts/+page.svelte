@@ -14,12 +14,15 @@
 			<div class="quilt_card_container">
 				<img 
 					class="quilt_thumbnail"
-					src="/images/quilts{quilt.images[0]}" 
+					src="/images/quilts/thumbnails{quilt.images[0]}" 
 					alt="{quilt.name} thumbnail" 
 				/>
-				<h2>
-					{quilt.name}
-				</h2>
+				<div class="quilt_info_container">
+					<h2 class="quilt_name">
+						{quilt.name}
+					</h2>
+				</div>
+				
 			</div>
 		{/each}
 	</div>
@@ -48,6 +51,14 @@
 		width: 100%;
 		height: 16rem;
 		object-fit: cover;
+	}
+
+	.quilt_info_container {
+		padding: 1rem;
+	}
+
+	.quilt_name {
+		text-align: center;
 	}
 
 </style>
