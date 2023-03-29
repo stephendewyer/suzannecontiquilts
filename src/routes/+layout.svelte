@@ -1,8 +1,8 @@
 <script>
 	import SideDrawer from '$lib/components/navigation/sideDrawer/SideDrawer.svelte';
 	import Backdrop from '$lib/components/navigation/sideDrawer/Backdrop.svelte';
-	import Header from './Header.svelte';
-	import Footer from './Footer.svelte';
+	import Header from '$lib/components/Header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import './styles.css';
 
 	let open = false;
