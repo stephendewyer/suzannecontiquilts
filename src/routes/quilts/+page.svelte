@@ -13,7 +13,7 @@
 			<div class="quilt_card_container">
 				<img 
 					class="quilt_thumbnail"
-					src="/src/lib/images/quilts/{quilt.images[0]}" 
+					src="/src/lib/images/quilts{quilt.images[0]}" 
 					alt="{quilt.name} thumbnail" 
 				/>
 				<h2>
