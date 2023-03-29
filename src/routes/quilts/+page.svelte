@@ -59,6 +59,7 @@
 
 	.quilt_name {
 		text-align: center;
+		color: #15060B;
 	}
 
 </style>
