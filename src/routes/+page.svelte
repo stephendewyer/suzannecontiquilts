@@ -10,10 +10,14 @@
 
 <section>
 	<div class="index_banner">
-		<img src={quiltBanner} alt="Nebraska Quilt banner" />
+		<a href="/quilts/nebraska" aria-label="link to Nebraska Quilt page">
+			<img src={quiltBanner} alt="Nebraska Quilt banner" />
+		</a>
 	</div>
 	<div class="index_quilt_floating">
-		<img src={floatingQuilt} alt="Massachusetts Quilt floating" />
+		<a href="/quilts/massachusetts" aria-label="link to Massachusetts Quilt">
+			<img src={floatingQuilt} alt="Massachusetts Quilt floating" />
+		</a>
 	</div>
 </section>
 

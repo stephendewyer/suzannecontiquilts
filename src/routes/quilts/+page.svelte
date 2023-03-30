@@ -73,6 +73,7 @@
 		text-align: center;
 		color: #15060B;
 		margin: 0 auto 1rem auto;
+		font-size: 1.75rem;
 	}
 
 </style>

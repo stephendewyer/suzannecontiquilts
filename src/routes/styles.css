@@ -13,6 +13,7 @@ body {
 	padding: 0;
 	color: #3B3E29;
 	font-family: "calibri-font-family";
+	font-size: 1.75rem;
 }
 
 img {
@@ -25,6 +26,7 @@ h1 {
 
 h2 {
 	font-weight: 200;
+	font-size: 1.75rem;
 }
 
 button {
@@ -33,4 +35,8 @@ button {
 
 a {
 	text-decoration: none;
+}
+
+p {
+	margin: 0;
 }
