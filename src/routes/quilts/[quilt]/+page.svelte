@@ -266,7 +266,8 @@
 
     .quilt_title {
         width: 100%;
-        margin: 4rem auto 1rem 2rem;
+        margin: 4rem auto 1rem auto;
+        padding: 0 1rem 0 1rem;
         text-align: center;
         font-size: 2.5rem;
         display: flex;
@@ -324,6 +325,41 @@
         }
         .thumbnails {
             padding: 0 1rem;
+        }
+        
+        .quilt_title {
+            width: 100%;
+            margin: 1.75rem auto 1rem auto;
+            padding: 0 1rem 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .underline_stitches {
+            width: 8rem;
+            margin: 0.5rem auto auto auto;
+        }
+
+        .quilt_info_list_item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quilt_info_heading {
+            margin: 0;
+            padding: 0 0.5rem 0 0;
+            width: 100%;
+            height: 100%;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .quilt_info_paragraphs {
+            margin: 0;
+            width: 100%;
         }
     }
 

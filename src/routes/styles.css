@@ -40,3 +40,14 @@ a {
 p {
 	margin: 0;
 }
+
+@media (max-width: 750px) {
+	body {
+		font-size: 1rem;
+	}
+
+	h2 {
+		font-weight: 200;
+		font-size: 1.25rem;
+	}
+}
