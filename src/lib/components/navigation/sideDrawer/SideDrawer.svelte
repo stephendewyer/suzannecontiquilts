@@ -54,6 +54,9 @@
 </aside>
 
 <style>
+    aside {
+        z-index: 50;
+    }
 
     .side_drawer_closed {
         position: absolute;

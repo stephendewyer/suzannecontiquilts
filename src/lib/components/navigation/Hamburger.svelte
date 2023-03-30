@@ -13,7 +13,7 @@
 <style>
 
     button {
-		z-index: 20;
+		z-index: 51;
         position: relative;
 	}
 
