@@ -149,25 +149,25 @@
                                 Techniques:
                             </h3>
                             <p class="quilt_info_paragraphs">
-                                {#if quilt.machine_pieced !== (null || false)}
+                                {#if (quilt.machine_pieced !== (false || null))}
                                     machine pieced
                                 {/if}
-                                {#if quilt.machine_pieced !== (null || false) && (quilt.hand_quilted !== (null || false)) || (quilt.applique !== (null || false)) || (quilt.paper_pieced !== (null || false))}
+                                {#if (quilt.machine_pieced !== (false || null) && (quilt.hand_quilted !== (false || null)) || (quilt.applique !== (false || null)) || (quilt.paper_pieced !== (false || null)))}
                                 ,
                                 {/if}
-                                {#if quilt.hand_quilted !== (null || false)}
+                                {#if (quilt.hand_quilted !== (false || null))}
                                     hand quilted
                                 {/if}
-                                {#if quilt.hand_quilted !== (null || false) && (quilt.applique !== (null || false)) || (quilt.paper_pieced !== (null || false))}
+                                {#if (quilt.hand_quilted !== (false || null) && (quilt.applique !== (false || null)) || (quilt.paper_pieced !== (false || null)))}
                                 ,
                                 {/if}
-                                {#if quilt.applique !== (null || false)}
+                                {#if (quilt.applique !== (false || null))}
                                     applique
                                 {/if}
-                                {#if quilt.applique !== (null || false) && (quilt.paper_pieced !== (null || false))}
+                                {#if (quilt.applique !== (false || null) && (quilt.paper_pieced !== (false || null)))}
                                 and
                                 {/if}
-                                {#if quilt.paper_pieced !== (null || false)}
+                                {#if (quilt.paper_pieced !== (false || null))}
                                     paper pieced
                                 {/if}
                             </p>
