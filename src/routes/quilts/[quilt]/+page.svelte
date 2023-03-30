@@ -4,7 +4,7 @@
     import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
     import { onMount } from 'svelte';
     // Default theme
-    import '@splidejs/svelte-splide/css/core';
+    import '@splidejs/svelte-splide/css/skyblue';
 
     // begin set title for header
 
@@ -36,7 +36,6 @@
         gap       : '1rem',
         pagination: false,
         fixedWidth: '100%',
-        focus: 'center',
         rewind: true,
         autoplay: true,
         arrows: false,
@@ -47,12 +46,12 @@
         rewind      : true,
         gap         : '1rem',
         pagination  : false,
-        fixedWidth  : 110,
+        fixedWidth  : 120,
         fixedHeight : 70,
         cover       : true,
-        focus       : 'center',
         isNavigation: true,
         updateOnMove: true,
+        focus      : 'center'
     }
 
     onMount( () => {
@@ -90,22 +89,22 @@
                     {/each} 
                 </Splide> 
             </div>
-            
-            <Splide 
-                aria-label="quilt thumbnails" 
-                options={ thumbsOptions }
-                bind:this={ thumbs }
-            >
-                { #each quilt.images as quiltImage, ix}
-                    <SplideSlide>
-                        <img src={`/images/quilts/${quiltImage}`} alt="{quilt.name} image {ix}">
-                    </SplideSlide>
-                { /each }
-                <div class="splide__arrows">
-                    <button class="splide__arrow splide__arrow--prev">Prev</button>
-                    <button class="splide__arrow splide__arrow--next">Next</button>
-                  </div>
-            </Splide>        
+            <div class="thumbnails_splide_container">
+                <div class="thumbnails">
+                    <Splide 
+                        aria-label="quilt thumbnails" 
+                        options={ thumbsOptions }
+                        bind:this={ thumbs }
+                    >
+                        { #each quilt.images as quiltImage, ix}
+                            <SplideSlide>
+                                <img src={`/images/quilts/${quiltImage}`} alt="{quilt.name} image {ix}">
+                            </SplideSlide>
+                        { /each }
+                        
+                    </Splide> 
+                </div>
+            </div> 
             <h2>{quilt.name}</h2>
         {/if}
     {/each}
@@ -126,6 +125,25 @@
         height: 100%;
         max-height: 1333px;
         object-fit: cover;
+    }
+
+    .thumbnails_splide_container {
+        width: 100%;
+        max-width: 2000px;
+    }
+
+    .thumbnails {
+        padding: 0 10rem;
+    }
+
+    @media (max-width: 750px) {
+
+        .main_splide_container {
+            margin: 0 0 1rem 0;
+        }
+        .thumbnails {
+            padding: 0 1rem;
+        }
     }
 
 </style>

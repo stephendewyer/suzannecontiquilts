@@ -12,16 +12,20 @@
 	<div class="quilts_container">
 		{#each quilts as quilt, i}
 			<div class="quilt_card_container">
-				<img 
-					class="quilt_thumbnail"
-					src="/images/quilts/thumbnails{quilt.images[0]}" 
-					alt="{quilt.name} thumbnail" 
-				/>
+				<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}">
+					<img 
+						class="quilt_thumbnail"
+						src="/images/quilts/thumbnails{quilt.images[0]}" 
+						alt="{quilt.name} thumbnail" 
+					/>
+				</a>
 				<div class="quilt_info_container">
-					<h2 class="quilt_name">
-						{quilt.name}
-					</h2>
-					<a href={`/quilts/${quilt.slug}`}>
+					<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}">
+						<h2 class="quilt_name">
+							{quilt.name}
+						</h2>
+					</a>
+					<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}">
 						<PrimaryButton>
 							view
 						</PrimaryButton>
