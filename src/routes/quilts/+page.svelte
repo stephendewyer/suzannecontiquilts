@@ -21,9 +21,11 @@
 					<h2 class="quilt_name">
 						{quilt.name}
 					</h2>
-					<PrimaryButton>
-						view
-					</PrimaryButton>
+					<a href={`/quilts/${quilt.slug}`}>
+						<PrimaryButton>
+							view
+						</PrimaryButton>
+					</a>
 				</div>
 				
 			</div>
