@@ -5,6 +5,8 @@
     import { onMount } from 'svelte';
     import '@splidejs/svelte-splide/css/skyblue';
     import stitches from '$lib/images/icons/stitches.svg';
+    import NextButton from '$lib/components/buttons/NextButton.svelte';
+    import PrevButton from '$lib/components/buttons/PreviousButton.svelte';
 
     // begin set title for header
 
@@ -14,13 +16,53 @@
 
     let title = "";
 
+    let quiltID = 0;
+    let prevQuiltID = 0;
+    let nextQuiltID = 0;
+
     let quilt01 = [];
+    let quilt02 = [];
+
+    let quiltCount = 0;
 
     for (quilt01 of quilts) {
         if (pageSlug === quilt01.slug) {
             title = quilt01.name;
+            quiltID = quilt01.id;
+        }
+        quiltCount += 1;
+    }
+
+    console.log(`the quilt count is ${quiltCount}`);
+    console.log(`current quilt id is ${quiltID}`);
+
+    // get the previous quilt data
+
+    if (quiltID >= 2) {
+        prevQuiltID = quiltID - 1;
+    } else {
+        prevQuiltID = quiltCount;
+    }
+
+    let prevQuiltSlug = "";
+
+    for (quilt02 of quilts) {
+        if (prevQuiltID === quilt02.id) {
+            prevQuiltSlug = quilt02.slug;
         }
     }
+
+    console.log(`previous quilt id is ${prevQuiltID}`);
+
+    // get the next quilt data
+
+    if (quiltID <= (quiltCount - 1)) {
+        nextQuiltID = quiltID + 1;
+    } else {
+        nextQuiltID = 1;
+    }
+
+    console.log(`next quilt id is ${nextQuiltID}`);
 
     // end set title for header
 
@@ -149,25 +191,33 @@
                                 Techniques:
                             </h3>
                             <p class="quilt_info_paragraphs">
-                                {#if (quilt.machine_pieced !== (false || null))}
+                                {#if (quilt.machine_pieced)}
                                     machine pieced
                                 {/if}
-                                {#if (quilt.machine_pieced !== (false || null) && (quilt.hand_quilted !== (false || null)) || (quilt.applique !== (false || null)) || (quilt.paper_pieced !== (false || null)))}
+                                {#if (
+                                    (quilt.machine_pieced) && (
+                                        (quilt.hand_quilted) || 
+                                        (quilt.applique) ||
+                                        (quilt.paper_pieced)
+                                    )
+                                )}
                                 ,
                                 {/if}
-                                {#if (quilt.hand_quilted !== (false || null))}
+                                {#if (quilt.hand_quilted)}
                                     hand quilted
                                 {/if}
-                                {#if (quilt.hand_quilted !== (false || null) && (quilt.applique !== (false || null)) || (quilt.paper_pieced !== (false || null)))}
+                                {#if (
+                                    (quilt.hand_quilted) && (
+                                        (quilt.applique) || 
+                                        (quilt.paper_pieced)
+                                    )
+                                )}
                                 ,
                                 {/if}
-                                {#if (quilt.applique !== (false || null))}
+                                {#if (quilt.applique)}
                                     applique
                                 {/if}
-                                {#if (quilt.applique !== (false || null) && (quilt.paper_pieced !== (false || null)))}
-                                and
-                                {/if}
-                                {#if (quilt.paper_pieced !== (false || null))}
+                                {#if (quilt.paper_pieced)}
                                     paper pieced
                                 {/if}
                             </p>
@@ -176,7 +226,7 @@
                             <h3 class="quilt_info_heading">
                                 Blocks:
                             </h3>
-                            {#if (quilt.blocks !== (false || null))}
+                            {#if (quilt.blocks)}
                                 <p class="quilt_info_paragraphs">
                                     {quilt.blocks}
                                 </p>
@@ -186,7 +236,7 @@
                             <h3 class="quilt_info_heading">
                                 Orphan blocks:
                             </h3>
-                            {#if (quilt.orphan_blocks !== (false || null))}
+                            {#if (quilt.orphan_blocks)}
                                 <p class="quilt_info_paragraphs">
                                     {quilt.orphan_blocks}
                                 </p>
@@ -196,7 +246,7 @@
                             <h3 class="quilt_info_heading">
                                 Pattern:
                             </h3>
-                            {#if (quilt.pattern !== (false || null))}
+                            {#if (quilt.pattern)}
                                 <p class="quilt_info_paragraphs">
                                     {quilt.pattern}
                                 </p>
@@ -206,7 +256,7 @@
                             <h3 class="quilt_info_heading">
                                 Details:
                             </h3>
-                            {#if (quilt.details !== (false || null))}
+                            {#if (quilt.details)}
                                 <p class="quilt_info_paragraphs">
                                     {quilt.details}
                                 </p>
@@ -216,7 +266,7 @@
                             <h3 class="quilt_info_heading">
                                 Collection:
                             </h3>
-                            {#if (quilt.collection !== (false || null))}
+                            {#if (quilt.collection)}
                                 <p class="quilt_info_paragraphs">
                                     {quilt.collection}
                                 </p>
@@ -225,10 +275,36 @@
                     </ul>
                 </div> 
             </div>
-            
         {/if}
     {/each}
-
+    <div class="buttons_container">
+        {#each quilts as quiltPrev, i}
+            {#if prevQuiltID === quiltPrev.id}
+                <a 
+                    data-sveltekit-reload 
+                    href={`/quilts/${quiltPrev.slug}/`} 
+                    aria-label="link to ${quiltPrev.name}"
+                >
+                    <PrevButton>
+                        {quiltPrev.name}
+                    </PrevButton>
+                </a>
+            {/if}
+        {/each}
+        {#each quilts as quiltNext, i}
+            {#if nextQuiltID === quiltNext.id}
+                <a
+                    data-sveltekit-reload
+                    href={`/quilts/${quiltNext.slug}/`}
+                    aria-label="link to ${quiltNext.name}"
+                >
+                    <NextButton>
+                        {quiltNext.name}
+                    </NextButton>
+                </a>
+            {/if}
+        {/each}
+    </div>
 </div>
 <style>
     .main_splide_container {
@@ -276,7 +352,7 @@
     }
 
     .underline_stitches {
-        width: 15rem;
+        width: 12rem;
         margin: 1rem auto auto auto;
         display: flex;
         flex-direction: column;
@@ -316,6 +392,16 @@
     .quilt_info_paragraphs {
         margin: 0;
         width: 60%;
+    }
+
+    .buttons_container {
+        width: 100%;
+        max-width: 2000px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     @media (max-width: 750px) {
@@ -360,6 +446,13 @@
         .quilt_info_paragraphs {
             margin: 0;
             width: 100%;
+        }
+
+        .buttons_container {
+            width: auto;
+            max-width: auto;
+            margin: 0;
+            padding: 0;
         }
     }
 
