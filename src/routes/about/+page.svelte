@@ -11,9 +11,6 @@
 		autoplay: true,
 		type      : 'loop',
 		arrows  : true,
-		fixedHeight: '32rem',
-		height: '32rem',
-		width: '35rem',
 		perPage: 1,
 	}
 </script>
@@ -85,7 +82,8 @@
 	.aboutCarousel {
 		position: relative;
 		margin-left: 2rem;
-
+		width: 100%;
+		max-width: 40rem;
 	}
 
 	.aboutImage {
