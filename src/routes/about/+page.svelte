@@ -1,9 +1,11 @@
 <script>
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+	import stitches from '$lib/images/icons/stitches.svg';
 	import quiltPattern from '$lib/images/quilts/Michigan/Suzanne_Conti_Michigan_07.jpg';
 	import aboutImage01 from '$lib/images/about/about-Suzanne_Conti_01.jpg';
 	import aboutImage02 from '$lib/images/about/about-Suzanne_Conti_02.jpg';
+	import aboutImage04 from '$lib/images/about/about-Suzanne_Conti_04.jpg';
 
 	const options = {
 		rewind  : true,
@@ -21,31 +23,53 @@
 </svelte:head>
 
 <div class="text-column">
-	<div class="aboutCarousel">
-			<Splide
-				options={ options }
-			>
-				<SplideSlide>
-					<img 
-						class="aboutImage"
-						src="/images/about/about-Suzanne_Conti_01.jpg" 
-						alt="about Suzanne Conti 01" 
-					/>
-				</SplideSlide>
-				<SplideSlide>
-					<img 
-						class="aboutImage"
-						src="/images/about/about-Suzanne_Conti_02.jpg"
-						alt="about Suzanne Conti 02"
-					/>
-				</SplideSlide>
-			</Splide>
-		</div>
-	<div class="quilt_pattern_background">
-		<img src={quiltPattern} alt="quilt pattern" />
-		<div class="quilt_pattern_overlay" />
+	<div 
+		class="quilt_pattern_background"
+		style="background-image: url({quiltPattern});"
+	>
 		<div class="about_content_container">
-			
+			<div class="aboutCarousel">
+				<Splide
+					options={ options }
+				>
+					<SplideSlide>
+						<img 
+							class="aboutImage"
+							src="{aboutImage01}"
+							alt="about Suzanne Conti 01" 
+						/>
+					</SplideSlide>
+					<SplideSlide>
+						<img 
+							class="aboutImage"
+							src="{aboutImage02}"
+							alt="about Suzanne Conti 02"
+						/>
+					</SplideSlide>
+					<SplideSlide>
+						<img 
+							class="aboutImage"
+							src="{aboutImage04}"
+							alt="about Suzanne Conti 04"
+						/>
+					</SplideSlide>
+				</Splide>
+			</div>
+			<div class="about_story">
+				<h1 class="about_heading">
+					about
+				</h1>
+				<img 
+					src="{stitches}"
+					class="stitches"
+					alt="stitches"
+				/>
+				<p class="about_paragraphs">
+					Suzanne Conti has been making quilts for friends and family for over a decade.  Her quilts use techniques including applique, paper piecing, machine piecing and block piecing.  Suzanne has created quilts for almost every state in the U.S.<br /><br />
+					Suzanne comes from a family of quilters.  Her patterns reflect the pinwheel style of that of her Great Grandmother Kate&#39;s quilts.<br /><br />
+					Suzanne was born in Detroit, Michigan and currently lives in Savannah, Georgia with her husband, Paul Conti.
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
@@ -54,36 +78,25 @@
 
 	.quilt_pattern_background {
 		width: 100%;
-		height: auto;
 		position: relative;
-		margin: 0 0 2rem 0;
-	}
-
-	.quilt_pattern_overlay {
-		background-color: #ffffff;
-		opacity: 50%;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
+		background-repeat: repeat-y;
+		background-size: cover;
+		padding: 2rem;
 	}
 
 	.about_content_container {
-		position: absolute;
 		max-width: 2000px;
-		left: 0;
-		right: 0;
-		margin-left: auto;
-		margin-right: auto;
-		top: 5rem;
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
 	}
 
 	.aboutCarousel {
 		position: relative;
-		margin-left: 2rem;
 		width: 100%;
-		max-width: 40rem;
+		max-width: 35rem;
 	}
 
 	.aboutImage {
@@ -91,5 +104,55 @@
 		height: 100%;
 		max-height: 28rem;
 		object-fit: cover;
+	}
+
+	.about_story {
+		padding: 1rem 2rem 3rem 2rem;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-color: rgba(255,255,255,0.7);
+		border-radius: 3rem;
+	}
+
+	.about_heading {
+		margin: 0 auto;
+		text-align: center;
+		font-size: 2.5rem;
+	}
+
+	.stitches {
+		max-width: 12rem;
+		margin: 1rem auto;
+	}
+
+	@media (max-width: 750px) {
+		.quilt_pattern_background {
+			padding: 1rem;
+		}
+
+		.aboutCarousel {
+			position: relative;
+			width: 100%;
+			max-width: 100%;
+		}
+		.about_content_container {
+			max-width: 100%;
+			margin: 0;
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.about_heading {
+			margin: 0 auto;
+			text-align: center;
+			font-size: 1.5rem;
+		}
+
+		.stitches {
+			max-width: 8rem;
+			margin: 0.5rem auto;
+		}
 	}
 </style>
