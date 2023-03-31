@@ -60,5 +60,12 @@
     .arrow_icon_container {
         width: 0.5rem;
     }
+
+    @media (max-width: 750px) {
+        .primary_button {
+            font-size: 1.25rem;
+            padding: 0.75rem 1rem 0.75rem 1rem;
+        }
+    }
     
 </style>
