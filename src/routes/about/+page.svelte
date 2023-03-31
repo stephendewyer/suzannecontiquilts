@@ -7,6 +7,39 @@
 	import aboutImage02 from '$lib/images/about/about-Suzanne_Conti_02.jpg';
 	import aboutImage04 from '$lib/images/about/about-Suzanne_Conti_04.jpg';
 
+	import inspiration01 from '$lib/images/inspiration/inspiration-Katherine_Marie_Jurkiewicz.jpg';
+	import inspiration02 from '$lib/images/inspiration/inspiration-grandson.jpg';
+	import inspiration03 from '$lib/images/inspiration/inspiration-family.jpg';
+	import inspiration04 from '$lib/images/inspiration/inspiration-Savannah,_Georgia.jpg';
+
+	const inspiration = [
+		{
+			"id": 1,
+			"name": "Katherine Marie Jurkiewicz (Grandma Kate)",
+			"image": inspiration01,
+			"alt": "portrait of Katherine Marie Jurkiewicz (Grandma Kate)"
+		},
+		{
+			"id": 2,
+			"name": "grandson",
+			"image": inspiration02,
+			"alt": "photo of Suzanne Conti with grandson"
+		},
+		{
+			"id": 3,
+			"name": "family",
+			"image": inspiration03,
+			"alt": "family at Nick and Katrina's wedding"
+		},
+		{
+			"id": 4,
+			"name": "Savannah, Georgia",
+			"image": inspiration04,
+			"alt": "photo of an oak tree in Savannah, Georgia"
+		}
+
+	]
+
 	const options = {
 		rewind  : true,
 		gap     : '1rem',
@@ -23,7 +56,7 @@
 </svelte:head>
 
 <div class="text-column">
-	<div 
+	<section 
 		class="quilt_pattern_background"
 		style="background-image: url({quiltPattern});"
 	>
@@ -71,7 +104,35 @@
 				</p>
 			</div>
 		</div>
-	</div>
+	</section>
+	<section class="inspiration">
+		<div class="inspiration_heading">
+			<h2 class="inspiration_heading_text">
+				inspiration
+			</h2>
+			<img 
+				src="{stitches}"
+				class="stitches"
+				alt="stitches"
+			/>
+		</div>
+		<div class="inspiration_container">
+			{#each inspiration as item, i}
+				<div class="inspiration_card_container">
+					<img 
+						class="inspiration_thumbnail"
+						src="{item.image}" 
+						alt="{item.alt}"
+					/>
+					<div class="inspiration_info_container">
+						<h3 class="inspiration_name">
+							{item.name}
+						</h3>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 </div>
 
 <style>
@@ -125,6 +186,59 @@
 	.stitches {
 		max-width: 12rem;
 		margin: 1rem auto;
+	}
+
+	.inspiration {
+		margin: 2rem auto 2rem auto;
+	}
+
+	.inspiration_heading {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.inspiration_heading_text {
+		margin: 0 auto;
+	}
+
+	.inspiration_container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		max-width: 2000px;
+		width: 100%;
+		margin: 1rem auto auto auto;
+	}
+
+	.inspiration_card_container {
+		background-color: #FDFCE8;
+		max-width: 24rem;
+		width: 100%;
+		margin: auto 1rem 3rem 1rem;
+		filter: drop-shadow(0 0.5rem 0.5rem rgba(0, 0, 0, 0.25));
+	}
+
+	.inspiration_thumbnail {
+		width: 100%;
+		height: 16rem;
+		object-fit: cover;
+	}
+
+	.inspiration_info_container {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 8rem;
+	}
+
+	.inspiration_name {
+		text-align: center;
+		color: #15060B;
+		margin: 0 auto 1rem auto;
 	}
 
 	@media (max-width: 750px) {
