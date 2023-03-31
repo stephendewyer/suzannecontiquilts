@@ -25,14 +25,12 @@
 
 <div class="text-column">
 	<div class="quilt_pattern_background">
-		<!-- <img src={quiltPattern} alt="quilt pattern" /> -->
+		<img src={quiltPattern} alt="quilt pattern" />
 		<div class="quilt_pattern_overlay" />
 		<div class="about_content_container">
 			<div class="aboutCarousel">
 				<Splide
 					options={ options }
-					on:mounted={ e => console.log( e.detail.splide.length ) }
-					on:move={ e => console.log( 'move to', e.detail.index ) }
 				>
 					<SplideSlide>
 						<img 
