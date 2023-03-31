@@ -33,8 +33,6 @@
 					options={ options }
 					on:mounted={ e => console.log( e.detail.splide.length ) }
 					on:move={ e => console.log( 'move to', e.detail.index ) }
-					aria-labelledby="basic-example-heading"
-					class="custom-class"
 				>
 					<SplideSlide>
 						<img 
@@ -86,8 +84,9 @@
 	}
 
 	.aboutCarousel {
-		position: absolute;
-		left: 2rem;
+		position: relative;
+		margin-left: 2rem;
+
 	}
 
 	.aboutImage {
