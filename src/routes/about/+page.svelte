@@ -35,14 +35,14 @@
 					<SplideSlide>
 						<img 
 							class="aboutImage"
-							src={ aboutImage01 } 
+							src="/images/about/about-Suzanne_Conti_01.jpg" 
 							alt="about Suzanne Conti 01" 
 						/>
 					</SplideSlide>
 					<SplideSlide>
 						<img 
 							class="aboutImage"
-							src={ aboutImage02 } 
+							src="/images/about/about-Suzanne_Conti_02.jpg"
 							alt="about Suzanne Conti 02"
 						/>
 					</SplideSlide>
