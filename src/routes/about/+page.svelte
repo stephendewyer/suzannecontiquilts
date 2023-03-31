@@ -24,30 +24,31 @@
 </svelte:head>
 
 <div class="text-column">
+	<div class="aboutCarousel">
+			<Splide
+				options={ options }
+			>
+				<SplideSlide>
+					<img 
+						class="aboutImage"
+						src="/images/about/about-Suzanne_Conti_01.jpg" 
+						alt="about Suzanne Conti 01" 
+					/>
+				</SplideSlide>
+				<SplideSlide>
+					<img 
+						class="aboutImage"
+						src="/images/about/about-Suzanne_Conti_02.jpg"
+						alt="about Suzanne Conti 02"
+					/>
+				</SplideSlide>
+			</Splide>
+		</div>
 	<div class="quilt_pattern_background">
 		<img src={quiltPattern} alt="quilt pattern" />
 		<div class="quilt_pattern_overlay" />
 		<div class="about_content_container">
-			<div class="aboutCarousel">
-				<Splide
-					options={ options }
-				>
-					<SplideSlide>
-						<img 
-							class="aboutImage"
-							src="/images/about/about-Suzanne_Conti_01.jpg" 
-							alt="about Suzanne Conti 01" 
-						/>
-					</SplideSlide>
-					<SplideSlide>
-						<img 
-							class="aboutImage"
-							src="/images/about/about-Suzanne_Conti_02.jpg"
-							alt="about Suzanne Conti 02"
-						/>
-					</SplideSlide>
-				</Splide>
-			</div>
+			
 		</div>
 	</div>
 </div>
