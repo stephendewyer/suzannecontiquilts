@@ -361,7 +361,7 @@
 
     .quilt_info {
         text-align: left;
-        
+        margin: 2rem auto auto auto;
     }
 
     ul {
@@ -427,6 +427,10 @@
         .underline_stitches {
             width: 8rem;
             margin: 0.5rem auto auto auto;
+        }
+
+        .quilt_info {
+            margin: 0rem auto auto auto;
         }
 
         .quilt_info_list_item {

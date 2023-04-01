@@ -3,6 +3,20 @@
 	import stitches from '$lib/images/icons/stitches.svg';
 	import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 	import CancelButton from '$lib/components/buttons/CancelButton.svelte';
+
+	function submitForm() {
+		fetch("/api/sendMail");
+	}
+
+	export async function load({ fetch }) {
+		const res = await fetch("/api/sendMail");
+		const item = await res.json();
+
+		return item;
+	}
+
+	
+
 </script>
 
 <svelte:head>
@@ -25,7 +39,11 @@
 					src="{stitches}" 
 					alt="stitches" 
 				/>
-				<form method="POST" class="form_container">
+				<form 
+					on:submit|preventDefault={submitForm}
+					method="POST" 
+					class="form_container"
+				>
 					<div class="form_field">
 						<label 
 							for="name_first"
@@ -96,7 +114,7 @@
 					</div>
 					<div class="form_buttons_container">
 						<CancelButton>cancel</CancelButton>
-						<SubmitButton>send</SubmitButton>
+						<SubmitButton type="submit">send</SubmitButton>
 					</div>
 				</form>
 			</div>
