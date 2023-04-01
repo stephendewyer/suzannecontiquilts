@@ -115,8 +115,7 @@
 	}
 
 	.contact_content_container {
-		max-width: 2000px;
-		width: 100%;
+		width: 45rem;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
@@ -239,13 +238,6 @@
 		.form_para_input {
 			width: 100%;
 			display: inline-block;
-		}
-
-		.form_buttons_container {
-			flex-direction: column-reverse;
-			justify-content: flex-start;
-			align-items: center;
-			gap: 0.125rem;
 		}
 	}
 
