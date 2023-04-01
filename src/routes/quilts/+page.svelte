@@ -31,7 +31,6 @@
 						</PrimaryButton>
 					</a>
 				</div>
-				
 			</div>
 		{/each}
 	</div>

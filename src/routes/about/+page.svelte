@@ -98,8 +98,8 @@
 					alt="stitches"
 				/>
 				<p class="about_paragraphs">
-					Suzanne Conti has been making quilts for friends and family for over a decade.  Her quilts use techniques including applique, paper piecing, machine piecing and block piecing.  Suzanne has created quilts for almost every state in the U.S.<br /><br />
-					Suzanne comes from a family of quilters.  Her patterns reflect the pinwheel style of that of her Great Grandmother Kate&#39;s quilts.<br /><br />
+					Suzanne Conti has been making quilts for friends and family for over twenty-five years.  Her quilts use techniques including applique, paper piecing, machine piecing and block piecing.  Suzanne has created quilts for almost every state in the U.S.<br /><br />
+					Suzanne comes from a family of quilters.  Her patterns reflect the pinwheel style of that of her grandmother Kate&#39;s quilts.<br /><br />
 					Suzanne was born in Detroit, Michigan and currently lives in Savannah, Georgia with her husband, Paul Conti.
 				</p>
 			</div>

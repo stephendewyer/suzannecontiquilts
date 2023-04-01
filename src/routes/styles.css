@@ -46,6 +46,46 @@ p {
 	margin: 0;
 }
 
+input {
+	font-family: "calibri-font-family";
+	font-size: 1.75rem;
+	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	border-color: #3B3E29;
+	border-style: solid;
+	border-width: 2px;
+	outline: none;
+	color: #3B3E29;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+input:focus {
+	border-color: #3B3E29;
+	border-radius: 0;
+	border-width: 2px;
+}
+
+textarea {
+	font-family: "calibri-font-family";
+	font-size: 1.75rem;
+	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	color: #3B3E29;
+	border-color: #3B3E29;
+	border-style: solid;
+	border-width: 2px;
+	outline: none;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+textarea:focus {
+	border-color: #3B3E29;
+	border-width: 2px;
+	outline: none;
+}
+
 @media (max-width: 750px) {
 	body {
 		font-size: 1rem;
