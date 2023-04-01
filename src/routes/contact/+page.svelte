@@ -149,6 +149,7 @@
 		flex-direction: column;
 		width: 100%;
 		max-width: 40rem;
+		margin: 1rem auto auto auto;
 	}
 
 	.form_field {
@@ -188,6 +189,16 @@
 			padding: 1rem;
 		}
 
+		.contact_form {
+			padding: 0.5rem 1rem 1rem 1rem;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: rgba(255,255,255,0.7);
+			border-radius: 3rem;
+		}
+
 		.contact_content_container {
 			max-width: 100%;
 			margin: 0;
@@ -204,6 +215,37 @@
 		.stitches {
 			max-width: 8rem;
 			margin: 0.5rem auto;
+		}
+
+		.form_field {
+			width: 100%;
+			margin: 0 0 1rem 0;
+			flex-direction: column;
+			font-size: 1.25rem;
+			gap: 0.125rem;
+		}
+
+		.form_label {
+			width: 100%;
+			display: block;
+			text-align: left;
+		}
+		
+		.form_input {
+			width: 100%;
+			display: block;
+		}
+
+		.form_para_input {
+			width: 100%;
+			display: inline-block;
+		}
+
+		.form_buttons_container {
+			flex-direction: column-reverse;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 0.125rem;
 		}
 	}
 
