@@ -4,18 +4,36 @@
 	import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 	import CancelButton from '$lib/components/buttons/CancelButton.svelte';
 
-	function submitForm() {
-		fetch("/api/sendMail");
-	}
+	let nameFirst = "";
+	let nameLast = "";
+	let email = "";
+	let subject = "";
+	let message = "";
 
-	export async function load({ fetch }) {
-		const res = await fetch("/api/sendMail");
-		const item = await res.json();
+	async function handleSubmit() {
 
+		const response = await fetch("/api/sendMail", {
+
+			method: 'POST',
+			body: JSON.stringify({
+				nameFirst,
+				nameLast,
+				email,
+				subject,
+				message
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+
+		});
+		const item = await response.json()
+		console.log(item);
+		// if (!item.ok) {
+		// 	throw new Error(item.message || 'something went wrong');
+		// }
 		return item;
 	}
-
-	
 
 </script>
 
@@ -40,7 +58,7 @@
 					alt="stitches" 
 				/>
 				<form 
-					on:submit|preventDefault={submitForm}
+					on:submit|preventDefault={handleSubmit}
 					method="POST" 
 					class="form_container"
 				>
@@ -55,6 +73,7 @@
 							name="name_first" 
 							type="text" 
 							class="form_input"
+							bind:value={nameFirst}
 						/>
 					</div>
 					<div class="form_field">
@@ -69,6 +88,7 @@
 							name="name_last" 
 							type="text" 
 							class="form_input"
+							bind:value={nameLast}
 						/>
 					</div>
 					<div class="form_field">
@@ -82,6 +102,7 @@
 							name="email" 
 							type="email" 
 							class="form_input"
+							bind:value={email}
 						/>
 					</div>
 					<div class="form_field">
@@ -96,7 +117,7 @@
 							name="subject" 
 							type="text" 
 							class="form_input"
-							style="width: 100%;"
+							bind:value={subject}
 						/>
 					</div>
 					<div class="form_field">
@@ -110,6 +131,7 @@
 							name="message" 
 							type="text" 
 							class="form_para_input"
+							bind:value={message}
 						/>
 					</div>
 					<div class="form_buttons_container">
