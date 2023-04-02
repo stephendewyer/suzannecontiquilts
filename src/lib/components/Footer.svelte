@@ -46,10 +46,17 @@
                             contact
                         </a>
                     </li>
+                    <li 
+                        class="{$page.url.pathname === '/colophon' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                    >
+                        <a href="/colophon" aria-label="link to colophon page">
+                            colophon
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <div class="copyright">
-                Suzanne Conti © {year}
+                    Suzanne Conti © {year}
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 import sgMail from "@sendgrid/mail";
-import {SENDGRID_API_KEY } from '$env/static/private';
+import {SENDGRID_API_KEY} from '$env/static/private';
 import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
@@ -16,7 +16,7 @@ export async function POST({request}) {
   // begin sending the message
 
   sgMail.setApiKey(SENDGRID_API_KEY);
-  
+
   const msg = [
     {
       to: 'sdewyer@artintechservices.com',
