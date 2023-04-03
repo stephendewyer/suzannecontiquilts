@@ -1,5 +1,6 @@
 <script>
 	import quiltPattern from '$lib/images/quilts/Grandma_Kate/Suzanne_Conti_Grandma_Kate_08.jpg';
+	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import stitches from '$lib/images/icons/stitches.svg';
 	import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 	import CancelButton from '$lib/components/buttons/CancelButton.svelte';
@@ -150,6 +151,7 @@
 <svelte:head>
 	<title>contact - Suzanne Conti Quilts</title>
 	<meta name="description" content="contact Suzanne Conti Quilts" />
+	<meta property="og:image" content="{quiltHeader}" />
 </svelte:head>
 
 <div class="text-column">

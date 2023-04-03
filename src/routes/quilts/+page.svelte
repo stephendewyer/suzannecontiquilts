@@ -1,11 +1,13 @@
 <script>
 	import quilts from '$lib/data/quilts.json';
+	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 </script>
 
 <svelte:head>
 	<title>search quilts - Suzanne Conti Quilts</title>
 	<meta name="description" content="search Suzanne Conti Quilts" />
+	<meta property="og:image" content="{quiltHeader}" />
 </svelte:head>
 
 <div>

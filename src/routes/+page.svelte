@@ -1,11 +1,13 @@
 <script>
 	import quiltBanner from '$lib/images/quilts/Nebraska/Suzanne_Conti_Nebraska_07.jpg';
+	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import floatingQuilt from '$lib/images/quilts/floating_quilts/Suzanne_Conti_Massachusetts_floating.png';
 </script>
 
 <svelte:head>
 	<title>index - Suzanne Conti Quilts</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Suzanne Conti Quilts index" />
+	<meta property="og:image" content="{quiltHeader}" />
 </svelte:head>
 
 <section>

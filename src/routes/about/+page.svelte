@@ -2,6 +2,7 @@
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 	import stitches from '$lib/images/icons/stitches.svg';
+	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import quiltPattern from '$lib/images/quilts/Michigan/Suzanne_Conti_Michigan_07.jpg';
 	import aboutImage01 from '$lib/images/about/about-Suzanne_Conti_01.jpg';
 	import aboutImage02 from '$lib/images/about/about-Suzanne_Conti_02.jpg';
@@ -53,6 +54,7 @@
 <svelte:head>
 	<title>about - Suzanne Conti Quilts</title>
 	<meta name="description" content="about Suzanne Conti" />
+	<meta property="og:image" content="{quiltHeader}" />
 </svelte:head>
 
 <div class="text-column">

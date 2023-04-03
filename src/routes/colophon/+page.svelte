@@ -1,11 +1,13 @@
 <script>
     import quiltPattern from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_04.jpg';
+    import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
     import stitches from '$lib/images/icons/stitches.svg';
 </script>
 
 <svelte:head>
 	<title>colophon - Suzanne Conti Quilts</title>
 	<meta name="description" content="about the Suzanne Conti Quilts website" />
+    <meta property="og:image" content="{quiltHeader}" />
 </svelte:head>
 
 <section 
