@@ -8,7 +8,7 @@
 
 <aside 
     class="{ (open) ? 'side_drawer_open' : 'side_drawer_closed' }"
-    aria-hidden="{ (open) ? 'true' : 'false'}"
+    aria-hidden="{ (open) ? 'false' : 'true'}"
 >
     <nav>
         <ul>

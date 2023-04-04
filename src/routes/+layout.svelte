@@ -7,7 +7,7 @@
 
 	let open = false;
 
-	let footerElHeight;
+	let footerElHeight = 0;
 
 </script>
 
