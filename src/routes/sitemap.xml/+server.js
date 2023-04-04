@@ -30,7 +30,7 @@ const posts = [
 
 const pages = ["quilts", "about", "contact", "colophon"] //list of pages as a string ex. ["about", "blog", "contact"]
 
-const site = "https://suzannecontiquilts.vercel.app/"
+const site = "https://suzannecontiquilts.vercel.app"
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({
