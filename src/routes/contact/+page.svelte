@@ -5,7 +5,6 @@
 	import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 	import CancelButton from '$lib/components/buttons/CancelButton.svelte';
 	import ErrorFlashMessage from '$lib/components/flash_messages/Error.svelte';
-	import PendingFlashMessage from '$lib/components/flash_messages/Pending.svelte';
 	import SuccessFlashMessage from '$lib/components/flash_messages/Success.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -108,20 +107,6 @@
 
     // after submit
 
-    // const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
-    // const [requestError, setRequestError] = useState();
-
-    // useEffect(() => {
-    //     if (requestStatus === 'success' || requestStatus === 'error') {
-    //         const timer = setTimeout(() => {
-    //             setRequestStatus(null);
-    //             setRequestError(null);
-    //         }, 6000);
-    
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [requestStatus]);
-
 	let item = "";
 
 	$: if(item !== "") {
@@ -152,10 +137,6 @@
 	}
 
 	async function handleSubmit() {
-
-		// setRequestStatus('pending');
-
-        // optional: add client-side validation
 
         try {
             await createMessage(
@@ -360,12 +341,6 @@
 						<SuccessFlashMessage>
 							{item.success}
 						</SuccessFlashMessage>
-					</div>
-				{:else if (item.pending)}
-					<div transition:fade="{{delay: 250, duration: 300}}">
-						<PendingFlashMessage>
-							{item.pending}
-						</PendingFlashMessage>
 					</div>
 				{/if}
 			</div>
