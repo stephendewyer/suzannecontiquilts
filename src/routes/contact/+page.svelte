@@ -173,6 +173,7 @@
 					on:submit|preventDefault={handleSubmit}
 					method="POST" 
 					class="form_container"
+					noValidate
 				>
 					<div class="form_field">
 						<label 
@@ -288,7 +289,9 @@
 						</div>
 					{/if}
 					<div class="form_buttons_container">
-						<CancelButton>cancel</CancelButton>
+						<a href="/" aria-label="link index page">
+							<CancelButton>cancel</CancelButton>
+						</a>
 						<SubmitButton type="submit">send</SubmitButton>
 					</div>
 				</form>

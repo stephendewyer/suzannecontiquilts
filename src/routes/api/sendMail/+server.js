@@ -3,7 +3,13 @@ import {SENDGRID_API_KEY} from '$env/static/private';
 import { json } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
+
+
 export async function POST({request}) {
+
+  if (request.method !== 'POST') {
+      return;
+  }
 
   const data = await request.json();
 
@@ -12,6 +18,22 @@ export async function POST({request}) {
   const subject = data.subject;
   const email = data.email;
   const message = data.message;
+
+  if (
+    !nameFirst ||
+    !nameLast ||
+    !subject ||
+    !email ||
+    !message 
+  ) {
+    return json(422, { message: 'missing form data' });
+  }
+
+  if (
+    !email.includes('@')
+  ) {
+    return json(422, { message: 'missing an @ symbol in email address' });
+  }
 
   // begin sending the message
 
@@ -42,7 +64,7 @@ export async function POST({request}) {
 
       if (error.response) {
         console.error(error.response.body)
-        return fail(422, { message: 'message not sent due to a problem with the API' });
+        return json(422, { message: 'message not sent due to a problem with the API' });
       }
     }
   })();

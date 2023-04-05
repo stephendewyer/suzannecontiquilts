@@ -5,6 +5,8 @@ const posts = [
   {title: "Tennessee", slug: "tennessee", updatedAt: "04-April-2023"},
   {title: "Utah", slug: "utah", updatedAt: "04-April-2023"},
   {title: "Savannah", slug: "savannah", updatedAt: "04-April-2023"},
+  {title: "Iowa", slug: "iowa", updatedAt: "04-April-2023"},
+  {title: "New York", slug: "new-york", updatedAt: "04-April-2023"},
   {title: "Maine", slug: "maine", updatedAt: "04-April-2023"},
   {title: "Virginia", slug: "virginia", updatedAt: "04-April-2023"},
   {title: "Alaska North Pole", slug: "alaska-north-pole", updatedAt: "04-April-2023"},
@@ -15,7 +17,7 @@ const posts = [
   {title: "Montana Dinosaurs", slug: "montana-dinosaurs", updatedAt: "04-April-2023"},
   {title: "Wyoming Dinosaurs", slug: "wyoming-dinosaurs", updatedAt: "04-April-2023"},
   {title: "Georgia", slug: "georgia", updatedAt: "04-April-2023"},
-  {title: "Vermong", slug: "vermont", updatedAt: "04-April-2023"},
+  {title: "Vermont", slug: "vermont", updatedAt: "04-April-2023"},
   {title: "South Carolina", slug: "south-carolina", updatedAt: "04-April-2023"},
   {title: "Arizona", slug: "arizona", updatedAt: "04-April-2023"},
   {title: "Nebraska", slug: "nebraska", updatedAt: "04-April-2023"},
@@ -28,9 +30,7 @@ const posts = [
   {title: "Kansas", slug: "kansas", updatedAt: "04-April-2023"},
 ]
 
-const pages = ["quilts", "about", "contact", "colophon"] //list of pages as a string ex. ["about", "blog", "contact"]
-
-// const site = "https://suzannecontiquilts.vercel.app"
+const pages = ["quilts", "about", "contact", "colophon"]
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({
