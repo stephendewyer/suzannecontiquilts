@@ -270,5 +270,9 @@
 			max-width: 8rem;
 			margin: 0.5rem auto;
 		}
+
+		.inspiration_card_container {
+			margin: auto 1rem 1rem 1rem;
+		}
 	}
 </style>

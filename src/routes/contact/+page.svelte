@@ -6,6 +6,7 @@
 	import CancelButton from '$lib/components/buttons/CancelButton.svelte';
 	import ErrorFlashMessage from '$lib/components/flash_messages/Error.svelte';
 	import SuccessFlashMessage from '$lib/components/flash_messages/Success.svelte';
+	import PendingFlashMessage from '$lib/components/flash_messages/Pending.svelte';
 	import { fade } from 'svelte/transition';
 
 	let nameFirst = "";
@@ -109,11 +110,25 @@
 
 	let item = "";
 
-	$: if(item !== "") {
+	$: if((item.success) || (item.error)) {
 		setTimeout(() => {
 			item = "";
 		}, 4000)
 	}
+
+	// onst [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
+    // const [requestError, setRequestError] = useState();
+
+    // useEffect(() => {
+    //     if (requestStatus === 'success' || requestStatus === 'error') {
+    //         const timer = setTimeout(() => {
+    //             setRequestStatus(null);
+    //             setRequestError(null);
+    //         }, 6000);
+    
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [requestStatus]);
 
 	async function createMessage(nameFirst, nameLast, email, subject, message) {		
 
@@ -136,7 +151,15 @@
 		return item;
 	}
 
+	let pending = false;
+
+	$: if((item.success) || (item.error)) {
+		pending = false;
+	}
+
 	async function handleSubmit() {
+
+		pending = true;
 
         try {
             await createMessage(
@@ -329,19 +352,18 @@
 						<SubmitButton type="submit">send</SubmitButton>
 					</div>
 				</form>
-
-				{#if (item.error)}
-					<div transition:fade="{{delay: 250, duration: 300}}">
-						<ErrorFlashMessage >
-							{item.error}
-						</ErrorFlashMessage>
-					</div>
+				{#if (pending)}
+					<PendingFlashMessage >
+						please wait while we validate your data
+					</PendingFlashMessage>
+				{:else if (item.error)}
+					<ErrorFlashMessage >
+						{item.error}
+					</ErrorFlashMessage>
 				{:else if (item.success)}
-					<div transition:fade="{{delay: 250, duration: 300}}">
-						<SuccessFlashMessage>
-							{item.success}
-						</SuccessFlashMessage>
-					</div>
+					<SuccessFlashMessage>
+						{item.success}
+					</SuccessFlashMessage>
 				{/if}
 			</div>
 		</div>
