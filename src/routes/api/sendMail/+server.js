@@ -26,13 +26,13 @@ export async function POST({request}) {
     !email ||
     !message 
   ) {
-    return json(422, { message: 'missing form data' });
+    return new Response(JSON.stringify({message: "missing form data"}), {status: 422})
   }
 
   if (
     !email.includes('@')
   ) {
-    return json(422, { message: 'missing an @ symbol in email address' });
+    return new Response(JSON.stringify({message: "missing an @ symbol in email address"}), {status: 422})
   }
 
   // begin sending the message
@@ -55,23 +55,20 @@ export async function POST({request}) {
       html: `<p>Dear ${nameFirst} ${nameLast},<br /><br />Thank you for contacting Suzanne Conti Quilts.  Your email has been received.<br /><br />Sincerely,<br /><br />Suzanne Conti<br />https://suzannecontiquilts.vercel.app/</p>`,
     },
   ];
-  (async () => {
-    try {
-      await sgMail.send(msg);
-      return json(200, { success: 'message sent' });
-    } catch (error) {
-      console.error(error);
 
-      if (error.response) {
-        console.error(error.response.body)
-        return json(422, { message: 'message not sent due to a problem with the API' });
-      }
+  try {
+    await sgMail.send(msg);
+    console.log("message sent");
+    return new Response(JSON.stringify({message: "data sent"}), {status: 200})
+  } catch (error) {
+    console.error(error);
+
+    if (error) {
+      console.error(error)
+      return json(422, { message: 'message not sent due to a problem with the API' });
     }
-  })();
+  }
 
   // end sending the message
 
-  return json({
-    message: "data sent!"
-  })
 }

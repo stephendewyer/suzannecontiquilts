@@ -124,6 +124,8 @@
     //     }
     // }, [requestStatus]);
 
+	let item = "";
+
 	async function handleSubmit() {
 
 		const response = await fetch("/api/sendMail", {
@@ -141,7 +143,7 @@
 			}
 
 		});
-		const item = await response.json()
+		item = await response.json()
 		console.log(item);
 		return item;
 	}
@@ -295,6 +297,12 @@
 						<SubmitButton type="submit">send</SubmitButton>
 					</div>
 				</form>
+
+				{#if (item)}
+					<div>
+						{item.message}
+					</div>
+				{/if}
 			</div>
 		</div>
 	</section>
