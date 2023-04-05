@@ -263,7 +263,7 @@
 							for="email"
 							class="form_label"
 						>
-							email:
+							email address:
 						</label>
 						<input 
 							name="email" 
@@ -411,7 +411,7 @@
 	}
 
 	.form_label {
-		width: 10rem;
+		width: 15rem;
 		display: inline-block;
 		text-align: right;
 	}
