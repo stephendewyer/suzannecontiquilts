@@ -468,12 +468,12 @@
 
 		.stitches {
 			max-width: 8rem;
-			margin: 0.5rem auto;
+			margin: 0.5rem auto auto auto;
 		}
 
 		.form_field {
 			width: 100%;
-			margin: 0 0 1rem 0;
+			margin: 0.5rem 0 0 0;
 			flex-direction: column;
 			font-size: 1.25rem;
 			gap: 0.125rem;
@@ -493,6 +493,16 @@
 		.form_para_input {
 			width: 100%;
 			display: inline-block;
+		}
+
+		.input_error_message {
+			width: auto;
+			margin-left: auto;
+			text-align: right;
+			font-size: 1rem;
+			color: #ffffff;
+			background-color: rgba(255,0,0,0.50);
+			padding: 0.5rem 1rem;
 		}
 	}
 
