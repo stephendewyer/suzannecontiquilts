@@ -79,7 +79,6 @@
 	@media (max-width: 750px) {
 		.quilt_card_container {
 			margin: auto 1rem 1rem 1rem;
-			filter: drop-shadow(0 0.5rem 0.5rem rgba(0, 0, 0, 0.25));
 		}
 	}
 

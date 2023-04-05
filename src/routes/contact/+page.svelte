@@ -7,7 +7,6 @@
 	import ErrorFlashMessage from '$lib/components/flash_messages/Error.svelte';
 	import SuccessFlashMessage from '$lib/components/flash_messages/Success.svelte';
 	import PendingFlashMessage from '$lib/components/flash_messages/Pending.svelte';
-	import { fade } from 'svelte/transition';
 
 	let nameFirst = "";
 	let nameLast = "";
