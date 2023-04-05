@@ -1,9 +1,5 @@
 import sgMail from "@sendgrid/mail";
 import {SENDGRID_API_KEY} from '$env/static/private';
-import { json } from '@sveltejs/kit';
-import { fail } from '@sveltejs/kit';
-
-
 
 export async function POST({request}) {
 
@@ -26,13 +22,13 @@ export async function POST({request}) {
     !email ||
     !message 
   ) {
-    return new Response(JSON.stringify({message: "missing form data"}), {status: 422})
+    return new Response(JSON.stringify({error: "missing form data"}), {status: 422});
   }
 
   if (
     !email.includes('@')
   ) {
-    return new Response(JSON.stringify({message: "missing an @ symbol in email address"}), {status: 422})
+    return new Response(JSON.stringify({error: "missing an @ symbol in email address"}), {status: 422});
   }
 
   // begin sending the message
@@ -59,14 +55,10 @@ export async function POST({request}) {
   try {
     await sgMail.send(msg);
     console.log("message sent");
-    return new Response(JSON.stringify({message: "data sent"}), {status: 200})
+    return new Response(JSON.stringify({success: "data sent"}), {status: 200})
   } catch (error) {
     console.error(error);
-
-    if (error) {
-      console.error(error)
-      return json(422, { message: 'message not sent due to a problem with the API' });
-    }
+    return new Response(JSON.stringify({error: "message not sent due to a problem with the API"}), {status: 422});
   }
 
   // end sending the message

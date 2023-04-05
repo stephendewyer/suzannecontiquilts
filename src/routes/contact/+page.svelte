@@ -4,6 +4,9 @@
 	import stitches from '$lib/images/icons/stitches.svg';
 	import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 	import CancelButton from '$lib/components/buttons/CancelButton.svelte';
+	import ErrorFlashMessage from '$lib/components/flash_messages/Error.svelte';
+	import PendingFlashMessage from '$lib/components/flash_messages/Pending.svelte';
+	import SuccessFlashMessage from '$lib/components/flash_messages/Success.svelte';
 
 	let nameFirst = "";
 	let nameLast = "";
@@ -41,12 +44,6 @@
     };
 
 	const emailChangeHandler = () => {
-        if (email !== '') {
-            enteredEmailIsValid = true;
-        }
-    };
-
-	const emailLeaveHandler = () => {
 		if (email !== '' && email.includes('@') ) {
 			enteredEmailIsValid = true;
 			enteredEmailHasAtSymbol = true;
@@ -55,7 +52,7 @@
 		if (email !== '' && !email.includes('@')) {
 			enteredEmailIsValid = true;
 		}
-	}
+    };
 
 	const subjectChangeHandler = () => {
         if (subject !== '') {
@@ -188,6 +185,7 @@
 							name="name_first" 
 							type="text" 
 							class="form_input"
+							style="{(!enteredNameFirstIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
 							bind:value={nameFirst}
 							on:input={nameFirstChangeHandler}
 							on:blur={nameFirstBlurHandler}
@@ -210,6 +208,7 @@
 							name="name_last" 
 							type="text" 
 							class="form_input"
+							style="{(!enteredNameLastIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
 							bind:value={nameLast}
 							on:input={nameLastChangeHandler}
 							on:blur={nameLastBlurHandler}
@@ -231,8 +230,8 @@
 							name="email" 
 							type="email" 
 							class="form_input"
+							style="{(!enteredEmailIsValid || !enteredEmailHasAtSymbol) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
 							bind:value={email}
-							on:change={emailLeaveHandler}
 							on:input={emailChangeHandler}
 							on:blur={emailBlurHandler}
 						/>
@@ -259,6 +258,7 @@
 							name="subject" 
 							type="text" 
 							class="form_input"
+							style="{(!enteredSubjectIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
 							bind:value={subject}
 							on:input={subjectChangeHandler}
 							on:blur={subjectBlurHandler}
@@ -280,6 +280,7 @@
 							name="message" 
 							type="text" 
 							class="form_para_input"
+							style="{(!enteredMessageIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
 							bind:value={message}
 							on:input={messageChangeHandler}
 							on:blur={messageBlurHandler}
@@ -298,10 +299,18 @@
 					</div>
 				</form>
 
-				{#if (item)}
-					<div>
-						{item.message}
-					</div>
+				{#if (item.error)}
+					<ErrorFlashMessage>
+						{item.error}
+					</ErrorFlashMessage>
+				{:else if (item.success)}
+					<SuccessFlashMessage>
+						{item.success}
+					</SuccessFlashMessage>
+				{:else if (item.pending)}
+					<PendingFlashMessage>
+						{item.pending}
+					</PendingFlashMessage>
 				{/if}
 			</div>
 		</div>
