@@ -7,6 +7,7 @@
 	import ErrorFlashMessage from '$lib/components/flash_messages/Error.svelte';
 	import PendingFlashMessage from '$lib/components/flash_messages/Pending.svelte';
 	import SuccessFlashMessage from '$lib/components/flash_messages/Success.svelte';
+	import { fade } from 'svelte/transition';
 
 	let nameFirst = "";
 	let nameLast = "";
@@ -123,7 +124,13 @@
 
 	let item = "";
 
-	async function handleSubmit() {
+	$: if(item !== "") {
+		setTimeout(() => {
+			item = "";
+		}, 4000)
+	}
+
+	async function createMessage(nameFirst, nameLast, email, subject, message) {		
 
 		const response = await fetch("/api/sendMail", {
 
@@ -138,11 +145,54 @@
 			headers: {
 				'Content-Type': 'application/json',
 			}
-
 		});
-		item = await response.json()
+		item = await response.json();
 		console.log(item);
 		return item;
+	}
+
+	async function handleSubmit() {
+
+		// setRequestStatus('pending');
+
+        // optional: add client-side validation
+
+        try {
+            await createMessage(
+                nameFirst,
+                nameLast,
+                email,
+				subject,
+                message
+            );
+			if (nameFirst === '') {
+                enteredNameFirstIsValid = false;
+            }
+            if (nameLast === '') {
+                enteredNameLastIsValid = false;
+            }
+            if (email === '') {
+                enteredEmailIsValid = false;
+            }
+            if (email !== '' && !email.includes('@')) {
+                enteredEmailHasAtSymbol = false;
+            }
+			if (subject === '') {
+                enteredSubjectIsValid = false;
+            }
+            if (message === '') {
+                enteredMessageIsValid = false;
+            }
+            if (item.success) {
+				nameFirst = "",
+                nameLast = "",
+                email = "",
+				subject = "",
+                message = ""
+			}
+        } catch (error) {
+			console.log("catch");
+        }
 	}
 
 </script>
@@ -193,7 +243,7 @@
 					</div>
 					{#if (!enteredNameFirstIsValid)}
 						<div class="input_error_message">
-							Missing a first name.
+							missing a first name
 						</div>
 					{/if}
 					<div class="form_field">
@@ -216,7 +266,7 @@
 					</div>
 					{#if (!enteredNameLastIsValid)}
 						<div class="input_error_message">
-							Missing a last name.
+							missing a last name
 						</div>
 					{/if}
 					<div class="form_field">
@@ -238,12 +288,12 @@
 					</div>
 					{#if (!enteredEmailIsValid)}
 						<div class="input_error_message">
-							Missing an email.
+							missing an email
 						</div>
 					{/if}
 					{#if (!enteredEmailHasAtSymbol)}
 						<div class="input_error_message">
-							Email must have an @ symbol.
+							email must have an @ symbol
 						</div>
 					{/if}
 					<div class="form_field">
@@ -266,7 +316,7 @@
 					</div>
 					{#if (!enteredSubjectIsValid)}
 						<div class="input_error_message">
-							Missing a subject.
+							missing a subject
 						</div>
 					{/if}
 					<div class="form_field">
@@ -288,7 +338,7 @@
 					</div>
 					{#if (!enteredMessageIsValid)}
 						<div class="input_error_message">
-							Missing a message.
+							missing a message
 						</div>
 					{/if}
 					<div class="form_buttons_container">
@@ -300,17 +350,23 @@
 				</form>
 
 				{#if (item.error)}
-					<ErrorFlashMessage>
-						{item.error}
-					</ErrorFlashMessage>
+					<div transition:fade="{{delay: 250, duration: 300}}">
+						<ErrorFlashMessage >
+							{item.error}
+						</ErrorFlashMessage>
+					</div>
 				{:else if (item.success)}
-					<SuccessFlashMessage>
-						{item.success}
-					</SuccessFlashMessage>
+					<div transition:fade="{{delay: 250, duration: 300}}">
+						<SuccessFlashMessage>
+							{item.success}
+						</SuccessFlashMessage>
+					</div>
 				{:else if (item.pending)}
-					<PendingFlashMessage>
-						{item.pending}
-					</PendingFlashMessage>
+					<div transition:fade="{{delay: 250, duration: 300}}">
+						<PendingFlashMessage>
+							{item.pending}
+						</PendingFlashMessage>
+					</div>
 				{/if}
 			</div>
 		</div>
@@ -384,10 +440,13 @@
 	}
 
 	.input_error_message {
-		width: 100%;
+		width: auto;
+		margin-left: auto;
 		text-align: right;
 		font-size: 1.5rem;
-		color: red;
+		color: #ffffff;
+		background-color: rgba(255,0,0,0.50);
+		padding: 0.5rem 1rem;
 	}
 
 	.form_para_input {

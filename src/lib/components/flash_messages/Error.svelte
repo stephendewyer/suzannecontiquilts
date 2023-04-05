@@ -1,6 +1,3 @@
-<script>
-
-</script>
 <div class="error_flash_message">
     <slot/>
 </div>

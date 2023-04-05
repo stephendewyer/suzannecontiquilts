@@ -1,6 +1,3 @@
-<script>
-
-</script>
 <div class="success_flash_message">
     <slot/>
 </div>

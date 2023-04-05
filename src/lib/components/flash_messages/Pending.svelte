@@ -1,6 +1,3 @@
-<script>
-
-</script>
 <div class="pending_flash_message">
     <slot/>
 </div>
