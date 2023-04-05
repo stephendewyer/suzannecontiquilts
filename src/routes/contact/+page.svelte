@@ -115,20 +115,6 @@
 		}, 4000)
 	}
 
-	// onst [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
-    // const [requestError, setRequestError] = useState();
-
-    // useEffect(() => {
-    //     if (requestStatus === 'success' || requestStatus === 'error') {
-    //         const timer = setTimeout(() => {
-    //             setRequestStatus(null);
-    //             setRequestError(null);
-    //         }, 6000);
-    
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [requestStatus]);
-
 	async function createMessage(nameFirst, nameLast, email, subject, message) {		
 
 		const response = await fetch("/api/sendMail", {

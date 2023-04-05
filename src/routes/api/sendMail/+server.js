@@ -37,18 +37,19 @@ export async function POST({request}) {
 
   const msg = [
     {
-      to: 'sdewyer@artintechservices.com',
-      from: 'sdewyer@artintechservices.com',
+      to: 'smconti@sbcglobal.net',
+      from: 'smconti@sbcglobal.net',
       subject: subject,
       text: 'message sent via Suzanne Conti Quilts contact form',
-      html: `${message} <br /><br />Sender email: ${email}`,
+      html: `<p>Dear Suzanne,<br />,<br />
+      You received a new message via the Suzanne Conti Quilts website.  The following is the message:<br /><br />${message} <br /><br />The sender's email is ${email}.</p>`,
     },
     {
-      to: 'stephen.dewyer@stephengdewyer.info',
-      from: 'sdewyer@artintechservices.com',
-      subject: `message receipt`,
-      text: 'Your message was sent via the Suzanne Conti Quilts contact form.',
-      html: `<p>Dear ${nameFirst} ${nameLast},<br /><br />Thank you for contacting Suzanne Conti Quilts.  Your email has been received.<br /><br />Sincerely,<br /><br />Suzanne Conti<br />https://suzannecontiquilts.vercel.app/</p>`,
+      to: email,
+      from: 'smconti@sbcglobal.net',
+      subject: `thank you for contacting Suzanne Conti Quilts`,
+      text: 'We are happy to say Suzanne Conti Quilts received your message via our website contact form.',
+      html: `<p>Dear ${nameFirst} ${nameLast},<br /><br />Thank you for contacting Suzanne Conti Quilts.  We are happy to say Suzanne Conti Quilts received your message via our website contact form.<br /><br />Happy quilting!<br /><br />Suzanne Conti<br />https://suzannecontiquilts.vercel.app/</p>`,
     },
   ];
 
