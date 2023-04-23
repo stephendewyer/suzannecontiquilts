@@ -1,9 +1,25 @@
 <script>
 
+    let buttonHovered = false;
+    export let quiltCardIsHoveredProp;
+
 </script>
 
 <button 
-    class="primary_button"
+    
+    on:mouseover={() => {
+        buttonHovered = true;
+    }} 
+    on:focus={() => {
+        buttonHovered = true;
+    }}
+    on:blur={() => {
+        buttonHovered = false;
+    }}
+    on:mouseout={() => {
+        buttonHovered = false;
+    }}
+    class="{ (buttonHovered) || quiltCardIsHoveredProp ? 'primary_button_hovered' : 'primary_button'}"
 >
     <slot/>
     <div class="arrow_icon_container">
@@ -32,18 +48,26 @@
         border-radius: 3rem;
     }
 
-    .primary_button:hover {
+    .primary_button_hovered {
         outline: 0.125rem solid #15060B;
         outline-offset: -0.125rem;
         color: #15060B;
         background-color: #FDFCE8;
+        padding: 1rem 1.5rem 1rem 1.5rem;
+        font-size: 1.5rem;
+        border: none;
+        transition: all 300ms;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        border-radius: 3rem;
     }
 
     .primary_button > .arrow_icon_container > svg > path {
         fill: #FDFCE8;
     }
 
-    .primary_button:hover > .arrow_icon_container > svg > path {
+    .primary_button_hovered > .arrow_icon_container > svg > path {
         fill: #15060B;
     }
 
@@ -53,8 +77,10 @@
         transition: all 0.33s ease-out;
     }
 
-    .primary_button:hover > .arrow_icon_container {
+    .primary_button_hovered > .arrow_icon_container {
         margin: auto auto auto 1.25rem;
+        will-change: 'margin-left';
+        transition: all 0.33s ease-out;
     }
 
     .arrow_icon_container {
