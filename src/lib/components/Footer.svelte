@@ -17,40 +17,51 @@
     <div class="nav_bottom_container">        
         <div class="nav_bottom">
             <nav>
-                <ul class="footer_nav_logo">
-                    <li>
-                        <a href="/" aria-label="link to index page">
-                            <img src={logo_white} alt="Suzanne Conti Quilts logo"/>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="footer_nav_tabs">
+                <div class="footer_top_nav_tabs">
+                    <ul class="footer_nav_logo">
+                        <li>
+                            <a href="/" aria-label="link to index page">
+                                <img src={logo_white} alt="Suzanne Conti Quilts logo"/>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer_nav_tabs_main">
+                        <li 
+                            class="{$page.url.pathname === '/quilts' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                        >
+                            <a href="/quilts" aria-label="link to quilts page">
+                                quilts
+                            </a>
+                        </li>
+                        <li 
+                            class="{$page.url.pathname === '/about' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                        >
+                            <a href="/about" aria-label="link to about page">
+                                about
+                            </a>
+                        </li>
+                        <li 
+                            class="{$page.url.pathname === '/contact' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                        >
+                            <a href="/contact" aria-label="link to contact page">
+                                contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="footer_nav_tabs_secondary">
                     <li 
-                        class="{$page.url.pathname === '/quilts' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
-                    >
-                        <a href="/quilts" aria-label="link to quilts page">
-                            quilts
-                        </a>
-                    </li>
-                    <li 
-                        class="{$page.url.pathname === '/about' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
-                    >
-                        <a href="/about" aria-label="link to about page">
-                            about
-                        </a>
-                    </li>
-                    <li 
-                        class="{$page.url.pathname === '/contact' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
-                    >
-                        <a href="/contact" aria-label="link to contact page">
-                            contact
-                        </a>
-                    </li>
-                    <li 
-                        class="{$page.url.pathname === '/colophon' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                        class="{$page.url.pathname === '/colophon' ? 'footer_nav_tab_active_secondary' : 'footer_nav_tab_secondary'}"
                     >
                         <a href="/colophon" aria-label="link to colophon page">
                             colophon
+                        </a>
+                    </li>
+                    <li 
+                        class="{$page.url.pathname === '/sitemap.xml' ? 'footer_nav_tab_active_secondary' : 'footer_nav_tab_secondary'}"
+                    >
+                        <a href="/sitemap.xml" target="_blank"  rel="noopener noreferrer" aria-label="link to colophon page">
+                            sitemap
                         </a>
                     </li>
                 </ul>
@@ -94,7 +105,7 @@
 
     .nav_bottom {
         width: 100%;
-		max-width: 1096px;
+		max-width: 860px;
 		margin: 0 auto 0 auto;
     }
 
@@ -105,33 +116,56 @@
         flex-direction: column;
     }
 
-    .footer_nav_tabs {
+    .footer_top_nav_tabs {
+        display: flex;
+		flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .footer_nav_tabs_main {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .footer_nav_tabs_secondary {
         display: flex;
         flex-direction: row;
     }
 
     .footer_nav_tab a {
-        margin: auto 1rem auto 1rem;
+        margin: auto auto auto 2rem;
         color: #ffffff;
         transition: all 0.2s;
     }
 
     .footer_nav_tab_active a {
-        margin: auto 1rem auto 1rem;
+        margin: auto auto auto 2rem;
         color: #BFC8D1;
         transition: all 0.2s;
     }
 
+    .footer_nav_tab_secondary a {
+        margin: auto 1rem auto auto;
+        color: #ffffff;
+        transition: all 0.2s;
+        font-size: 1.25rem;
+    }
+
+    .footer_nav_tab_active_secondary a {
+        margin: auto 1.5rem auto auto;
+        color: #BFC8D1;
+        transition: all 0.2s;
+        font-size: 1.25rem;
+    }
+
     nav {
 		display: flex;
-		flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-around;
+        flex-direction: column;
 	}
 
 	nav a {
 		text-decoration: none;
-		font-size: 1.75rem;
 		transition: all 0.2s;
 	}
 
@@ -151,18 +185,15 @@
 
     .copyright {
         color: #ffffff;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         text-align: center;
+        margin: 0.5rem auto auto auto;
     }
 
     @media (max-width: 750px) {
 
         nav {
             justify-content: space-between;
-        }
-
-        nav a {
-            font-size: 1.25rem;
         }
 
         .nav_bottom {
@@ -174,7 +205,7 @@
             align-items: flex-start;
         }
 
-        .footer_nav_tabs {
+        .footer_nav_tabs_main {
             display: flex;
             flex-direction: column;
             padding: 0 0 1rem 0;
@@ -189,9 +220,23 @@
             margin: auto auto 1rem 0;
         }
 
+        .footer_nav_tab_secondary a {
+            margin: auto 1rem auto auto;
+            color: #ffffff;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .footer_nav_tab_active_secondary a {
+            margin: auto 1.5rem auto auto;
+            color: #BFC8D1;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
         .copyright {
-            font-size: 1.25rem;
-            text-align: left;
+            font-size: 1rem;
+            text-align: center;
         }
 
     }
