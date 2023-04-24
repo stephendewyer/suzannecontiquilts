@@ -1,12 +1,43 @@
 <script>
+	import { onMount } from 'svelte';
 	import quilts from '$lib/data/quilts.json';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 
 	let quiltCardIsHovered = false;
-
 	let hoveredQuiltCardId = null;
+	let page = 0;
+	let pageCount = [];
+	let currentPageQuilts = [];
+	let quiltsPerPage = 9;
+	let loading = true;
 
+	// set the current page quilts use reactive
+
+	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
+	$: console.log("Page is", page);
+
+	const paginate = (items) => {
+		const pages = Math.ceil(items.length / quiltsPerPage);
+
+		const paginatedItems = Array.from({ length: pages }, (_, index) => {
+			const start = index * quiltsPerPage;
+			return items.slice(start, start + quiltsPerPage);
+		});
+
+		console.log("paginatedItems are", paginatedItems);
+		pageCount = [...paginatedItems];
+	}
+
+	onMount(() => {
+		paginate(quilts);
+	});
+
+	const setPage = (p) => {
+		if (p >= 0 && p < pageCount.length) {
+			page = p;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -17,7 +48,7 @@
 
 <div>
 	<div class="quilts_container">
-		{#each quilts as quilt, i}
+		{#each currentPageQuilts as quilt, i}
 			<div
 				on:mouseover={() => {
 					hoveredQuiltCardId = quilt.id;
@@ -33,27 +64,114 @@
 				}}
 				class="quilt_card_container"
 			>
-			<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}">
-				<img 
-					class="quilt_thumbnail"
-					src="/images/quilts/thumbnails{quilt.images[0]}" 
-					alt="{quilt.name} thumbnail" 
-				/>
-				<div class="quilt_info_container">
-					<h2 class="{hoveredQuiltCardId == quilt.id ? "quilt_name_hovered" : "quilt_name"}">
-						{quilt.name}
-					</h2>
-					<PrimaryButton quiltCardIsHoveredProp={hoveredQuiltCardId == quilt.id ? quiltCardIsHovered = true : quiltCardIsHovered = false}>
-						view
-					</PrimaryButton>
-				</div>
+				<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}">
+					<img 
+						class="quilt_thumbnail"
+						src="/images/quilts/thumbnails{quilt.images[0]}" 
+						alt="{quilt.name} thumbnail" 
+					/>
+					<div class="quilt_info_container">
+						<h2 class="{hoveredQuiltCardId == quilt.id ? "quilt_name_hovered" : "quilt_name"}">
+							{quilt.name}
+						</h2>
+						<PrimaryButton quiltCardIsHoveredProp={hoveredQuiltCardId == quilt.id ? quiltCardIsHovered = true : quiltCardIsHovered = false}>
+							view
+						</PrimaryButton>
+					</div>
 				</a>
 			</div>
+			{:else}
+				<p>No quilts fit search criteria.</p>
 		{/each}
 	</div>
+	<nav class="pagination">
+		<ul>
+			<li>
+			  	<button 
+					type="button"
+					disabled={page === 0} 
+					on:click={() => setPage(page = 0)}
+				>
+					First
+			  	</button>
+			</li>
+			<li>
+			  	<button
+					type="button"
+			  		disabled={page === 0} 
+					on:click={() => setPage(page - 1)}
+				>
+					Previous
+			  	</button>
+			</li>
+			{#each pageCount as page, i}
+				<li>
+				  	<button
+						type="button"
+						on:click={() => setPage(i)}
+					>
+						{i + 1}
+				  	</button>
+				</li>
+			{/each}
+			<li>
+				<button
+					type="button"
+					disabled={page >= pageCount.length - 1}
+					on:click={() => setPage(page + 1)}
+				>
+					Next
+				</button>
+			</li>
+			<li>
+			  	<button 
+				  	type="button"
+			  		disabled={page >= pageCount.length - 1} 
+					on:click={() => setPage(pageCount.length - 1)}
+				>
+					Last
+			  	</button>
+			</li>
+		</ul>
+	</nav>
 </div>
 
 <style>
+
+	/* begin pagination */
+
+	.pagination {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin: 2rem auto auto auto;
+	}
+
+	/* .active {
+		background-color: rgb(150, 150, 235);
+		color: white;
+	} */
+
+	ul {
+		list-style: none;
+	}
+
+	li {
+		float: left;
+	}
+
+	button {
+		background: transparent;
+		border: 1px solid #ccc;
+		padding: 5px 10px;
+		margin-left: 3px;
+		float: left;
+		cursor: pointer;
+	}
+
+  	/* end pagination */
+
 	.quilts_container {
 		display: flex;
 		flex-direction: row;
