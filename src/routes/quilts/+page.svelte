@@ -6,6 +6,7 @@
 
 	const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
+	let quilts_cont;
 
 	let quiltCardIsHovered = false;
 	let hoveredQuiltCardId = null;
@@ -37,9 +38,13 @@
 	});
 
 	const setPage = (p) => {
+		
 		if (p >= 0 && p < pageCount.length) {
 			page = p;
 			activePageId = page;
+			quilts_cont.scrollIntoView({
+				behavior: 'smooth'
+			});
 		}
 	}
 </script>
@@ -51,7 +56,10 @@
 </svelte:head>
 
 <div>
-	<div class="quilts_container">
+	<div 
+		class="quilts_container" 	
+		bind:this={quilts_cont}	
+	>
 		{#each currentPageQuilts as quilt, i}
 			<div
 				on:mouseover={() => {
