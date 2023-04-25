@@ -9,8 +9,7 @@
 	let page = 0;
 	let pageCount = [];
 	let currentPageQuilts = [];
-	let quiltsPerPage = 9;
-	let loading = true;
+	let quiltsPerPage = 8;
 
 	// set the current page quilts use reactive
 
@@ -91,6 +90,7 @@
 					type="button"
 					disabled={page === 0} 
 					on:click={() => setPage(page = 0)}
+					class="paginationButton"
 				>
 					First
 			  	</button>
@@ -100,6 +100,7 @@
 					type="button"
 			  		disabled={page === 0} 
 					on:click={() => setPage(page - 1)}
+					class="paginationButton"
 				>
 					Previous
 			  	</button>
@@ -109,6 +110,7 @@
 				  	<button
 						type="button"
 						on:click={() => setPage(i)}
+						class={page == i ? "activePaginationButton" : "paginationButton"}
 					>
 						{i + 1}
 				  	</button>
@@ -119,6 +121,7 @@
 					type="button"
 					disabled={page >= pageCount.length - 1}
 					on:click={() => setPage(page + 1)}
+					class="paginationButton"
 				>
 					Next
 				</button>
@@ -128,6 +131,7 @@
 				  	type="button"
 			  		disabled={page >= pageCount.length - 1} 
 					on:click={() => setPage(pageCount.length - 1)}
+					class="paginationButton"
 				>
 					Last
 			  	</button>
@@ -145,16 +149,16 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		margin: 2rem auto auto auto;
+		margin: 1rem auto 2rem auto;
 	}
-
-	/* .active {
-		background-color: rgb(150, 150, 235);
-		color: white;
-	} */
 
 	ul {
 		list-style: none;
+		margin: 0;
+		box-sizing: border-box;
+		padding-inline-start: 0;
+		margin-block-start: 0;
+    	margin-block-end: 0;
 	}
 
 	li {
@@ -162,12 +166,25 @@
 	}
 
 	button {
+		font-size: 1.75rem;
+	}
+
+	.paginationButton {
 		background: transparent;
 		border: 1px solid #ccc;
+		padding: 0.5rem 1rem;
+		margin-left: 0.3rem;
+		cursor: pointer;
+	}
+
+	.activePaginationButton {
+		background: transparent;
+		border: 3px solid #ccc;
 		padding: 5px 10px;
 		margin-left: 3px;
 		float: left;
 		cursor: pointer;
+		font-size: 24px;
 	}
 
   	/* end pagination */
@@ -232,6 +249,24 @@
 	}
 
 	@media (max-width: 750px) {
+
+		/* begin mobile pagination */
+
+		.pagination {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			margin: 1rem;
+			flex-wrap: wrap;
+		}
+
+		button {
+			font-size: 1rem;
+			margin: auto auto 1rem auto;
+		}
+
+		/* end mobile pagination */
 		.quilt_card_container {
 			margin: auto 1rem 1rem 1rem;
 		}
