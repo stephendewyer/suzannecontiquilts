@@ -4,6 +4,9 @@
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 
+	const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+
 	let quiltCardIsHovered = false;
 	let hoveredQuiltCardId = null;
 	let activePageId = 0;
@@ -30,7 +33,7 @@
 	}
 
 	onMount(() => {
-		paginate(quilts);
+		paginate(quiltsByAlpha);
 	});
 
 	const setPage = (p) => {
