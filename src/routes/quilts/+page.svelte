@@ -135,7 +135,7 @@
 					on:click={() => setPage(pageCount.length - 1)}
 					class="paginationButton"
 				>
-					Last
+					last
 			  	</button>
 			</li>
 		</ul>
