@@ -6,6 +6,7 @@
 
 	let quiltCardIsHovered = false;
 	let hoveredQuiltCardId = null;
+	let activePageId = 0;
 	let page = 0;
 	let pageCount = [];
 	let currentPageQuilts = [];
@@ -35,6 +36,7 @@
 	const setPage = (p) => {
 		if (p >= 0 && p < pageCount.length) {
 			page = p;
+			activePageId = page;
 		}
 	}
 </script>
@@ -92,7 +94,7 @@
 					on:click={() => setPage(page = 0)}
 					class="paginationButton"
 				>
-					First
+					first
 			  	</button>
 			</li>
 			<li>
@@ -102,7 +104,7 @@
 					on:click={() => setPage(page - 1)}
 					class="paginationButton"
 				>
-					Previous
+					previous
 			  	</button>
 			</li>
 			{#each pageCount as page, i}
@@ -110,7 +112,7 @@
 				  	<button
 						type="button"
 						on:click={() => setPage(i)}
-						class={page == i ? "activePaginationButton" : "paginationButton"}
+						class={activePageId == i ? "activePaginationButton" : "paginationButton"}
 					>
 						{i + 1}
 				  	</button>
@@ -123,7 +125,7 @@
 					on:click={() => setPage(page + 1)}
 					class="paginationButton"
 				>
-					Next
+					next
 				</button>
 			</li>
 			<li>
@@ -145,10 +147,6 @@
 	/* begin pagination */
 
 	.pagination {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
 		margin: 1rem auto 2rem auto;
 	}
 
@@ -159,6 +157,10 @@
 		padding-inline-start: 0;
 		margin-block-start: 0;
     	margin-block-end: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 	}
 
 	li {
@@ -171,20 +173,20 @@
 
 	.paginationButton {
 		background: transparent;
-		border: 1px solid #ccc;
+		border-width: 1px;
 		padding: 0.5rem 1rem;
 		margin-left: 0.3rem;
 		cursor: pointer;
+		border-style: dashed;
 	}
 
 	.activePaginationButton {
 		background: transparent;
-		border: 3px solid #ccc;
-		padding: 5px 10px;
-		margin-left: 3px;
-		float: left;
+		border-width: 3px;
+		border-style: dashed;
+		padding: 0.5rem 1rem;
+		margin-left: 0.3rem;
 		cursor: pointer;
-		font-size: 24px;
 	}
 
   	/* end pagination */
@@ -253,11 +255,10 @@
 		/* begin mobile pagination */
 
 		.pagination {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			align-items: center;
 			margin: 1rem;
+		}
+
+		ul {
 			flex-wrap: wrap;
 		}
 
