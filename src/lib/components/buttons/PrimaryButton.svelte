@@ -92,6 +92,11 @@
             font-size: 1.25rem;
             padding: 0.75rem 1rem 0.75rem 1rem;
         }
+
+        .primary_button_hovered {
+            font-size: 1.25rem;
+            padding: 0.75rem 1rem 0.75rem 1rem;
+        }
     }
     
 </style>
