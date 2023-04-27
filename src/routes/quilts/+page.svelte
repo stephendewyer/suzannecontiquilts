@@ -467,13 +467,13 @@
 		}
 
 		.arrow_container_active {
-			transform: rotateY(0) rotateX(0) rotate(90deg);
+			transform: rotateY(0) rotateX(180deg) rotate(90deg);
 			will-change: transform;
 			transition: transform 300ms ease-out;
 		}
 
 		.arrow_container {
-			transform: rotateY(0) rotateX(180deg) rotate(90deg);
+			transform: rotateY(0) rotateX(0) rotate(90deg);
 			will-change: transform;
 			transition: transform 300ms ease-out;
 		}
