@@ -6,7 +6,22 @@
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 	import stitches from '$lib/images/icons/stitches.svg';
 
-	const searchQuilts = quilts.map((quilt) => ({
+	let quilts_cont;
+	let quiltSearchNavBarIsHovered = false;
+	let searchFormIsActive = true;
+	let quiltCardIsHovered = false;
+	let hoveredQuiltCardId = null;
+	let activePageId = 0;
+	let page = 0;
+	let pageCount = [];
+	let currentPageQuilts = [];
+	let quiltsPerPage = 8;
+
+	// sort the quilts by alphabetical order
+
+	const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+	const searchQuilts = quiltsByAlpha.map((quilt) => ({
 		...quilt,
 		search_terms: `${quilt.name}`
 	}));
@@ -19,25 +34,17 @@
 		unsubscribe();
 	});
 
-	const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-
-	let quilts_cont;
-	let quiltSearchNavBarIsHovered = false;
-	let searchFormIsActive = true;
-	let quiltCardIsHovered = false;
-	let hoveredQuiltCardId = null;
-	let activePageId = 0;
-	let page = 0;
-	let pageCount = [];
-	let currentPageQuilts = [];
-	let quiltsPerPage = 8;
-
 	// set the current page quilts use reactive
 
 	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
 	$: console.log("Page is", page);
 
+	$: filteredQuilts = searchStore.filtered ? searchStore.filtered : quiltsByAlpha;
+
+	// console.log(filteredQuilts)
+
 	const paginate = (items) => {
+		console.log(items);
 		const pages = Math.ceil(items.length / quiltsPerPage);
 
 		const paginatedItems = Array.from({ length: pages }, (_, index) => {
@@ -50,7 +57,7 @@
 	}
 
 	onMount(() => {
-		paginate(quiltsByAlpha);
+		paginate(filteredQuilts);
 	});
 
 	const searchSubmitHandler = (event) => {
@@ -131,7 +138,6 @@
 			  bind:value={$searchStore.search}
             />
           </form>
-		  <!-- <pre>{JSON.stringify($searchStore.filtered, null, 2)}</pre> -->
 		</div>
 	</div>
 	
