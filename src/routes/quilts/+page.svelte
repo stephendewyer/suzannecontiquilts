@@ -1,14 +1,23 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import quilts from '$lib/data/quilts.json';
+	import { createSearchStore, searchHandler } from '$lib/stores/search';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 	import stitches from '$lib/images/icons/stitches.svg';
 
-	// const searchQuilts = quilts.map((quilt) => ({
-	// 	...quilt,
-	// 	searchTerms: `${quilt.name} ${quilt.machine_pieced}`
-	// }))
+	const searchQuilts = quilts.map((quilt) => ({
+		...quilt,
+		search_terms: `${quilt.name}`
+	}));
+
+	const searchStore = createSearchStore(searchQuilts);
+
+	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+
+	onDestroy(() => {
+		unsubscribe();
+	});
 
 	const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
@@ -43,6 +52,10 @@
 	onMount(() => {
 		paginate(quiltsByAlpha);
 	});
+
+	const searchSubmitHandler = (event) => {
+		event.preventDefault();
+	}
 
 	const setPage = (p) => {
 		
@@ -103,7 +116,22 @@
 <div class="quilt_search_and_results">
 	<div class="{(searchFormIsActive) ? "quilt_search_form_container_open" : "quilt_search_form_container_closed"}">
 		<div class="{(searchFormIsActive) ? "quilt_search_form_open" : "quilt_search_form_closed"}">
-			search filters are on the way.
+			<form 
+				class="search_form"
+				noValidate 
+				autoComplete="off"
+				onSubmit={searchSubmitHandler}
+			>
+            <input 
+              id="quilt_search"
+              type="search" 
+              name="quilt_search" 
+              class="search_input"
+              placeholder="quilt title"
+			  bind:value={$searchStore.search}
+            />
+          </form>
+		  <!-- <pre>{JSON.stringify($searchStore.filtered, null, 2)}</pre> -->
 		</div>
 	</div>
 	
@@ -112,7 +140,7 @@
 			class="quilts_container" 	
 			bind:this={quilts_cont}	
 		>
-			{#each currentPageQuilts as quilt, i}
+			{#each $searchStore.filtered as quilt, i}
 				<div
 					on:mouseover={() => {
 						hoveredQuiltCardId = quilt.id;
@@ -232,7 +260,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		width: 20rem;
+		width: 26rem;
 		padding: 1rem 2rem;
 		cursor: pointer;
 	}
@@ -296,22 +324,26 @@
 
 	.quilt_search_form_container_open {
 		position: relative;
-		width: 20rem;
-		will-change: width;
-		transition: width 0.3s ease-out;
+		width: 26rem;
+		min-width: 26rem;
+		margin-left: 0;
+		will-change: margin-left;
+		transition: margin-left 0.3s ease-out;
 	}
 
 	.quilt_search_form_container_closed {
 		position: relative;
-		width: 0;
-		will-change: width;
-		transition: width 0.3s ease-out;
+		width: 26rem;
+		min-width: 26rem;
+		margin-left: -26rem;
+		will-change: margin-left;
+		transition: margin-left 0.3s ease-out;
 	}
 
 	.quilt_search_form_open {
-		position: absolute;
+		position: relative;
 		padding: 1rem 2rem;
-		width: 20rem;
+		width: 100%;
 		will-change: transform;
 		transform: translateX(0);
 		transition: transform 0.3s ease-out;
@@ -319,13 +351,34 @@
 	}
 
 	.quilt_search_form_closed {
-		position: absolute;
+		position: relative;
 		padding: 1rem 2rem;
 		transform: translateX(-100%);
-		width: 20rem;
+		width: 100%;
 		will-change: transform;
 		transition: transform 0.3s ease-out;
 		text-align: center;
+	}
+
+	.search_input {
+		height: 3rem;
+		width: 100%;
+		font-size: 1.75rem;
+		background-color: #ECF7FA;
+		border-color: #3B3E29;
+		border-width: 3px;
+		border-style: solid;
+		padding: 0.25rem 1rem 0.25rem 2.75rem;
+		background-image: url('$lib/images/icons/magnifying_glass.svg');
+		background-size: 1.5rem;
+		background-repeat: no-repeat;
+		background-position: 10px center;
+		transition: border-color 0.3s ease-out;
+	}
+	
+	.search_input:focus {
+		outline: none;
+		border-color: #ED6545;
 	}
 
 	/* end quilt search */
@@ -347,6 +400,7 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 
 	li {
@@ -355,6 +409,7 @@
 
 	button {
 		font-size: 1.75rem;
+		/* margin: auto auto 1rem auto; */
 	}
 
 	.paginationButton {
@@ -489,15 +544,19 @@
 		.quilt_search_form_container_open {
 			position: relative;
 			width: 100%;
-			height: auto;
-			overflow: visible;
+			min-width: 100%;
+			margin-left: 0;
+			height: 100%;
 			will-change: height;
+			overflow: hidden;
 			transition: height 0.3s ease-out;
 		}
 
 		.quilt_search_form_container_closed {
 			position: relative;
 			width: 100%;
+			min-width: 100%;
+			margin-left: 0;
 			height: 0;
 			will-change: height;
 			overflow: hidden;
@@ -508,22 +567,25 @@
 			position: relative;
 			padding: 1rem 2rem;
 			width: 100%;
-			height: auto;
-			opacity: 100%;
-			will-change: opacity;
-			transform: translateX(0);
-			transition: opacity 0.3s ease-out;
+			height: 100%;
+			will-change: transform;
+			transform: translateY(0) translateX(0);
+			transition: transform 0.3s ease-out;
 		}
 
 		.quilt_search_form_closed {
 			position: relative;
 			padding: 1rem 2rem;
 			width: 100%;
-			height: auto;
-			opacity: 0;
-			will-change: opacity;
-			transform: translateX(0);
-			transition: opacity 0.3s ease-out;
+			height: 100%;
+			will-change: transform;
+			transform: translateY(-100%) translateX(0);
+			transition: transform 0.3s ease-out;
+		}
+
+		.search_input {
+			font-size: 1.25rem;
+			border-width: 2px;
 		}
 
 		/* end mobile quilt search */
@@ -540,7 +602,7 @@
 
 		button {
 			font-size: 1rem;
-			margin: auto auto 1rem auto;
+			margin: 0.5rem auto auto auto;
 		}
 
 		/* end mobile pagination */
