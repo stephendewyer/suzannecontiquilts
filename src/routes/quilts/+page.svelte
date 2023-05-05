@@ -182,7 +182,7 @@
 					<p>No quilts fit search criteria.</p>
 			{/each}
 		</div>
-		<nav class="pagination">
+		<!-- <nav class="pagination">
 			<ul>
 				<li>
 					<button 
@@ -236,7 +236,7 @@
 					</button>
 				</li>
 			</ul>
-		</nav> 
+		</nav>  -->
 	</div>
 </div>
 
