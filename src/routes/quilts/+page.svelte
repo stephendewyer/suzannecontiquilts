@@ -1,5 +1,5 @@
 <script>
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount, onDestroy, afterUpdate } from 'svelte';
 	import quilts from '$lib/data/quilts.json';
 	import { createSearchStore, searchHandler } from '$lib/stores/search';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
@@ -39,7 +39,7 @@
 	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
 	$: console.log("Page is", page);
 
-	$: filteredQuilts = searchStore.filtered ? searchStore.filtered : quiltsByAlpha;
+	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : quiltsByAlpha;
 
 	// console.log(filteredQuilts)
 
@@ -56,7 +56,7 @@
 		pageCount = [...paginatedItems];
 	}
 
-	onMount(() => {
+	afterUpdate(() => {
 		paginate(filteredQuilts);
 	});
 
@@ -146,7 +146,7 @@
 			class="quilts_container" 	
 			bind:this={quilts_cont}	
 		>
-			{#each $searchStore.filtered as quilt, i}
+			{#each currentPageQuilts as quilt, i}
 				<div
 					on:mouseover={() => {
 						hoveredQuiltCardId = quilt.id;
@@ -182,7 +182,7 @@
 					<p>No quilts fit search criteria.</p>
 			{/each}
 		</div>
-		<!-- <nav class="pagination">
+		<nav class="pagination">
 			<ul>
 				<li>
 					<button 
@@ -236,7 +236,7 @@
 					</button>
 				</li>
 			</ul>
-		</nav>  -->
+		</nav> 
 	</div>
 </div>
 
