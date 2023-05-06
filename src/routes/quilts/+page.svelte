@@ -1,5 +1,5 @@
 <script>
-	import { onMount, onDestroy, afterUpdate } from 'svelte';
+	import { onDestroy, afterUpdate } from 'svelte';
 	import quilts from '$lib/data/quilts.json';
 	import { createSearchStore, searchHandler } from '$lib/stores/search';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
@@ -39,12 +39,13 @@
 	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
 	$: console.log("Page is", page);
 
-	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : quiltsByAlpha;
+	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : searchQuilts;
 
-	// console.log(filteredQuilts)
+	$: searchValue = ""
 
 	const paginate = (items) => {
 		console.log(items);
+
 		const pages = Math.ceil(items.length / quiltsPerPage);
 
 		const paginatedItems = Array.from({ length: pages }, (_, index) => {
@@ -58,14 +59,20 @@
 
 	afterUpdate(() => {
 		paginate(filteredQuilts);
+		
 	});
 
 	const searchSubmitHandler = (event) => {
 		event.preventDefault();
 	}
 
+	const inputSearchHandler = () => {
+		page = 0;
+		activePageId = page;
+		$searchStore.search = searchValue;	
+	}
+
 	const setPage = (p) => {
-		
 		if (p >= 0 && p < pageCount.length) {
 			page = p;
 			activePageId = page;
@@ -135,7 +142,8 @@
               name="quilt_search" 
               class="search_input"
               placeholder="quilt title"
-			  bind:value={$searchStore.search}
+			  bind:value={searchValue}
+			  on:keyup={inputSearchHandler}
             />
           </form>
 		</div>

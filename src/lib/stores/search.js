@@ -13,7 +13,7 @@ export const createSearchStore = (data) => {
     }
 }
 
-export const searchHandler = (store) => {
+export const searchHandler = (store) => { 
     const search_term = store.search.toLowerCase() || "";
     store.filtered = store.data.filter((item) => {
         return item.search_terms.toLowerCase().includes(search_term);
