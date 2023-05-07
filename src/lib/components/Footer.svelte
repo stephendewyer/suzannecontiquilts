@@ -209,22 +209,18 @@
 
     @media (max-width: 750px) {
 
-        .footer_nav_logo  {
-            display: block;
-            height: 100%;
-        }
-
         nav {
             justify-content: space-between;
         }
 
         .nav_bottom {
             margin: 0 1rem 0 1rem;
+            width: auto;
         }
 
         .footer_nav_logo {
             max-width: 7rem;
-            align-items: flex-start;
+            flex-direction: flex-start;
         }
 
         .footer_nav_tabs_main {
