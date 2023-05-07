@@ -392,7 +392,7 @@
 	
 	.search_input:focus {
 		outline: none;
-		border-color: #ED6545;
+		border-color: #BAE1D7;
 	}
 
 	/* end quilt search */
@@ -578,7 +578,7 @@
 
 		.quilt_search_form_open {
 			position: relative;
-			padding: 1rem 2rem;
+			padding: 1rem;
 			width: 100%;
 			height: 100%;
 			will-change: transform;
@@ -588,7 +588,7 @@
 
 		.quilt_search_form_closed {
 			position: relative;
-			padding: 1rem 2rem;
+			padding: 1rem;
 			width: 100%;
 			height: 100%;
 			will-change: transform;
