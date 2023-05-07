@@ -502,7 +502,6 @@
 		margin: 0 auto 1rem auto;
 		transition: all 600ms;
 		will-change: color;
-
 	}
 
 	@media (max-width: 750px) {
