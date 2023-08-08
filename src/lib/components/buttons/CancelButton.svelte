@@ -2,11 +2,11 @@
 
 </script>
 
-<button 
+<div
     class="primary_button"
 >
     <slot/>
-</button>
+</div>
 
 <style>
 
