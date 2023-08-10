@@ -75,6 +75,10 @@
         fill: #3B3E29;
     }
 
+    .previous_button > .button_top > .arrow_icon_container_hovered > svg > path {
+        fill: #3B3E29;
+    }
+
     @media (max-width: 750px) {
         .previous_button {
             padding: 1rem 1.5rem 1rem 1.5rem;

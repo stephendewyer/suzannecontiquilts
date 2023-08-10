@@ -10,9 +10,8 @@
 
     // begin set title for header
 
-    const pagePath = $page.url.pathname;
-
-    const pageSlug = pagePath.slice(8);
+    $: pagePath = $page.url.pathname;
+    $: pageSlug = pagePath.slice(8);
 
     let title = "";
 
@@ -25,7 +24,9 @@
 
     let quiltCount = 0;
 
-    for (quilt01 of quilts) {
+    $: for (quilt01 of quilts) {
+        console.log(pageSlug)
+        
         if (pageSlug === quilt01.slug) {
             title = quilt01.name;
             quiltID = quilt01.id;
@@ -33,12 +34,12 @@
         quiltCount += 1;
     }
 
-    console.log(`the quilt count is ${quiltCount}`);
-    console.log(`current quilt id is ${quiltID}`);
+    $: console.log(`the quilt count is ${quiltCount}`);
+    $: console.log(`current quilt id is ${quiltID}`);
 
     // get the previous quilt data
 
-    if (quiltID >= 2) {
+    $: if (quiltID >= 2) {
         prevQuiltID = quiltID - 1;
     } else {
         prevQuiltID = quiltCount;
@@ -46,23 +47,23 @@
 
     let prevQuiltSlug = "";
 
-    for (quilt02 of quilts) {
+    $: for (quilt02 of quilts) {
         if (prevQuiltID === quilt02.id) {
             prevQuiltSlug = quilt02.slug;
         }
     }
 
-    console.log(`previous quilt id is ${prevQuiltID}`);
+    $: console.log(`previous quilt id is ${prevQuiltID}`);
 
     // get the next quilt data
 
-    if (quiltID <= (quiltCount - 1)) {
+    $: if (quiltID <= (quiltCount - 1)) {
         nextQuiltID = quiltID + 1;
     } else {
         nextQuiltID = 1;
     }
 
-    console.log(`next quilt id is ${nextQuiltID}`);
+    $: console.log(`next quilt id is ${nextQuiltID}`);
 
     // end set title for header
 
@@ -96,11 +97,11 @@
         focus      : 'center'
     }
 
-    onMount( () => {
-    if ( main && thumbs ) {
-      main.sync( thumbs.splide );
+    onMount(() => {
+        if ( main && thumbs ) {
+        main.sync( thumbs.splide );
     }
-  } );
+  });
 
   // end Splide
 
@@ -281,7 +282,6 @@
         {#each quilts as quiltPrev, i}
             {#if prevQuiltID === quiltPrev.id}
                 <a 
-                    data-sveltekit-reload 
                     href={`/quilts/${quiltPrev.slug}/`} 
                     aria-label="link to ${quiltPrev.name}"
                 >
@@ -294,7 +294,6 @@
         {#each quilts as quiltNext, i}
             {#if nextQuiltID === quiltNext.id}
                 <a
-                    data-sveltekit-reload
                     href={`/quilts/${quiltNext.slug}/`}
                     aria-label="link to ${quiltNext.name}"
                 >
