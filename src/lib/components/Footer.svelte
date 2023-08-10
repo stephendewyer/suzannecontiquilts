@@ -56,13 +56,6 @@
                             colophon
                         </a>
                     </li>
-                    <li 
-                        class="{$page.url.pathname === '/sitemap.xml' ? 'footer_nav_tab_active_secondary' : 'footer_nav_tab_secondary'}"
-                    >
-                        <a href="/sitemap.xml" target="_blank"  rel="noopener noreferrer" aria-label="link to colophon page">
-                            sitemap
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <div class="copyright">

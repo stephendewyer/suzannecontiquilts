@@ -1,3 +1,3 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt file of https://suzannecontiquilts.vercel.app/robots.txt
 User-agent: *
-Disallow:
+Sitemap: https://suzannecontiquilts.vercel.app/sitemap.xml
