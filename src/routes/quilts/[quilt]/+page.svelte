@@ -2,7 +2,7 @@
     import { page } from '$app/stores';
     import quilts from '$lib/data/quilts.json';
     import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-    import { onMount } from 'svelte';
+    import { onMount, afterUpdate } from 'svelte';
     import '@splidejs/svelte-splide/css/skyblue';
     import stitches from '$lib/images/icons/stitches.svg';
     import NextButton from '$lib/components/buttons/NextButton.svelte';
@@ -97,11 +97,13 @@
         focus      : 'center'
     }
 
-    onMount(() => {
-        if ( main && thumbs ) {
-        main.sync( thumbs.splide );
+    $: if ( main && thumbs ) {
+        afterUpdate(() => {
+            main.sync( thumbs.splide );
+        });
     }
-  });
+
+    
 
   // end Splide
 
@@ -139,12 +141,14 @@
                         options={ thumbsOptions }
                         bind:this={ thumbs }
                     >
-                        { #each quilt.images as quiltImage, ix}
+                        {#each quilt.images as quiltImage, ix}
                             <SplideSlide>
-                                <img src={`/images/quilts/${quiltImage}`} alt="{quilt.name} image {ix}">
+                                <img 
+                                    src={`/images/quilts/${quiltImage}`} 
+                                    alt="{quilt.name} image {ix}"
+                                />
                             </SplideSlide>
-                        { /each }
-                        
+                        {/each}
                     </Splide> 
                 </div>
             </div> 
