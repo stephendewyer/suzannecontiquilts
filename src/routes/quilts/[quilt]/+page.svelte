@@ -2,7 +2,7 @@
     import { page } from '$app/stores';
     import quilts from '$lib/data/quilts.json';
     import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-    import { onMount, afterUpdate } from 'svelte';
+    import { afterUpdate } from 'svelte';
     import '@splidejs/svelte-splide/css/skyblue';
     import stitches from '$lib/images/icons/stitches.svg';
     import NextButton from '$lib/components/buttons/NextButton.svelte';
@@ -68,6 +68,10 @@
     // end set title for header
 
     // begin Splide
+
+    $: Splide;
+
+    $: SplideSlide;
 
     let main = Splide;
     let thumbs = SplideSlide;

@@ -1,6 +1,6 @@
 <script>
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-	import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+	import '@splidejs/svelte-splide/css/skyblue';
 	import stitches from '$lib/images/icons/stitches.svg';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import quiltPattern from '$lib/images/quilts/Michigan/Suzanne_Conti_Michigan_07.jpg';
