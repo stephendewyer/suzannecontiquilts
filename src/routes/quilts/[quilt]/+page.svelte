@@ -68,11 +68,7 @@
     // end set title for header
 
     // begin Splide
-
-    $: Splide;
-
-    $: SplideSlide;
-
+    
     let main = Splide;
     let thumbs = SplideSlide;
 
