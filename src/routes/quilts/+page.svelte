@@ -92,6 +92,7 @@
 	on:click={() => {
 		searchFormIsActive = !searchFormIsActive;
 	}}
+	
 	on:keydown={() => {
 		searchFormIsActive = !searchFormIsActive;
 	}}
@@ -144,6 +145,7 @@
               placeholder="quilt title"
 			  bind:value={searchValue}
 			  on:keyup={inputSearchHandler}
+			  on:input={inputSearchHandler}
             />
           </form>
 		</div>
