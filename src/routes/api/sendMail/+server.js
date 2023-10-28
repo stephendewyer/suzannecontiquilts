@@ -4,7 +4,7 @@ import {SENDGRID_API_KEY} from '$env/static/private';
 export async function POST({request}) {
 
   if (request.method !== 'POST') {
-      return;
+      return new Response(JSON.stringify({error: "method is not a POST"}), {status: 422});
   }
 
   const data = await request.json();
@@ -37,7 +37,7 @@ export async function POST({request}) {
 
   const msg = [
     {
-      to: 'smconti@sbcglobal.net',
+      to: 'smconti7@gmail.com',
       from: 'sdewyer@artintechservices.com',
       subject: subject,
       text: 'message sent via Suzanne Conti Quilts contact form',
