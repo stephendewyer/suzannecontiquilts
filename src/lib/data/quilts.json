@@ -876,5 +876,35 @@
             "/Kansas/Suzanne_Conti_Kansas_05.jpg",
             "/Kansas/Suzanne_Conti_Kansas_06.jpg"
         ]
+    },
+    {
+        "id": 30,
+        "name": "Grandma Kate Quilt",
+        "slug": "grandma-kate-quilt",
+        "size": null,
+        "date_start": null,
+        "date_finished": null,
+        "year": null,
+        "machine_pieced": null,
+        "hand_quilted": null,
+        "hand_pieced": null,
+        "applique": null,
+        "paper_pieced": null,
+        "blocks": null,
+        "orphan_blocks": null,
+        "pattern": null,
+        "details": null,
+        "collection": null,
+        "images": [
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_01.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_02.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_03.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_04.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_05.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_06.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_07.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_08.jpg",
+            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_09.jpg"
+        ]
     }
 ]
