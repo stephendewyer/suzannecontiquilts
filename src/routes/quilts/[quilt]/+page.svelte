@@ -214,6 +214,18 @@
                                 {#if (
                                     (quilt.hand_quilted) && (
                                         (quilt.applique) || 
+                                        (quilt.paper_pieced) ||
+                                        (quilt.hand_pieced)
+                                    )
+                                )}
+                                ,
+                                {/if}
+                                {#if (quilt.hand_pieced)}
+                                    hand pieced
+                                {/if}
+                                {#if (
+                                    (quilt.hand_pieced) && (
+                                        (quilt.applique) || 
                                         (quilt.paper_pieced)
                                     )
                                 )}
@@ -221,6 +233,12 @@
                                 {/if}
                                 {#if (quilt.applique)}
                                     applique
+                                {/if}
+                                {#if (
+                                    (quilt.applique) && (quilt.paper_pieced)
+                                    )
+                                }
+                                ,
                                 {/if}
                                 {#if (quilt.paper_pieced)}
                                     paper pieced
