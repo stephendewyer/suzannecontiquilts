@@ -16,9 +16,9 @@
 	const inspiration = [
 		{
 			"id": 1,
-			"name": "Katherine Marie Jurkiewicz (Grandma Kate)",
+			"name": "Katherine Marie Jurkiewicz (Suzanne's grandma Kate)",
 			"image": inspiration01,
-			"alt": "portrait of Katherine Marie Jurkiewicz (Grandma Kate)"
+			"alt": "portrait of Katherine Marie Jurkiewicz (Suzanne's grandma Kate)"
 		},
 		{
 			"id": 2,
@@ -273,6 +273,8 @@
 
 		.inspiration_card_container {
 			margin: auto 1rem 1rem 1rem;
+			height: auto;
 		}
+
 	}
 </style>

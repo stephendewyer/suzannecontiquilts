@@ -412,6 +412,13 @@
         .main_splide_container {
             margin: 0 0 1rem 0;
         }
+
+        .slide_image {
+            width: 100%;
+            height: 20rem;
+            object-fit: cover;
+        }
+
         .thumbnails {
             padding: 0 1rem;
         }
