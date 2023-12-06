@@ -4,19 +4,10 @@
     import { afterUpdate } from 'svelte';
     import '@splidejs/svelte-splide/css/skyblue';
     import stitches from '$lib/images/icons/stitches.svg';
-    import NextButton from '$lib/components/buttons/NextButton.svelte';
-    import PrevButton from '$lib/components/buttons/PreviousButton.svelte';
 
     // begin set title for header
 
-    let title = "";
-
-    let quiltID = 0;
-
-    let quilt01 = [];
-    let quilt02 = [];
-
-    let quiltCount = 0;
+    let title = "Suzanne's Grandma Kate Quilt";
 
     // end set title for header
 
