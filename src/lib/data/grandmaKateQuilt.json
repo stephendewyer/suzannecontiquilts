@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Suzanne's Grandma Kate Quilt",
+        "slug": null,
+        "size": null,
+        "date_start": null,
+        "date_finished": "~1960",
+        "year": 1960,
+        "machine_pieced": false,
+        "hand_quilted": true,
+        "hand_pieced": null,
+        "hand_cross_stitched": true,
+        "applique": false,
+        "paper_pieced": false,
+        "blocks": null,
+        "orphan_blocks": null,
+        "pattern": null,
+        "details": null,
+        "collection": "Suzanne Conti", 
+        "images": [ 
+            "/Great_Grandmother/Grandma_Kate_01.jpg", 
+            "/Great_Grandmother/Grandma_Kate_02.jpg", 
+            "/Great_Grandmother/Grandma_Kate_03.jpg"
+        ]
+    }
+]

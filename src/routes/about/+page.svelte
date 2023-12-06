@@ -7,39 +7,49 @@
 	import aboutImage01 from '$lib/images/about/about-Suzanne_Conti_01.jpg';
 	import aboutImage02 from '$lib/images/about/about-Suzanne_Conti_02.jpg';
 	import aboutImage04 from '$lib/images/about/about-Suzanne_Conti_04.jpg';
-
+	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 	import inspiration01 from '$lib/images/inspiration/inspiration-Katherine_Marie_Jurkiewicz.jpg';
 	import inspiration02 from '$lib/images/inspiration/inspiration-grandson.jpg';
 	import inspiration03 from '$lib/images/inspiration/inspiration-family.jpg';
 	import inspiration04 from '$lib/images/inspiration/inspiration-Savannah,_Georgia.jpg';
 
+	let hoveredInspoCardId = null;
+	let quiltCardIsHovered = false;
+
 	const inspiration = [
 		{
 			"id": 1,
-			"name": "Katherine Marie Jurkiewicz (Suzanne's grandma Kate)",
+			"name": "Suzanne's grandma Kate, Katherine Marie Jurkiewicz",
 			"image": inspiration01,
-			"alt": "portrait of Katherine Marie Jurkiewicz (Suzanne's grandma Kate)"
+			"alt": "portrait of Katherine Marie Jurkiewicz (Suzanne's grandma Kate)",
+			"button": PrimaryButton,
+			"path": "/quilts/Grandma_Kate_Quilt"
 		},
 		{
 			"id": 2,
 			"name": "grandson",
 			"image": inspiration02,
-			"alt": "photo of Suzanne Conti with grandson"
+			"alt": "photo of Suzanne Conti with grandson",
+			"button": null,
+			"path": null
 		},
 		{
 			"id": 3,
 			"name": "family",
 			"image": inspiration03,
-			"alt": "family at Nick and Katrina's wedding"
+			"alt": "family at Nick and Katrina's wedding",
+			"button": null,
+			"path": null
 		},
 		{
 			"id": 4,
 			"name": "Savannah, Georgia",
 			"image": inspiration04,
-			"alt": "photo of an oak tree in Savannah, Georgia"
+			"alt": "photo of an oak tree in Savannah, Georgia",
+			"button": null,
+			"path": null
 		}
-
-	]
+	];
 
 	const options = {
 		rewind  : true,
@@ -120,18 +130,62 @@
 		</div>
 		<div class="inspiration_container">
 			{#each inspiration as item, i}
-				<div class="inspiration_card_container">
-					<img 
-						class="inspiration_thumbnail"
-						src="{item.image}" 
-						alt="{item.alt}"
-					/>
-					<div class="inspiration_info_container">
-						<h3 class="inspiration_name">
-							{item.name}
-						</h3>
+				{#if (item.button !== null)}
+					<a href={`${item.path}`} class="inspiration_card_container">
+						<div 
+							on:mouseover={() => {
+								hoveredInspoCardId = i;
+							}} 
+							on:focus={() => {
+								hoveredInspoCardId = i;
+							}}
+							on:blur={() => {
+								hoveredInspoCardId = null;
+							}}
+							on:mouseout={() => {
+								hoveredInspoCardId = null;
+							}}
+						>
+							<img 
+								class="inspiration_thumbnail"
+								src="{item.image}" 
+								alt="{item.alt}"
+							/>
+							<div class="inspiration_info_container">
+								<h3 class="inspiration_name">
+									{item.name}
+								</h3>
+								{#if (item.button !== null)}
+									<div class="action_button_container">
+										<svelte:component
+											this={item.button}
+											id={`${item.name}_quilt`}
+											tabindex={-i}
+											quiltCardIsHoveredProp={hoveredInspoCardId === 0? quiltCardIsHovered = true : quiltCardIsHovered = false}
+										>
+											quilt by Grandma Kate
+										</svelte:component>
+									</div>
+								{/if}
+							</div>
+						</div>
+					</a>
+				{:else }
+					<div 
+						class="inspiration_card_container"
+					>
+						<img 
+							class="inspiration_thumbnail"
+							src="{item.image}" 
+							alt="{item.alt}"
+						/>
+						<div class="inspiration_info_container">
+							<h3 class="inspiration_name">
+								{item.name}
+							</h3>
+						</div>
 					</div>
-				</div>
+				{/if}
 			{/each}
 		</div>
 	</section>
@@ -216,32 +270,50 @@
 	}
 
 	.inspiration_card_container {
-		background-color: #FDFCE8;
+		position: relative;
 		max-width: 24rem;
+		height: 20rem;
 		width: 100%;
-		margin: auto 1rem 3rem 1rem;
+		margin: auto 1rem 1rem 1rem;
 		filter: drop-shadow(0 0.5rem 0.5rem rgba(0, 0, 0, 0.25));
 	}
 
 	.inspiration_thumbnail {
+		position: absolute;
 		width: 100%;
-		height: 16rem;
+		height: 100%;
 		object-fit: cover;
+		object-position: center;
 	}
 
 	.inspiration_info_container {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
 		padding: 1rem;
 		display: flex;
 		flex-direction: column;
+		justify-content: flex-end;
 		align-items: center;
-		height: 8rem;
+		background: rgb(233,237,255);
+		background: linear-gradient(0deg, rgba(233,237,255,1) 0%, rgba(233,237,255,0.7525385154061625) 20%, rgba(233,237,255, 0.10) 50%, rgba(0,0,0,0) 100%);
 	}
 
 	.inspiration_name {
 		text-align: center;
 		color: #15060B;
 		margin: 0 auto 1rem auto;
+		transition: all 600ms;
+		will-change: color;
 	}
+
+	.action_button_container {
+		display: flex;
+		justify-content: center;
+	}
+
 
 	@media (max-width: 750px) {
 		.quilt_pattern_background {
@@ -266,6 +338,10 @@
 			font-size: 1.5rem;
 		}
 
+		.about_story {
+			padding: 1rem;
+		}
+
 		.stitches {
 			max-width: 8rem;
 			margin: 0.5rem auto;
@@ -273,7 +349,7 @@
 
 		.inspiration_card_container {
 			margin: auto 1rem 1rem 1rem;
-			height: auto;
+			height: 20rem;
 		}
 
 	}
