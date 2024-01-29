@@ -7,7 +7,7 @@
 
     // begin set title for header
 
-    let title = "Suzanne's Grandma Kate Quilt";
+    let title = "quilt by Suzanne's grandma Kate, Katherine Marie Jurkiewicz";
 
     // end set title for header
 
@@ -39,15 +39,13 @@
         isNavigation: true,
         updateOnMove: true,
         focus      : 'center'
-    }
+    };
 
     $: if ( main && thumbs ) {
         afterUpdate(() => {
             main.sync( thumbs.splide );
         });
-    }
-
-    
+    };
 
   // end Splide
 
@@ -55,7 +53,7 @@
 
 <svelte:head>
 	<title>{title} - Suzanne Conti Quilts</title>
-	<meta name="description" content="search Suzanne Conti Quilts" />
+	<meta name="description" content="quilt by Suzanne's Grandma Kate, Katherine Marie Jurkiewicz" />
 </svelte:head>
 
 <div class="quilt">
