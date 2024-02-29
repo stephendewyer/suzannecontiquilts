@@ -2,13 +2,11 @@
     import { page } from '$app/stores';
     import quilts from '$lib/data/quilts.json';
     import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-    import { afterUpdate } from 'svelte';
+    import { afterUpdate, onDestroy } from 'svelte';
     import '@splidejs/svelte-splide/css/skyblue';
     import stitches from '$lib/images/icons/stitches.svg';
     import NextButton from '$lib/components/buttons/NextButton.svelte';
     import PrevButton from '$lib/components/buttons/PreviousButton.svelte';
-
-    // begin set title for header
 
     $: pagePath = $page.url.pathname;
     $: pageSlug = pagePath.slice(8);
@@ -19,23 +17,19 @@
     let prevQuiltID = 0;
     let nextQuiltID = 0;
 
-    let quilt01 = [];
-    let quilt02 = [];
-
     let quiltCount = 0;
 
-    $: for (quilt01 of quilts) {
-        console.log(pageSlug)
-        
-        if (pageSlug === quilt01.slug) {
-            title = quilt01.name;
-            quiltID = quilt01.id;
-        }
-        quiltCount += 1;
-    }
+    let currentQuilt;
 
-    $: console.log(`the quilt count is ${quiltCount}`);
-    $: console.log(`current quilt id is ${quiltID}`);
+    $: currentQuilt = quilts.filter(quilt => {
+        if (pageSlug === quilt.slug) {
+            title = quilt.name;
+            quiltID = quilt.id;
+            return quilt;
+        };
+    });
+
+    $: quiltCount = quilts.length;
 
     // get the previous quilt data
 
@@ -43,17 +37,17 @@
         prevQuiltID = quiltID - 1;
     } else {
         prevQuiltID = quiltCount;
-    }
+    };
 
     let prevQuiltSlug = "";
 
-    $: for (quilt02 of quilts) {
-        if (prevQuiltID === quilt02.id) {
-            prevQuiltSlug = quilt02.slug;
-        }
-    }
+    let previousQuilt;
 
-    $: console.log(`previous quilt id is ${prevQuiltID}`);
+    $: previousQuilt = quilts.filter(quilt => {
+        if (prevQuiltID === quilt.id) {
+            prevQuiltSlug = quilt.slug;
+        };
+    });
 
     // get the next quilt data
 
@@ -61,11 +55,34 @@
         nextQuiltID = quiltID + 1;
     } else {
         nextQuiltID = 1;
-    }
+    };
 
-    $: console.log(`next quilt id is ${nextQuiltID}`);
+    // construct the techniques list
 
-    // end set title for header
+    let techniques = [];
+
+    afterUpdate(() => {
+
+        techniques = [];
+
+        if (currentQuilt.length > 0) {
+            if (currentQuilt[0].machine_pieced === true) {
+                techniques = [...techniques, "machine pieced"];
+            };
+            if (currentQuilt[0].hand_quilted === true) {
+                techniques = [...techniques, "hand quilted"];
+            };
+            if (currentQuilt[0].hand_pieced === true) {
+                techniques = [...techniques, "hand pieced"];
+            };
+            if (currentQuilt[0].applique === true) {
+                techniques = [...techniques, "applique"];
+            };
+            if (currentQuilt[0].paper_pieced === true) {
+                techniques = [...techniques, "paper pieced"];
+            };
+        };
+    });
 
     // begin Splide
     
@@ -95,15 +112,13 @@
         isNavigation: true,
         updateOnMove: true,
         focus      : 'center'
-    }
+    };
 
     $: if ( main && thumbs ) {
         afterUpdate(() => {
             main.sync( thumbs.splide );
         });
-    }
-
-    
+    }; 
 
   // end Splide
 
@@ -196,53 +211,7 @@
                                 Techniques:
                             </h3>
                             <p class="quilt_info_paragraphs">
-                                {#if (quilt.machine_pieced)}
-                                    machine pieced
-                                {/if}
-                                {#if (
-                                    (quilt.machine_pieced) && (
-                                        (quilt.hand_quilted) || 
-                                        (quilt.applique) ||
-                                        (quilt.paper_pieced)
-                                    )
-                                )}
-                                ,
-                                {/if}
-                                {#if (quilt.hand_quilted)}
-                                    hand quilted
-                                {/if}
-                                {#if (
-                                    (quilt.hand_quilted) && (
-                                        (quilt.applique) || 
-                                        (quilt.paper_pieced) ||
-                                        (quilt.hand_pieced)
-                                    )
-                                )}
-                                ,
-                                {/if}
-                                {#if (quilt.hand_pieced)}
-                                    hand pieced
-                                {/if}
-                                {#if (
-                                    (quilt.hand_pieced) && (
-                                        (quilt.applique) || 
-                                        (quilt.paper_pieced)
-                                    )
-                                )}
-                                ,
-                                {/if}
-                                {#if (quilt.applique)}
-                                    applique
-                                {/if}
-                                {#if (
-                                    (quilt.applique) && (quilt.paper_pieced)
-                                    )
-                                }
-                                ,
-                                {/if}
-                                {#if (quilt.paper_pieced)}
-                                    paper pieced
-                                {/if}
+                                {techniques.join(", ")}
                             </p>
                         </li>
                         <li class="quilt_info_list_item list_item_background">
@@ -408,6 +377,7 @@
         height: 100%;
         font-size: 1.75rem;
         text-align: left;
+        font-weight: bold;
     }
 
     .quilt_info_paragraphs {
