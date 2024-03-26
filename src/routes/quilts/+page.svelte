@@ -5,6 +5,7 @@
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import stitches from '$lib/images/icons/stitches.svg';
 	import QuiltCard from '$lib/components/cards/QuiltCard.svelte';
+	import Pagination from '$lib/components/pagination/Pagination.svelte';
 
 	let quilts_cont;
 	let quiltSearchNavBarIsHovered = false;
@@ -39,7 +40,7 @@
 
 	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : searchQuilts;
 
-	$: searchValue = ""
+	$: searchValue = "";
 
 	const paginate = (items) => {
 		console.log(items);
@@ -57,28 +58,27 @@
 
 	afterUpdate(() => {
 		paginate(filteredQuilts);
-		
 	});
 
 	const searchSubmitHandler = (event) => {
 		event.preventDefault();
-	}
+	};
 
 	const inputSearchHandler = () => {
 		page = 0;
 		activePageId = page;
 		$searchStore.search = searchValue;	
-	}
+	};
 
-	const setPage = (p) => {
-		if (p >= 0 && p < pageCount.length) {
-			page = p;
-			activePageId = page;
-			quilts_cont.scrollIntoView({
+	let pageChanged = false;
+
+	$: if (pageChanged) {
+		quilts_cont.scrollIntoView({
 				behavior: 'smooth'
-			});
-		}
-	}
+		});
+		pageChanged = false;
+	};
+
 </script>
 
 <svelte:head>
@@ -90,7 +90,6 @@
 	on:click={() => {
 		searchFormIsActive = !searchFormIsActive;
 	}}
-	
 	on:keydown={() => {
 		searchFormIsActive = !searchFormIsActive;
 	}}
@@ -162,61 +161,12 @@
 					<p>No quilts fit search criteria.</p>
 			{/each}
 		</div>
-		<nav class="pagination">
-			<ul>
-				<li>
-					<button 
-						type="button"
-						disabled={page === 0} 
-						on:click={() => setPage(page = 0)}
-						class="paginationButton"
-					>
-						first
-					</button>
-				</li>
-				<li>
-					<button
-						type="button"
-						disabled={page === 0} 
-						on:click={() => setPage(page - 1)}
-						class="paginationButton"
-					>
-						previous
-					</button>
-				</li>
-				{#each pageCount as page, i}
-					<li>
-						<button
-							type="button"
-							on:click={() => setPage(i)}
-							class={activePageId == i ? "activePaginationButton" : "paginationButton"}
-						>
-							{i + 1}
-						</button>
-					</li>
-				{/each}
-				<li>
-					<button
-						type="button"
-						disabled={page >= pageCount.length - 1}
-						on:click={() => setPage(page + 1)}
-						class="paginationButton"
-					>
-						next
-					</button>
-				</li>
-				<li>
-					<button 
-						type="button"
-						disabled={page >= pageCount.length - 1} 
-						on:click={() => setPage(pageCount.length - 1)}
-						class="paginationButton"
-					>
-						last
-					</button>
-				</li>
-			</ul>
-		</nav> 
+		<Pagination 
+			bind:page={page}
+			bind:pageChanged={pageChanged}
+			pageCount={pageCount} 
+			activePageId={activePageId}
+		/>
 	</div>
 </div>
 
@@ -373,55 +323,6 @@
 
 	/* end quilt search */
 
-	/* begin pagination */
-
-	.pagination {
-		margin: 1rem auto 2rem auto;
-	}
-
-	ul {
-		list-style: none;
-		margin: 0;
-		box-sizing: border-box;
-		padding-inline-start: 0;
-		margin-block-start: 0;
-    	margin-block-end: 0;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap;
-	}
-
-	li {
-		float: left;
-	}
-
-	button {
-		font-size: 1.75rem;
-		/* margin: auto auto 1rem auto; */
-	}
-
-	.paginationButton {
-		background: transparent;
-		border-width: 1px;
-		padding: 0.5rem 1rem;
-		margin-left: 0.3rem;
-		cursor: pointer;
-		border-style: dashed;
-	}
-
-	.activePaginationButton {
-		background: transparent;
-		border-width: 3px;
-		border-style: dashed;
-		padding: 0.5rem 1rem;
-		margin-left: 0.3rem;
-		cursor: pointer;
-	}
-
-  	/* end pagination */
-
 	.quilts_container {
 		display: flex;
 		flex-direction: row;
@@ -533,21 +434,6 @@
 
 		/* end mobile quilt search */
 
-		/* begin mobile pagination */
-
-		.pagination {
-			margin: 1rem;
-		}
-
-		ul {
-			flex-wrap: wrap;
-		}
-
-		button {
-			font-size: 1rem;
-			margin: 0.5rem auto auto auto;
-		}
-
 		.quilts_container {
 			justify-content: center;
 		}
@@ -651,22 +537,6 @@
 
 		/* end mobile quilt search */
 
-		/* begin mobile pagination */
-
-		.pagination {
-			margin: 1rem;
-		}
-
-		ul {
-			flex-wrap: wrap;
-		}
-
-		button {
-			font-size: 1rem;
-			margin: 0.5rem auto auto auto;
-		}
-
-		/* end mobile pagination */
 	}
 
 </style>
