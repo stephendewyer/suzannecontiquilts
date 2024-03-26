@@ -6,6 +6,8 @@
 	import stitches from '$lib/images/icons/stitches.svg';
 	import QuiltCard from '$lib/components/cards/QuiltCard.svelte';
 	import Pagination from '$lib/components/pagination/Pagination.svelte';
+	import SearchInput from '$lib/components/inputs/SearchInput.svelte';
+	import Arrow from '$lib/images/icons/arrow.svg?raw'
 
 	let quilts_cont;
 	let quiltSearchNavBarIsHovered = false;
@@ -36,14 +38,12 @@
 	// set the current page quilts use reactive
 
 	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
-	$: console.log("Page is", page);
 
 	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : searchQuilts;
 
 	$: searchValue = "";
 
 	const paginate = (items) => {
-		console.log(items);
 
 		const pages = Math.ceil(items.length / quiltsPerPage);
 
@@ -52,23 +52,12 @@
 			return items.slice(start, start + quiltsPerPage);
 		});
 
-		console.log("paginatedItems are", paginatedItems);
 		pageCount = [...paginatedItems];
-	}
+	};
 
 	afterUpdate(() => {
 		paginate(filteredQuilts);
 	});
-
-	const searchSubmitHandler = (event) => {
-		event.preventDefault();
-	};
-
-	const inputSearchHandler = () => {
-		page = 0;
-		activePageId = page;
-		$searchStore.search = searchValue;	
-	};
 
 	let pageChanged = false;
 
@@ -77,6 +66,15 @@
 				behavior: 'smooth'
 		});
 		pageChanged = false;
+	};
+
+	let searchValueChanged = false;
+
+	$: if (searchValueChanged) {
+		page = 0;
+		activePageId = page;
+		$searchStore.search = searchValue;	
+		searchValueChanged = false;
 	};
 
 </script>
@@ -117,11 +115,7 @@
 	</h1>
 	<div class="{(searchFormIsActive) ? "arrow_container_active" : "arrow_container"}">
 		<div class="{(quiltSearchNavBarIsHovered) ? "arrow_hovered" : "arrow"}">
-			<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.18 568.32">
-			<defs>
-				<style>.cls-1{fill:#15060B;}</style>
-			</defs>
-			<path class="cls-1" d="M301.3,300.76L40.62,561.44c-9.17,9.17-24.03,9.17-33.2,0l-.54-.54c-9.17-9.17-9.17-24.03,0-33.2l243.54-243.54L6.88,40.62C-2.29,31.45-2.29,16.59,6.88,7.42l.54-.54C16.59-2.29,31.45-2.29,40.62,6.88L301.3,267.56c9.17,9.17,9.17,24.03,0,33.2Z"/></svg>
+			{@html Arrow}
 		</div>
 	</div>
 </div>
@@ -132,18 +126,12 @@
 				class="search_form"
 				noValidate 
 				autoComplete="off"
-				onSubmit={searchSubmitHandler}
+				on:submit|preventDefault
 			>
-            <input 
-              id="quilt_search"
-              type="search" 
-              name="quilt_search" 
-              class="search_input"
-              placeholder="quilt title"
-			  bind:value={searchValue}
-			  on:keyup={inputSearchHandler}
-			  on:input={inputSearchHandler}
-            />
+				<SearchInput 
+					bind:searchValue={searchValue}
+					bind:searchValueChanged={searchValueChanged}
+				/>
           </form>
 		</div>
 	</div>
@@ -165,7 +153,7 @@
 			bind:page={page}
 			bind:pageChanged={pageChanged}
 			pageCount={pageCount} 
-			activePageId={activePageId}
+			bind:activePageId={activePageId}
 		/>
 	</div>
 </div>
@@ -244,19 +232,15 @@
 
 	.arrow {
 		width: 1.5rem;
-	}
-
-	.arrow_hovered {
-		width: 1.5rem;
-	}
-
-	.arrow > svg > path {
-    	fill: #3B3E29;
+    	color: #3B3E29;
+		fill: #3B3E29;
 		will-change: fill;
 		transition: fill 300ms ease-out;
 	}
 
-	.arrow_hovered > svg > path {
+	.arrow_hovered {
+		width: 1.5rem;
+		color: #ED6545;
     	fill: #ED6545;
 		will-change: fill;
 		transition: fill 300ms ease-out;
@@ -298,27 +282,6 @@
 		will-change: transform;
 		transition: transform 0.3s ease-out;
 		text-align: center;
-	}
-
-	.search_input {
-		height: 3rem;
-		width: 100%;
-		font-size: 1.75rem;
-		background-color: #ECF7FA;
-		border-color: #3B3E29;
-		border-width: 3px;
-		border-style: solid;
-		padding: 0.25rem 1rem 0.25rem 2.75rem;
-		background-image: url('$lib/images/icons/magnifying_glass.svg');
-		background-size: 1.5rem;
-		background-repeat: no-repeat;
-		background-position: 10px center;
-		transition: border-color 0.3s ease-out;
-	}
-	
-	.search_input:focus {
-		outline: none;
-		border-color: #BAE1D7;
 	}
 
 	/* end quilt search */
@@ -427,11 +390,6 @@
 			transition: transform 0.3s ease-out;
 		}
 
-		.search_input {
-			font-size: 1.25rem;
-			border-width: 2px;
-		}
-
 		/* end mobile quilt search */
 
 		.quilts_container {
@@ -528,11 +486,6 @@
 			will-change: transform;
 			transform: translateY(-100%) translateX(0);
 			transition: transform 0.3s ease-out;
-		}
-
-		.search_input {
-			font-size: 1.25rem;
-			border-width: 2px;
 		}
 
 		/* end mobile quilt search */

@@ -5,12 +5,12 @@ export const createSearchStore = (data) => {
         data: data,
         filtered: data,
         search: '',
-    })
+    });
     return {
         subscribe,
         set,
         update,
-    }
+    };
 }
 
 export const searchHandler = (store) => { 
