@@ -4,18 +4,37 @@
 
 </script>
 
-<input 
-    id="quilt_search"
-    type="search" 
-    name="quilt_search" 
-    class="search_input"
-    placeholder="quilt title"
-    bind:value={searchValue}
-    on:keyup={() => searchValueChanged = true}
-    on:input={() => searchValueChanged = true}
-/>
+<div class="quilt_search_container">
+	<label 
+		for="quilt_search" 
+		class="label"
+	>
+		<slot />
+	</label>
+	<input 
+		id="quilt_search"
+		type="search" 
+		name="quilt_search" 
+		class="search_input"
+		placeholder="sample"
+		bind:value={searchValue}
+		on:keyup={() => searchValueChanged = true}
+		on:input={() => searchValueChanged = true}
+	/>
+</div>
 
 <style>
+
+	.quilt_search_container {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.label {
+		font-size: 1.5rem;
+	}
+	
     .search_input {
 		height: 3rem;
 		width: 100%;
@@ -37,17 +56,14 @@
         border-color: #3B3E29;
 	}
 
-    @media (max-width: 1200px) {
-        .search_input {
-			/* font-size: 1.25rem;
-			border-width: 2px; */
-		}
-    }
-
     @media (max-width: 750px) {
         .search_input {
 			font-size: 1.25rem;
 			border-width: 2px;
+		}
+
+		.label {
+			font-size: 1.25rem;
 		}
     }
 </style>

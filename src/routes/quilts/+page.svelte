@@ -7,7 +7,9 @@
 	import QuiltCard from '$lib/components/cards/QuiltCard.svelte';
 	import Pagination from '$lib/components/pagination/Pagination.svelte';
 	import SearchInput from '$lib/components/inputs/SearchInput.svelte';
-	import Arrow from '$lib/images/icons/arrow.svg?raw'
+	import Arrow from '$lib/images/icons/arrow.svg?raw';
+	import Filter from '$lib/images/icons/filter_icon.svg?raw';
+	import Sort from '$lib/images/icons/sort_icon.svg?raw';
 
 	let quilts_cont;
 	let quiltSearchNavBarIsHovered = false;
@@ -105,14 +107,20 @@
 	}}
 	class="quilt_search_nav_bar"
 >
-	<h1 
-		class="{(quiltSearchNavBarIsHovered) ? "quilt_search_heading_hovered" : "quilt_search_heading"}"
-	>
-		search quilts
-		<div class="underline_stitches">
-			<img src={stitches} alt="stitches"/>
+	<div class="buttons_container">
+		<div class="button_container">
+			<div class="{(quiltSearchNavBarIsHovered) ? "icon_container_hovered" : "icon_container"}">
+				{@html Filter}
+			</div>
+			<p class="{(quiltSearchNavBarIsHovered) ? "label_hovered" : "label"}">filter</p>
 		</div>
-	</h1>
+		<div class="button_container">
+			<div class="{(quiltSearchNavBarIsHovered) ? "icon_container_hovered" : "icon_container"}">
+				{@html Sort}
+			</div>
+			<p class="{(quiltSearchNavBarIsHovered) ? "label_hovered" : "label"}">sort</p>
+		</div>
+	</div>
 	<div class="{(searchFormIsActive) ? "arrow_container_active" : "arrow_container"}">
 		<div class="{(quiltSearchNavBarIsHovered) ? "arrow_hovered" : "arrow"}">
 			{@html Arrow}
@@ -131,11 +139,12 @@
 				<SearchInput 
 					bind:searchValue={searchValue}
 					bind:searchValueChanged={searchValueChanged}
-				/>
+				>
+					search quilts by name
+				</SearchInput>
           </form>
 		</div>
 	</div>
-	
 	<div class="{(searchFormIsActive) ? "quilt_search_results" : "quilt_search_results_full"}">
 		<div 
 			class="quilts_container" 	
@@ -159,6 +168,51 @@
 </div>
 
 <style>
+
+	.buttons_container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.button_container {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.icon_container {
+		width: 2rem;
+		height: 2rem;
+		color: #3B3E29;
+		fill: #3B3E29;
+		will-change: fill;
+		transition: fill 300ms ease-out;
+	}
+
+	.icon_container_hovered {
+		width: 2rem;
+		height: 2rem;
+		color: #ED6545;
+		fill: #ED6545;
+		will-change: fill;
+		transition: fill 300ms ease-out;
+	}
+
+	.label {
+		font-size: 1.5rem;
+		color: #3B3E29;
+		will-change: color;
+		transition: color 300ms ease-out;
+	}
+
+	.label_hovered {
+		font-size: 1.5rem;
+		color: #ED6545;
+		will-change: color;
+		transition: color 300ms ease-out;
+	}
 
 	.quilt_card_container {
 		width: auto;
@@ -191,31 +245,7 @@
 		width: 26rem;
 		padding: 1rem;
 		cursor: pointer;
-	}
-
-	.quilt_search_heading {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		margin: 0 auto 0 auto;
-		padding: 0;
-		will-change: color;
-		transition: color 300ms ease-out;
-	}
-
-	.quilt_search_heading_hovered {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		margin: 0 auto 0 auto;
-		padding: 0;
-		color: #ED6545;
-		will-change: color;
-		transition: color 300ms ease-out;
-	}
-
-	.underline_stitches {
-		width: 12rem;
+		gap: 1rem;
 	}
 
 	.arrow_container_active {
@@ -231,7 +261,7 @@
 	}
 
 	.arrow {
-		width: 1.5rem;
+		width: 1.25rem;
     	color: #3B3E29;
 		fill: #3B3E29;
 		will-change: fill;
@@ -239,7 +269,7 @@
 	}
 
 	.arrow_hovered {
-		width: 1.5rem;
+		width: 1.25rem;
 		color: #ED6545;
     	fill: #ED6545;
 		will-change: fill;
@@ -314,18 +344,6 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
-		}
-
-		.quilt_search_heading {
-			margin: 0 1rem 0 auto;
-		}
-
-		.quilt_search_heading_hovered {
-			margin: 0 1rem 0 auto;
-		}
-
-		.underline_stitches {
-			width: 8rem;
 		}
 
 		.arrow_container_active {
@@ -414,16 +432,22 @@
 			padding: 0 1rem;
 		}
 
-		.quilt_search_heading {
-			margin: 0 1rem 0 auto;
+		.icon_container {
+			width: 1.5rem;
+			height: 1.5rem;
 		}
 
-		.quilt_search_heading_hovered {
-			margin: 0 1rem 0 auto;
+		.icon_container_hovered {
+			width: 1.5rem;
+			height: 1.5rem;
 		}
 
-		.underline_stitches {
-			width: 8rem;
+		.label {
+			font-size: 1rem;
+		}
+
+		.label_hovered {
+			font-size: 1rem;
 		}
 
 		.arrow_container_active {
