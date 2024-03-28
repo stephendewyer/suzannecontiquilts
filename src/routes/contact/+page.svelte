@@ -1,5 +1,5 @@
 <script>
-	import quiltPattern from '$lib/images/quilts/Grandma_Kate/Suzanne_Conti_Grandma_Kate_08.jpg';
+	import quiltPattern from '$lib/images/quilts/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_08.jpg';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import stitches from '$lib/images/icons/stitches.svg';
 	import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
