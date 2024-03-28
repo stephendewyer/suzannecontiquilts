@@ -34,37 +34,18 @@
 
 	let flyingDutchmanChecked = false;
 
-	// sort
-
-	let radioValue = "alphabetical";
-
-	let sortedQuilts = [];
-
-	$: if (radioValue === "alphabetical") {
-		const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-		sortedQuilts = [...quiltsByAlpha];
-	} else if (radioValue === "latest") {
-		const quiltsByLatest = quilts.sort((a, b) => {
-			return new Date(b.date_finished) - new Date(a.date_finished);
-		}); 
-		sortedQuilts = [...quiltsByLatest];
-	} else if (radioValue === "earliest") {
-		const quiltsByEarliest = quilts.sort((a, b) => {
-			return new Date(a.date_finished) - new Date(b.date_finished);
-		});
-		sortedQuilts = [...quiltsByEarliest];
-	};
-
 	let searchQuilts = [];
 
-	$: searchQuilts = sortedQuilts.map((quilt) => ({
+	$: searchQuilts = quilts.map((quilt) => ({
 		...quilt,
 		search_terms: `${quilt.name}`
 	}));
 
-	$: searchStore = createSearchStore(searchQuilts);
+	// begin filters
 
-	// console.log("searchStore is: ", searchStore);
+	// initialize the searchStore
+
+	$: searchStore = createSearchStore(searchQuilts);
 
 	$: unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 
@@ -79,6 +60,27 @@
 	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : searchQuilts;
 
 	$: searchValue = "";
+
+	// sort the filtered quilts
+
+	let radioValue = "alphabetical";
+
+	let sortedAndFilteredQuilts = [];
+
+	$: if (radioValue === "alphabetical") {
+		const quiltsByAlpha = $searchStore.filtered.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+		sortedAndFilteredQuilts = [...quiltsByAlpha];
+	} else if (radioValue === "latest") {
+		const quiltsByLatest = $searchStore.filtered.sort((a, b) => {
+			return new Date(b.date_finished) - new Date(a.date_finished);
+		}); 
+		sortedAndFilteredQuilts = [...quiltsByLatest];
+	} else if (radioValue === "earliest") {
+		const quiltsByEarliest = $searchStore.filtered.sort((a, b) => {
+			return new Date(a.date_finished) - new Date(b.date_finished);
+		});
+		sortedAndFilteredQuilts = [...quiltsByEarliest];
+	};
 
 	const paginate = (items) => {
 
