@@ -3,6 +3,8 @@
 
     export let quiltData;
 
+    $: quiltData;
+
     let cardHovered = false;
 
     const cardHoverHandler = () => {
