@@ -3,13 +3,14 @@
 	import quilts from '$lib/data/quilts.json';
 	import { createSearchStore, searchHandler } from '$lib/stores/search';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
-	import stitches from '$lib/images/icons/stitches.svg';
 	import QuiltCard from '$lib/components/cards/QuiltCard.svelte';
 	import Pagination from '$lib/components/pagination/Pagination.svelte';
 	import SearchInput from '$lib/components/inputs/SearchInput.svelte';
 	import Arrow from '$lib/images/icons/arrow.svg?raw';
 	import Filter from '$lib/images/icons/filter_icon.svg?raw';
 	import Sort from '$lib/images/icons/sort_icon.svg?raw';
+	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
+	import RadioButtons from '$lib/components/inputs/RadioButtons.svelte';
 
 	let quilts_cont;
 	let quiltSearchNavBarIsHovered = false;
@@ -20,18 +21,52 @@
 	let currentPageQuilts = [];
 	let quiltsPerPage = 8;
 
-	// sort the quilts by alphabetical order
+	// techniques
 
-	const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+	let appliqueChecked = false;
+	let blockPiecingChecked = false;
+	let handPiecedChecked = false;
+	let handQuiltedChecked = false;
+	let machinePiecedChecked = false;
+	let paperPiecedChecked = false;
 
-	const searchQuilts = quiltsByAlpha.map((quilt) => ({
+	// patterns
+
+	let flyingDutchmanChecked = false;
+
+	// sort
+
+	let radioValue = "alphabetical";
+
+	let sortedQuilts = [];
+
+	$: if (radioValue === "alphabetical") {
+		const quiltsByAlpha = quilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+		sortedQuilts = [...quiltsByAlpha];
+	} else if (radioValue === "latest") {
+		const quiltsByLatest = quilts.sort((a, b) => {
+			return new Date(b.date_finished) - new Date(a.date_finished);
+		}); 
+		sortedQuilts = [...quiltsByLatest];
+	} else if (radioValue === "earliest") {
+		const quiltsByEarliest = quilts.sort((a, b) => {
+			return new Date(a.date_finished) - new Date(b.date_finished);
+		});
+		sortedQuilts = [...quiltsByEarliest];
+	};
+
+	let searchQuilts = [];
+
+	$: searchQuilts = sortedQuilts.map((quilt) => ({
 		...quilt,
 		search_terms: `${quilt.name}`
 	}));
 
-	const searchStore = createSearchStore(searchQuilts);
+	$: searchStore = createSearchStore(searchQuilts);
 
-	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+	// console.log("searchStore is: ", searchStore);
+
+	$: unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 
 	onDestroy(() => {
 		unsubscribe();
@@ -78,6 +113,21 @@
 		$searchStore.search = searchValue;	
 		searchValueChanged = false;
 	};
+
+	const options = [
+		{
+			value: "alphabetical",
+			label: "alphabetical"
+		},
+		{
+			value: "latest",
+			label: "latest"
+		},
+		{
+			value: "earliest",
+			label: "earliest"
+		}
+	];
 
 </script>
 
@@ -142,6 +192,46 @@
 				>
 					search quilts by name
 				</SearchInput>
+				<h3 class="category_name">
+					techniques:
+				</h3>
+				<div class="checkboxes">
+					<Checkbox bind:checked={appliqueChecked}>
+						applique
+					</Checkbox>
+					<Checkbox bind:checked={blockPiecingChecked}>
+						block piecing
+					</Checkbox>
+					<Checkbox bind:checked={handPiecedChecked}>
+						hand pieced
+					</Checkbox>
+					<Checkbox bind:checked={handQuiltedChecked}>
+						hand quilted
+					</Checkbox>
+					<Checkbox bind:checked={machinePiecedChecked}>
+						machine pieced
+					</Checkbox>
+					<Checkbox bind:checked={paperPiecedChecked}>
+						paper piecing
+					</Checkbox>
+				</div>
+				<h3 class="category_name">
+					pattern:
+				</h3>
+				<div class="checkboxes">
+					<Checkbox bind:checked={flyingDutchmanChecked}>
+						flying dutchman
+					</Checkbox>
+				</div>
+				<h3 class="category_name">
+					order by:
+				</h3>
+				<div class="checkboxes">
+					<RadioButtons 
+						options={options}
+						bind:userSelected={radioValue}
+					/>
+				</div>
           </form>
 		</div>
 	</div>
@@ -168,6 +258,17 @@
 </div>
 
 <style>
+
+	.category_name {
+		margin: 1rem auto;
+		font-size: 1.5rem;
+	}
+
+	.checkboxes {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
 
 	.buttons_container {
 		width: 100%;
@@ -420,6 +521,10 @@
 
 		.quilt_card_container {
 			width: 100%;
+		}
+
+		.category_name {
+			font-size: 1.25rem;
 		}
 
 		/* begin mobile quilt search  */

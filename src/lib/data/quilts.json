@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+        "quilter": "Suzanne Conti",
         "name": "Joy to the World Baby Quilt",
         "slug": "joy-to-the-world-baby-quilt",
         "size": "38.5\" X 43.75\"",
@@ -14,7 +15,7 @@
         "paper_pieced": true,
         "blocks": "16 animal paper pieced blocks, each 6.75\" X 7.125\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["animal"],
         "details": "2\" and 2.5\" sashing",
         "collection": "Made for my grandson, Alexander Jiang Dewyer, and given to him on 22 August 2021 in Tucson, Arizona.", 
         "images": [ 
@@ -27,6 +28,7 @@
     },
     {
         "id": 2,
+        "quilter": "Suzanne Conti",
         "name": "Idaho",
         "slug": "idaho",
         "size": "87.5\" X 72\"",
@@ -39,8 +41,8 @@
         "applique": false,
         "paper_pieced": null,
         "blocks": null,
-        "orphan_blocks": "Flying Dutchman, Old Maids Puzzle, Hour Glass, Pinwheel, Square in a Square, Half Square Triangles, Hope of Hartford, Castle Wall, Patience Corner, To the Nines, Endless Stairs",
-        "pattern": "gypsy wife",
+        "orphan_blocks": "flying dutchman, old maids puzzle, hour glass, pinwheel, square in a square, half-square triangles, hope of Hartford, castle wall, patience corner, to the nines, endless stairs",
+        "pattern": ["gypsy wife", "flying dutchman", "old maids puzzle", "hour glass", "pinwheel", "square in a square", "half-square triangles", "hope of Hartford", "castle wall", "patience corner", "to the nines", "endless stairs"],
         "details": "1.5\" double-fold, straight-grain binding",
         "collection": null,
         "images": [
@@ -54,6 +56,7 @@
     },
     {
         "id": 3,
+        "quilter": "Suzanne Conti",
         "name": "New England",
         "slug": "new-england",
         "size": "91\" X 94\"",
@@ -65,9 +68,9 @@
         "hand_pieced": null,
         "applique": null,
         "paper_pieced": null,
-        "blocks": "8 X Star of Virginia, each 11\" and 16 X Rising Star, each 11\"",
+        "blocks": "8 X star of Virginia, each 11\" and 16 X rising star, each 11\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["star of Virginia", "rising star"],
         "details": "1.75\" top and bottom border, 1\" side border, 16 X under stars border, each 11.25\" X 1.5\", 32 X stripes, each 50\" X 2.75\", 0.75\" double straight grain binding",
         "collection": "Given to Nick Dewyer and Katrina Jiang in Tucson, Arizona in 2022.",
         "images": [
@@ -80,6 +83,7 @@
     },
     {
         "id": 4,
+        "quilter": "Suzanne Conti",
         "name": "Tennessee",
         "slug": "tennessee",
         "size": "90\" X 101\"",
@@ -91,9 +95,9 @@
         "hand_pieced": null,
         "applique": true,
         "paper_pieced": null,
-        "blocks": "76 X Illusion, each 11.5\" X 6.75\", Center Illusion 23\" X 12.75\", Border Piano Keys 6.5\" and 26 X Not Blocks Border, each 14\" X 8.25\"",
+        "blocks": "76 X illusion, each 11.5\" X 6.75\", center illusion 23\" X 12.75\", border piano keys 6.5\" and 26 X not blocks border, each 14\" X 8.25\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["illusion", "center illusion", "border piano keys", "not blocks border"],
         "details": "straight grain 0.5\" binding in 2 colors, applique notes and center, hand appliqued",
         "collection": "Given in August 2023 to Bill Nigro and Dee Childs after their move to Savannah, Georgia.",
         "images": [
@@ -108,6 +112,7 @@
     },
     {
         "id": 5,
+        "quilter": "Suzanne Conti",
         "name": "Utah",
         "slug": "utah",
         "size": "88.5\" X 78\"",
@@ -121,7 +126,7 @@
         "paper_pieced": null,
         "blocks": "56 X kaleidoscope kites, each 9\" X 9\" and 4 X paper-pieced honeybee, each 5.5\" X 5.5\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["kaleidoscope kites", "honeybee"],
         "details": "1 border 5\" wide and 2 border 5\" wide, double French bias binding",
         "collection": null,
         "images": [
@@ -133,6 +138,7 @@
     },
     {
         "id": 6,
+        "quilter": "Suzanne Conti",
         "name": "Iowa",
         "slug": "iowa",
         "size": "63\" X 89\"",
@@ -146,7 +152,7 @@
         "paper_pieced": true,
         "blocks": "24 X machine pieced, each 6.5\" X 9\", 9 X machine pieced letter, each 9\" X 9.5\", 12 X paper pieced farm animal, each 10\" X 10\" 2 X paper pieced corn cob, each 5\" X 9\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["letter", "animal", "corn cob"],
         "details": "sashing 1\", inner border 1\", border animal frames 1.75\" and 2.25\", outer top and bottom border 1.5\" and outer side borders 4.5\"",
         "collection": null,
         "images": [
@@ -164,6 +170,7 @@
     },
     {
         "id": 7,
+        "quilter": "Suzanne Conti",
         "name": "New York",
         "slug": "new-york",
         "size": "56\" X 68\"",
@@ -177,7 +184,7 @@
         "paper_pieced": true,
         "blocks": "44 X New York beauty, each 5.75\" X 5.75\" and paper pieced, 48 X half-square triangles, each 5\", 12 X half-circles, each 5.75\" X 5.75\", 14 X half-circle border, each 10\" diameter, 4 X 3/4-circle corner, each 10\" diameter",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["New York beauty", "half-square triangles", "half-circles"],
         "details": "piping border, 0.5\" binding, double French continuous bias",
         "collection": "Given to Jiang YuYu and Yingwen on their visit to Savannah, Georgia on 11 March 2023 from Shenzhen, China.",
         "images": [
@@ -190,6 +197,7 @@
     },
     {
         "id": 8,
+        "quilter": "Suzanne Conti",
         "name": "Savannah",
         "slug": "savannah",
         "size": "55.5\" X 68\"",
@@ -229,6 +237,7 @@
     },
     {
         "id": 9,
+        "quilter": "Suzanne Conti",
         "name": "Maine",
         "slug": "maine",
         "size": "87\" X 98\"",
@@ -242,7 +251,7 @@
         "paper_pieced": null,
         "blocks": "20 X double aster, each 12.5\" and set on point, 52 X nautical flag as border, each 4\", 14 X snails trail, each 12\", 12X applique half triangle, each 11.5\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["double aster", "nautical flag", "snails trail"],
         "details": "2\" wide sashing",
         "collection": "Gifted to John and Mary Nigro on 26 February 2024.",
         "images": [
@@ -272,6 +281,7 @@
     },
     {
         "id": 10,
+        "quilter": "Suzanne Conti",
         "name": "Virginia",
         "slug": "virginia",
         "size": "102\" X 102\"",
@@ -285,7 +295,7 @@
         "paper_pieced": null,
         "blocks": "25 X sampler blocks, each 11.5\", \"Women's Voices Civil War Quilt\", Crowned Cross, Dolly Madison Star, Coxey's Camp, Old Tippecanoe and Tyler Too, Crown of Thorns, Lincoln's Log Cabin, Mrs. Cleveland's Choice, Swing in the Center, Courthouse Steps, Patriotic Flags, Sherman's March, Lincoln's Platform, Brown Goose",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["crowned cross", "Dolly Madison star", "Coxey's camp", "Old Tippecanoe and Tyler too", "crown of thorns", "Lincoln's log cabin", "Mrs. Cleveland's choice", "swing in the center", "courthouse steps", "patriotic flags", "Sherman's march", "Lincoln's platform", "brown goose"],
         "details": "3 X sashings with cornerstones: 1.5\", 2.6\" and 1.5\", 7\" border, curved corners",
         "collection": null,
         "images": [
@@ -308,6 +318,7 @@
     },
     {
         "id": 11,
+        "quilter": "Suzanne Conti",
         "name": "Alaska North Pole",
         "slug": "alaska-north-pole",
         "size": "89\" X 74.5\"",
@@ -321,7 +332,7 @@
         "paper_pieced": null,
         "blocks": "20 X applique blocks, each 11.25\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": [null],
         "details": "1.75\" attic window sashing, 2\" sashing, 4.75\" border, 0.625\" straight grain binding",
         "collection": null,
         "images": [
@@ -355,6 +366,7 @@
     },
     {
         "id": 12,
+        "quilter": "Suzanne Conti",
         "name": "North Carolina",
         "slug": "north-carolina",
         "size": "72\" X 59\"",
@@ -368,8 +380,8 @@
         "paper_pieced": null,
         "blocks": "20 X flying dutchman, each 9\"",
         "orphan_blocks": null,
-        "pattern": null,
-        "details": "3.5\" sashing, 8\" border, 0.75\" double-folded straight-grain mitered binding, replica of Suzanne's Great Grandmother Kate's Quilt",
+        "pattern": ["flying dutchman"],
+        "details": "3.5\" sashing, 8\" border, 0.75\" double-folded straight-grain mitered binding, replica of Suzanne's Grandmother Kate's Quilt",
         "collection": null,
         "images": [
             "/North_Carolina/Suzanne_Conti_North_Carolina_01.jpg",
@@ -383,6 +395,7 @@
     },
     {
         "id": 13,
+        "quilter": "Suzanne Conti",
         "name": "Florida",
         "slug": "florida",
         "size": "63\" X 77\"",
@@ -396,7 +409,7 @@
         "paper_pieced": null,
         "blocks": "20 X flying dutchman, each 9\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["flying dutchman"],
         "details": "3.5\" sashing, 8\" border, double-folded bias binding, replica of Suzanne's Great Grandmother Kate's Quilt",
         "collection": null,
         "images": [
@@ -410,6 +423,7 @@
     },
     {
         "id": 14,
+        "quilter": "Suzanne Conti",
         "name": "Michigan",
         "slug": "michigan",
         "size": "88.5\" X 99\"",
@@ -423,7 +437,7 @@
         "paper_pieced": null,
         "blocks": null,
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["whole cloth medallion center"],
         "details": "whole cloth medallion center, 2 borders: 8\" inner border and 11\" outer border",
         "collection": null,
         "images": [
@@ -440,6 +454,7 @@
     },
     {
         "id": 15,
+        "quilter": "Suzanne Conti",
         "name": "Oregon",
         "slug": "oregon",
         "size": "98\" X 86\"",
@@ -453,7 +468,7 @@
         "paper_pieced": null,
         "blocks": "30 X quatrefoil, each 12\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["quatrefoil"],
         "details": "2\" plain border, 5.5\" piano key border and 3.75\" scalloped border",
         "collection": null,
         "images": [
@@ -469,6 +484,7 @@
     },
     {
         "id": 16,
+        "quilter": "Suzanne Conti",
         "name": "Montana Dinosaurs",
         "slug": "montana-dinosaurs",
         "size": "64.5\" X 87\"",
@@ -482,7 +498,7 @@
         "paper_pieced": null,
         "blocks": "44 X bright hope border, 28 X box border",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["center panel medallion", "animal"],
         "details": "center panel medallion from favorite childhood sheets of Nick and Steve, 5 borders, double-folded bias binding",
         "collection": null,
         "images": [
@@ -497,6 +513,7 @@
     },
     {
         "id": 17,
+        "quilter": "Suzanne Conti",
         "name": "Wyoming Dinosaurs",
         "slug": "wyoming-dinosaurs",
         "size": "64\" X 84\"",
@@ -510,7 +527,7 @@
         "paper_pieced": null,
         "blocks": "32 X endless stair border, each 6\", 28 X July summer sky border 5\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["center panel medallion", "animal"],
         "details": "center panel medallion from favorite childhood sheets of Nick and Stave, 5 borders, double-folded bias binding",
         "collection": "Given to my grandson, Alexander Jiang Dewyer, in 2022 in Tucson, Arizona",
         "images": [
@@ -525,6 +542,7 @@
     },
     {
         "id": 18,
+        "quilter": "Suzanne Conti",
         "name": "Georgia",
         "slug": "georgia",
         "size": "88\" X 88\"",
@@ -538,7 +556,7 @@
         "paper_pieced": null,
         "blocks": "28 X love in mist, each 12\", 16 X Kansas, each 12\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["love in mist", "Kansas"],
         "details": "4 borders, double-folded bias binding",
         "collection": "Gifted to Dr. Erin Gillespie for her graduation from the University of Michigan Medical School.",
         "images": [
@@ -553,6 +571,7 @@
     },
     {
         "id": 19,
+        "quilter": "Suzanne Conti",
         "name": "Vermont",
         "slug": "vermont",
         "size": "102\" X 102\"",
@@ -566,7 +585,7 @@
         "paper_pieced": null,
         "blocks": "30 X garden blocks, each 16\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["garden"],
         "details": "2 borders, French fold bias binding, quilt made with themes on fabric that suited Nick's interests: travel and newspaper",
         "collection": null,
         "images": [
@@ -582,6 +601,7 @@
     },
     {
         "id": 20,
+        "quilter": "Suzanne Conti",
         "name": "South Carolina",
         "slug": "south-carolina",
         "size": "102\" X 120\"",
@@ -595,7 +615,7 @@
         "paper_pieced": null,
         "blocks": null,
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["garden maze"],
         "details": "garden maze pattern with scalloped border, 1 border, 2.5\" French fold bias binding",
         "collection": "Gifted to Nick Dewyer while he was in medical school at the University of Michigan in 2011.",
         "images": [
@@ -607,6 +627,7 @@
     },
     {
         "id": 21,
+        "quilter": "Suzanne Conti",
         "name": "Arizona",
         "slug": "arizona",
         "size": "100\" X 100\"",
@@ -620,8 +641,8 @@
         "paper_pieced": null,
         "blocks": null,
         "orphan_blocks": null,
-        "pattern": "all over - Nancy Crow \"High Spirits\" (1982) inspired",
-        "details": "French fold bias binding",
+        "pattern": ["all over"],
+        "details": "Nancy Crow \"High Spirits\" (1982) inspired, French fold bias binding",
         "collection": "This was the second quilt I made.  My quilting was interrupted by my going back to work.  I started quilting again and finished this one 10 years later.  I made this quilt for my son, Nick Dewyer,  when he was 10 years old.  He was into Ninja Turtles and liked the colors of green and blue. I laid this quilt out under our dining room table in order to have enough room.   Nick and his friend, David Saginaw, liked to watch it grow as more colors were added to it.",
         "images": [
             "/Arizona/Suzanne_Conti_Arizona_01.jpg",
@@ -641,6 +662,7 @@
     },
     {
         "id": 22,
+        "quilter": "Suzanne Conti",
         "name": "Nebraska",
         "slug": "nebraska",
         "size": "102\" X 102\"",
@@ -654,7 +676,7 @@
         "paper_pieced": null,
         "blocks": "25 X pinwheel, each 12\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["pinwheel"],
         "details": "3 borders - 1 with Card Trick, cording embellishment, French fold bias binding",
         "collection": "Made for my husband with card trick blocks being his interest and pinwheels honoring the pinwheel quilt my Grandmother made for me as a child.",
         "images": [
@@ -677,6 +699,7 @@
     },
     {
         "id": 23,
+        "quilter": "Suzanne Conti",
         "name": "Montana",
         "slug": "montana",
         "size": "81\" X 95.5\"",
@@ -690,7 +713,7 @@
         "paper_pieced": null,
         "blocks": "20 X Susannah",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["Susannah"],
         "details": "hand pieced and hand quilted, 3 sashings with cornerstones, 2 borders, French fold bias multicolor binding",
         "collection": "This is the first quilt I ever made.  It was for Stephen who was collecting Kachina Dolls after our trip to Glacier National Park, Montana.  This is the only quilt that I hand pieced. Stephen was studying pioneers in his second grade class and when they came to quilting he inspired me to make a quilt – this one.  Especially, since I was staying home with the 2 kids while they had the chicken pox, I thought \"When would I have a better chance to do this?\"",
         "images": [
@@ -706,6 +729,7 @@
     },
     {
         "id": 24,
+        "quilter": "Suzanne Conti",
         "name": "Louisiana",
         "slug": "louisiana",
         "size": "72\" X 96\"",
@@ -719,7 +743,7 @@
         "paper_pieced": null,
         "blocks": "28X attraction, each 8\", 68 X Louisiana, each 8\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["Louisiana", "attraction"],
         "details": "2 borders and 1\" double-folded bias binding",
         "collection": "Gifted to Drs. Jen & Hriday Shah as a baby gift for their daughter, Jaya, in Spring 2014 San Mateo, California.",
         "images": [
@@ -740,9 +764,9 @@
         "hand_pieced": null,
         "applique": null,
         "paper_pieced": null,
-        "blocks": "30 X To the Nines, each 12\" set on point",
+        "blocks": "30 X to the nines, each 12\" set on point",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["to the nines"],
         "details": "sashing plain, pieced and cornerstones, 3 borders: 2.75\", 1\" and 5.25\", 2 tone double French bias binding 1.5\"",
         "collection": null,
         "images": [
@@ -772,9 +796,9 @@
         "hand_pieced": null,
         "applique": null,
         "paper_pieced": null,
-        "blocks": "30 X Call Crossing (Civil War Pattern), each 16\"",
+        "blocks": "30 X call crossing (Civil War pattern), each 16\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": "call crossing",
         "details": "2 borders, continuous French fold bias binding",
         "collection": null,
         "images": [
@@ -804,7 +828,7 @@
         "paper_pieced": null,
         "blocks": "32 X cascading quarter log cabin, each 16\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["cascading quarter log cabin"],
         "details": "tumbling blocks border, French fold bias binding, cording embellishment, striped border, prairie point edge embelishment",
         "collection": "I made this quilt for Stephen Dewyer while in Yale’s MFA Program.  He gave me input on colors and how to quilt it.  I wanted a quilt for him that he really liked and he did!",
         "images": [
@@ -836,7 +860,7 @@
         "paper_pieced": null,
         "blocks": "140 X tumbling in center, each 4\", 24 X tumbling in side borders, each 4\", 22 X castle wall in the side borders, each 8\", 40 X patience corner in top and bottom borders, each 5.5\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["tumbling"],
         "details": "borders: 5.5\", inner side: 4\" and outer side: 8\", double folded straight grain binding",
         "collection": "Made for and given to Stephen Dewyer while he was living in Detroit.",
         "images": [
@@ -867,7 +891,7 @@
         "paper_pieced": null,
         "blocks": "16 X odd fellow chain, each 16\", 30 X farmhouse favorite, each 8\"",
         "orphan_blocks": null,
-        "pattern": null,
+        "pattern": ["odd fellow chain", "farmhouse favorite"],
         "details": "2\" and 3.5\" inside border, 1\" double fold bias binding",
         "collection": "Given to my former husband, Raymond Dewyer, in 2018 and inherited by Stephen Dewyer in 2023 in Minnesota.",
         "images": [
@@ -881,8 +905,31 @@
     },
     {
         "id": 30,
-        "name": "Grandma Kate Quilt",
-        "slug": "grandma-kate-quilt",
+        "name": "Katherine Marie Jurkiewicz Quilt 01",
+        "slug": "katherine-marie-jurkiewicz-quilt-01",
+        "size": null,
+        "date_start": null,
+        "date_finished": null,
+        "year": null,
+        "machine_pieced": null,
+        "hand_quilted": null,
+        "hand_pieced": null,
+        "applique": null,
+        "paper_pieced": null,
+        "blocks": null,
+        "orphan_blocks": null,
+        "pattern": null,
+        "details": null,
+        "collection": "John and Mary Nigro",
+        "images": [
+            "/Katherine_Marie_Jurkiewicz_Quilt_01/Katherine_Marie_Jurkiewicz_Quilt_01_01.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_01/Katherine_Marie_Jurkiewicz_Quilt_01_02.jpg"
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Katherine Marie Jurkiewicz Quilt 02",
+        "slug": "katherine-marie-jurkiewicz-quilt-02",
         "size": null,
         "date_start": null,
         "date_finished": null,
@@ -898,15 +945,40 @@
         "details": null,
         "collection": null,
         "images": [
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_01.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_02.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_03.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_04.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_05.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_06.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_07.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_08.jpg",
-            "/Grandma_Kate/Suzanne_Conti_Grandma_Kate_09.jpg"
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_01.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_02.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_03.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_04.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_05.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_06.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_07.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_08.jpg",
+            "/Katherine_Marie_Jurkiewicz_Quilt_02/Katherine_Marie_Jurkiewicz_Quilt_02_09.jpg"
+        ]
+    },
+    {
+        "id": 32,
+        "name": "Katherine Marie Jurkiewicz Quilt 03",
+        "slug": "katherine-marie-jurkiewicz-quilt-03",
+        "size": null,
+        "date_start": null,
+        "date_finished": "~1960",
+        "year": 1960,
+        "machine_pieced": false,
+        "hand_quilted": true,
+        "hand_pieced": null,
+        "hand_cross_stitched": true,
+        "applique": false,
+        "paper_pieced": false,
+        "blocks": null,
+        "orphan_blocks": null,
+        "pattern": "flying dutchman",
+        "details": null,
+        "collection": "Suzanne Conti", 
+        "images": [ 
+            "/Katherine_Marie_Jurkiewicz_Quilt_03/Katherine_Marie_Jurkiewicz_Quilt_03_01.jpg", 
+            "/Katherine_Marie_Jurkiewicz_Quilt_03/Katherine_Marie_Jurkiewicz_Quilt_03_02.jpg", 
+            "/Katherine_Marie_Jurkiewicz_Quilt_03/Katherine_Marie_Jurkiewicz_Quilt_03_03.jpg"
         ]
     }
 ]
