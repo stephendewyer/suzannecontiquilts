@@ -23,6 +23,7 @@
         display: flex;
         flex-direction: row;
         border-radius: 3rem;
+        box-sizing: border-box;
     }
 
     .primary_button:hover {

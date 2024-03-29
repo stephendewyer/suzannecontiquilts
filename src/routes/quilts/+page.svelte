@@ -43,7 +43,7 @@
 
 	// begin filters
 
-	// initialize the searchStore
+	// initialize the searchStore FILTER BEFORE SORT!!
 
 	$: searchStore = createSearchStore(searchQuilts);
 
@@ -61,7 +61,7 @@
 
 	$: searchValue = "";
 
-	// sort the filtered quilts
+	// sort the filtered quilts SORT AFTER FILTER!!
 
 	let radioValue = "alphabetical";
 
