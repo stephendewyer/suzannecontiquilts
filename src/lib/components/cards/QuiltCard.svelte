@@ -1,6 +1,7 @@
 <script>
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
-
+    import { afterUpdate } from 'svelte';
+    import LoadingSpinner from '$lib/components/loadingSpinners/LoadingSpinner.svelte';
     export let quiltData;
 
     $: quiltData;
@@ -19,30 +20,40 @@
 
     };
 
+    let pending = true;
+
+    afterUpdate(() => {
+        pending = false;
+    })
+
 </script>
 
-<div
-    role="treeitem"
-    aria-selected={cardHovered}
-    on:focus={() => cardHoverHandler()}
-    on:blur={() => cardExitHandler()}
-    on:mouseenter={() => cardHoverHandler()}
-    on:mouseover={() => cardHoverHandler()}
-    on:mouseleave={() => cardExitHandler()}
-    on:mouseout={() => cardExitHandler()}
-    class={(cardHovered) ? "quilt_card_hovered" : "quilt_card"}
->
-    <img 
-        class="quilt_thumbnail"
-        src="/images/quilts/thumbnails{quiltData.images[0]}" 
-        alt="{quiltData.name} thumbnail" 
-    />
-    <div class="quilt_info_container">
-        <PrimaryButton quiltCardIsHoveredProp={cardHovered}>
-            {quiltData.name}
-        </PrimaryButton>
+{#if (pending)}
+    <LoadingSpinner />
+{:else}
+    <div
+        role="treeitem"
+        aria-selected={cardHovered}
+        on:focus={() => cardHoverHandler()}
+        on:blur={() => cardExitHandler()}
+        on:mouseenter={() => cardHoverHandler()}
+        on:mouseover={() => cardHoverHandler()}
+        on:mouseleave={() => cardExitHandler()}
+        on:mouseout={() => cardExitHandler()}
+        class={(cardHovered) ? "quilt_card_hovered" : "quilt_card"}
+    >
+        <img 
+            class="quilt_thumbnail"
+            src="/images/quilts/thumbnails{quiltData.images[0]}" 
+            alt="{quiltData.name} thumbnail" 
+        />
+        <div class="quilt_info_container">
+            <PrimaryButton quiltCardIsHoveredProp={cardHovered}>
+                {quiltData.name}
+            </PrimaryButton>
+        </div>
     </div>
-</div>
+{/if}
 
 <style>
     .quilt_card {

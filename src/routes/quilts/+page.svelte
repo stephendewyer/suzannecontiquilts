@@ -86,7 +86,6 @@
 	};
 
 	const paginate = (items) => {
-
 		const pages = Math.ceil(items.length / quiltsPerPage);
 
 		const paginatedItems = Array.from({ length: pages }, (_, index) => {
@@ -98,13 +97,14 @@
 	};
 
 	afterUpdate(() => {
-		pending = false;
 		paginate(filteredQuilts);
+		pending = false;
 	});
 
 	let pageChanged = false;
 
 	$: if (pageChanged) {
+		pending = true;
 		quilts_cont.scrollIntoView({
 				behavior: 'smooth'
 		});
