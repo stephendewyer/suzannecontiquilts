@@ -11,6 +11,7 @@
 	import Sort from '$lib/images/icons/sort_icon.svg?raw';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import RadioButtons from '$lib/components/inputs/RadioButtons.svelte';
+	import LoadingSpinner from '../../lib/components/loadingSpinners/LoadingSpinner.svelte';
 
 	let quilts_cont;
 	let quiltSearchNavBarIsHovered = false;
@@ -31,6 +32,8 @@
 	let paperPiecedChecked = false;
 
 	// patterns
+
+	let pending = true;
 
 	let flyingDutchmanChecked = false;
 
@@ -95,6 +98,7 @@
 	};
 
 	afterUpdate(() => {
+		pending = false;
 		paginate(filteredQuilts);
 	});
 
@@ -242,13 +246,19 @@
 			class="quilts_container" 	
 			bind:this={quilts_cont}	
 		>
-			{#each currentPageQuilts as quilt, i}
-				<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}" class="quilt_card_container">
-					<QuiltCard quiltData={quilt} />
-				</a>
-				{:else}
-					<p>No quilts fit search criteria.</p>
-			{/each}
+			{#if (pending)}
+				<div class="loading_spinner_container">
+					<LoadingSpinner/>
+				</div>
+			{:else}
+				{#each currentPageQuilts as quilt, i}
+					<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}" class="quilt_card_container">
+						<QuiltCard quiltData={quilt} />
+					</a>
+					{:else}
+						<p>No quilts fit search criteria.</p>
+				{/each}
+			{/if}
 		</div>
 		<Pagination 
 			bind:page={page}
@@ -429,6 +439,12 @@
 		width: 100%;
 		padding: 1rem;
 		width: 0 auto;
+	}
+
+	.loading_spinner_container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
 	}
 
 	@media (max-width: 1200px) {
