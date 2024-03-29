@@ -1,5 +1,5 @@
 <script>
-
+    import Arrow from '$lib/images/icons/arrow.svg?raw';
     let buttonHovered = false;
     export let quiltCardIsHoveredProp;
 
@@ -19,83 +19,87 @@
     on:mouseout={() => {
         buttonHovered = false;
     }}
-    class="{ (buttonHovered) || quiltCardIsHoveredProp ? 'primary_button_hovered' : 'primary_button'}"
+    class="{ (buttonHovered) || quiltCardIsHoveredProp ? 'primary_button_outer_hovered' : 'primary_button_outer'}"
 >
-    <slot/>
-    <div class="arrow_icon_container">
-        <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.18 568.32">
-        <defs>
-            <style>.cls-1{fill:#15060B;}</style>
-        </defs>
-        <path class="cls-1" d="M301.3,300.76L40.62,561.44c-9.17,9.17-24.03,9.17-33.2,0l-.54-.54c-9.17-9.17-9.17-24.03,0-33.2l243.54-243.54L6.88,40.62C-2.29,31.45-2.29,16.59,6.88,7.42l.54-.54C16.59-2.29,31.45-2.29,40.62,6.88L301.3,267.56c9.17,9.17,9.17,24.03,0,33.2Z"/></svg>
+    <div class="{ (buttonHovered) || quiltCardIsHoveredProp ? 'primary_button_inner_hovered' : 'primary_button_inner'}">
+        <slot/>
+        <div class="arrow_icon_container">
+            {@html Arrow}
+        </div>
     </div>
 </button>
 
 <style>
 
-    .primary_button {
-        outline: 0.125rem solid #FDFCE8;
-        outline-offset: -0.25rem;
-        color: #FDFCE8;
+    .primary_button_outer {
         background-color: #15060B;
-        padding: 1rem 1.5rem 1rem 1.5rem;
-        font-size: 1.5rem;
-        border: none;
-        transition: all 300ms;
+        padding: 0;
+        border: 0.125rem solid #15060B;
+        transition: background-color 300ms linear, border 300ms linear;
+        will-change: background-color, border;
         cursor: pointer;
-        display: flex;
-        flex-direction: row;
         border-radius: 3rem;
-        box-sizing: border-box;
     }
 
-    .primary_button_hovered {
-        outline: 0.125rem solid #15060B;
-        outline-offset: -0.125rem;
-        color: #15060B;
+    .primary_button_outer_hovered {
         background-color: #FDFCE8;
-        padding: 1rem 1.5rem 1rem 1.5rem;
-        font-size: 1.5rem;
-        border: none;
-        transition: all 300ms;
+        padding: 0;
+        border: 0.125rem solid #FDFCE8;
+        transition: background-color 300ms linear, border 300ms linear;
+        will-change: background-color, border;
         cursor: pointer;
-        display: flex;
-        flex-direction: row;
         border-radius: 3rem;
-        box-sizing: border-box;
     }
 
-    .primary_button > .arrow_icon_container > svg > path {
+    .primary_button_inner {
+        border: 0.125rem solid #FDFCE8;
+        color: #FDFCE8;
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 3rem;
+        transition: all 300ms;
+    }
+
+    .primary_button_inner_hovered {
+        border: 0.125rem solid #15060B;
+        color: #15060B;
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        border-radius: 3rem;
+        transition: all 300ms;
+    }
+
+    .primary_button_inner > .arrow_icon_container {
         fill: #FDFCE8;
     }
 
-    .primary_button_hovered > .arrow_icon_container > svg > path {
+    .primary_button_inner_hovered > .arrow_icon_container {
         fill: #15060B;
     }
 
-    .primary_button > .arrow_icon_container {
-        margin: auto auto auto 0.75rem;
-        will-change: 'margin-left';
-        transition: all 0.33s ease-out;
-    }
-
-    .primary_button_hovered > .arrow_icon_container {
-        margin: auto auto auto 1.25rem;
-        will-change: 'margin-left';
-        transition: all 0.33s ease-out;
-    }
-
     .arrow_icon_container {
+        will-change: 'fill';
+        transition: all 0.33s ease-out;
         width: 0.5rem;
     }
 
     @media (max-width: 750px) {
-        .primary_button {
+        .primary_button_inner {
             font-size: 1.25rem;
             padding: 0.75rem 1rem 0.75rem 1rem;
         }
 
-        .primary_button_hovered {
+        .primary_button_inner_hovered {
             font-size: 1.25rem;
             padding: 0.75rem 1rem 0.75rem 1rem;
         }
