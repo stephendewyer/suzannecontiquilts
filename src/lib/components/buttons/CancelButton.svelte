@@ -78,6 +78,11 @@
             font-size: 1.25rem;
             padding: 0.5rem 1rem 0.5rem 1rem;
         }
+
+        .cancel_button_inner_hovered {
+            font-size: 1.25rem;
+            padding: 0.625rem 1.125rem 0.625rem 1.125rem;
+        }
     }
     
 </style>
