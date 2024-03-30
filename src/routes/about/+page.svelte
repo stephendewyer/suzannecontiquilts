@@ -19,9 +19,9 @@
 	const inspiration = [
 		{
 			"id": 1,
-			"name": "Suzanne's grandma Kate, Katherine Marie Jurkiewicz",
+			"name": "Suzanne's grandma Kate, Katherine Guzinski",
 			"image": inspiration01,
-			"alt": "portrait of Katherine Marie Jurkiewicz (Suzanne's grandma Kate)",
+			"alt": "portrait of Katherine Guzinski (Suzanne's grandma Kate)",
 			"button": PrimaryButton,
 			"path": "/quilts/Grandma_Kate_Quilt"
 		},
@@ -30,14 +30,6 @@
 			"name": "grandson",
 			"image": inspiration02,
 			"alt": "photo of Suzanne Conti with grandson",
-			"button": null,
-			"path": null
-		},
-		{
-			"id": 3,
-			"name": "family",
-			"image": inspiration03,
-			"alt": "family at Nick and Katrina's wedding",
 			"button": null,
 			"path": null
 		},
@@ -155,18 +147,6 @@
 								<h3 class="inspiration_name">
 									{item.name}
 								</h3>
-								{#if (item.button !== null)}
-									<div class="action_button_container">
-										<svelte:component
-											this={item.button}
-											id={`${item.name}_quilt`}
-											tabindex={-i}
-											quiltCardIsHoveredProp={hoveredInspoCardId === 0? quiltCardIsHovered = true : quiltCardIsHovered = false}
-										>
-											quilt by Grandma Kate
-										</svelte:component>
-									</div>
-								{/if}
 							</div>
 						</div>
 					</a>

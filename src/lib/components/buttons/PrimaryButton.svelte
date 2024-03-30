@@ -1,12 +1,10 @@
 <script>
     import Arrow from '$lib/images/icons/arrow.svg?raw';
-    let buttonHovered = false;
     export let quiltCardIsHoveredProp;
-
+    let buttonHovered = false;
 </script>
 
 <button 
-    
     on:mouseover={() => {
         buttonHovered = true;
     }} 
