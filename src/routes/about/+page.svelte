@@ -10,11 +10,7 @@
 	import PrimaryButton from '$lib/components/buttons/PrimaryButton.svelte';
 	import inspiration01 from '$lib/images/inspiration/inspiration-Katherine_Marie_Jurkiewicz.jpg';
 	import inspiration02 from '$lib/images/inspiration/inspiration-grandson.jpg';
-	import inspiration03 from '$lib/images/inspiration/inspiration-family.jpg';
 	import inspiration04 from '$lib/images/inspiration/inspiration-Savannah,_Georgia.jpg';
-
-	let hoveredInspoCardId = null;
-	let quiltCardIsHovered = false;
 
 	const inspiration = [
 		{
@@ -122,50 +118,20 @@
 		</div>
 		<div class="inspiration_container">
 			{#each inspiration as item, i}
-				{#if (item.button !== null)}
-					<a href={`${item.path}`} class="inspiration_card_container">
-						<div 
-							on:mouseover={() => {
-								hoveredInspoCardId = i;
-							}} 
-							on:focus={() => {
-								hoveredInspoCardId = i;
-							}}
-							on:blur={() => {
-								hoveredInspoCardId = null;
-							}}
-							on:mouseout={() => {
-								hoveredInspoCardId = null;
-							}}
-						>
-							<img 
-								class="inspiration_thumbnail"
-								src="{item.image}" 
-								alt="{item.alt}"
-							/>
-							<div class="inspiration_info_container">
-								<h3 class="inspiration_name">
-									{item.name}
-								</h3>
-							</div>
-						</div>
-					</a>
-				{:else }
-					<div 
-						class="inspiration_card_container"
-					>
-						<img 
-							class="inspiration_thumbnail"
-							src="{item.image}" 
-							alt="{item.alt}"
-						/>
-						<div class="inspiration_info_container">
-							<h3 class="inspiration_name">
-								{item.name}
-							</h3>
-						</div>
+				<div 
+					class="inspiration_card_container"
+				>
+					<img 
+						class="inspiration_thumbnail"
+						src="{item.image}" 
+						alt="{item.alt}"
+					/>
+					<div class="inspiration_info_container">
+						<h3 class="inspiration_name">
+							{item.name}
+						</h3>
 					</div>
-				{/if}
+				</div>
 			{/each}
 		</div>
 	</section>
