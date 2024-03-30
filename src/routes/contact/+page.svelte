@@ -221,7 +221,7 @@
 							first name:
 						</label>
 						<input 
-							name="name_first" 
+							id="name_first"
 							type="text" 
 							class="form_input"
 							style="{(!enteredNameFirstIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
@@ -244,7 +244,7 @@
 							
 						</label>
 						<input 
-							name="name_last" 
+							id="name_last" 
 							type="text" 
 							class="form_input"
 							style="{(!enteredNameLastIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
@@ -266,7 +266,7 @@
 							email address:
 						</label>
 						<input 
-							name="email" 
+							id="email" 
 							type="email" 
 							class="form_input"
 							style="{(!enteredEmailIsValid || !enteredEmailHasAtSymbol) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
@@ -294,7 +294,7 @@
 							
 						</label>
 						<input 
-							name="subject" 
+							id="subject" 
 							type="text" 
 							class="form_input"
 							style="{(!enteredSubjectIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
@@ -316,7 +316,7 @@
 							message:
 						</label>
 						<textarea 
-							name="message" 
+							id="message" 
 							type="text" 
 							class="form_para_input"
 							style="{(!enteredMessageIsValid) ? 'background-color: #FDDBD3;' : 'background-color: #FFFFFF;'}"
