@@ -29,7 +29,7 @@
         {label}  
         <input
           type="radio"
-          name="radio"
+          name="group"
           id={slugify(label)}
           bind:group={userSelected}
           value={value} 
