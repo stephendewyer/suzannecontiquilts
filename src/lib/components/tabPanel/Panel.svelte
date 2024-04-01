@@ -13,6 +13,7 @@
             tabindex={-i}
             aria-labelledby={`tabpanel_header_${tabPanel.label}`}
             panel_data={tabPanel.data}
+            activePageID={tabPanel.activePageID}
         />
     {/if} 
 {/each}

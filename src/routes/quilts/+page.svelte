@@ -78,8 +78,13 @@
 
 	let searchValueChanged = false;
 
+	let activePageID = 0;
+
+	$: activePageID;
+
 	$: if (searchValueChanged) {
-		$searchStore.search = searchValue;	
+		$searchStore.search = searchValue;
+		activePageID = 0;
 		searchValueChanged = false;
 	};
 
@@ -125,21 +130,24 @@
 			index: 0,
 			label: "all quilts",
 			panel: QuiltResultsPanel,
-			data: sortedAndFilteredQuilts
+			data: sortedAndFilteredQuilts,
+			activePageID: activePageID
 		},
 		{
 			id: uuidv4(),
 			index: 1,
 			label: "quilts by Suzanne",
 			panel: QuiltResultsPanel,
-			data: quiltsBySuzanneConti
+			data: quiltsBySuzanneConti,
+			activePageID: activePageID
 		},
 		{
 			id: uuidv4(),
 			index: 2,
 			label: "quilts by ancestors of Suzanne",
 			panel: QuiltResultsPanel,
-			data: quiltsBySuzanneContiAncestors
+			data: quiltsBySuzanneContiAncestors,
+			activePageID: activePageID
 		}
 	];
 

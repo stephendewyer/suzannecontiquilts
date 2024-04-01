@@ -5,11 +5,17 @@
     import { onDestroy, afterUpdate } from "svelte";
 
     export let panel_data;
+    export let activePageID;
+
+    $: activePageID;
 
     $: panel_data;
 
     let quilts_cont;
+    
     let activePageId = 0;
+    $: activePageId = activePageID;
+
 	let page = 0;
 	let pageCount = [];
 	let currentPageQuilts = [];
@@ -75,7 +81,7 @@
         bind:page={page}
         bind:pageChanged={pageChanged}
         pageCount={pageCount} 
-        bind:activePageId={activePageId}
+        bind:activePageId={activePageID}
     />
 </div>
 <style>
