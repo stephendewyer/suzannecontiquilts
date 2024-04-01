@@ -1,7 +1,7 @@
 <script>
     export let tabPanels = [];
     export let activeTab = 0;
-
+    export let activePageID = 0;
 </script>
 
 {#each tabPanels as tabPanel, i}
@@ -13,7 +13,7 @@
             tabindex={-i}
             aria-labelledby={`tabpanel_header_${tabPanel.label}`}
             panel_data={tabPanel.data}
-            activePageID={tabPanel.activePageID}
+            bind:activePageID={activePageID}
         />
     {/if} 
 {/each}

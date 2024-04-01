@@ -82,6 +82,8 @@
 
 	$: activePageID;
 
+	$: console.log("active page ID: ", activePageID);
+
 	$: if (searchValueChanged) {
 		$searchStore.search = searchValue;
 		activePageID = 0;
@@ -462,24 +464,21 @@
 			index: 0,
 			label: "all quilts",
 			panel: QuiltResultsPanel,
-			data: sortedAndFilteredQuilts,
-			activePageID: activePageID
+			data: sortedAndFilteredQuilts
 		},
 		{
 			id: uuidv4(),
 			index: 1,
 			label: "quilts by Suzanne",
 			panel: QuiltResultsPanel,
-			data: quiltsBySuzanneConti,
-			activePageID: activePageID
+			data: quiltsBySuzanneConti
 		},
 		{
 			id: uuidv4(),
 			index: 2,
 			label: "quilts by ancestors of Suzanne",
 			panel: QuiltResultsPanel,
-			data: quiltsBySuzanneContiAncestors,
-			activePageID: activePageID
+			data: quiltsBySuzanneContiAncestors
 		}
 	];
 
@@ -598,6 +597,7 @@
 		<TabPanel
 			tabPanels={quiltsTabPanels}
 			bind:activeTab={activeQuiltsTab}
+			bind:activePageID={activePageID}
 		/>
 	</div>
 </div>

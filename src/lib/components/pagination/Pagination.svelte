@@ -1,13 +1,15 @@
 <script>
     export let page = 0;
     export let pageCount = 0;
-    export let activePageId = 0;
+    export let activePageID = 0;
     export let pageChanged = false;
+
+    // if search value changed, set page to 0, activePageId to page and pageChanged to true;
 
     const setPage = (p) => {
 		if (p >= 0 && p < pageCount.length) {
 			page = p;
-			activePageId = page;
+			activePageID = page;
 		};
         pageChanged = true;
 	};
@@ -44,7 +46,7 @@
                     type="button"
                     on:click={() => setPage(i)}
                     on:keydown={() => setPage(i)}
-                    class={activePageId == i ? "activePaginationButton" : "paginationButton"}
+                    class={activePageID == i ? "activePaginationButton" : "paginationButton"}
                 >
                     {i + 1}
                 </button>

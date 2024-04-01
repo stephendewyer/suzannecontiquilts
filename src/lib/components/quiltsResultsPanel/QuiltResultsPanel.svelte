@@ -7,14 +7,9 @@
     export let panel_data;
     export let activePageID;
 
-    $: activePageID;
-
     $: panel_data;
 
     let quilts_cont;
-    
-    let activePageId = 0;
-    $: activePageId = activePageID;
 
 	let page = 0;
 	let pageCount = [];
@@ -39,6 +34,7 @@
 	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
 
 	afterUpdate(() => {
+        page = activePageID;;
 		paginate(panel_data);
 		pending = false;
 	});
@@ -81,7 +77,7 @@
         bind:page={page}
         bind:pageChanged={pageChanged}
         pageCount={pageCount} 
-        bind:activePageId={activePageID}
+        bind:activePageID={activePageID}
     />
 </div>
 <style>
