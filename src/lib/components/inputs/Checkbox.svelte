@@ -61,7 +61,7 @@
 
   <style>
     .checkbox-wrapper-28 {
-      --size: 2rem;
+      --size: 1.5rem;
       position: relative;
       display: flex;
     }
@@ -88,9 +88,11 @@
       -webkit-animation: draw-checkbox-28 ease-in-out 0.2s forwards;
               animation: draw-checkbox-28 ease-in-out 0.2s forwards;
     }
+
     .checkbox-wrapper-28 label:active::after {
       background-color: #e6e6e6;
     }
+
     .checkbox_label {
       font-size: 1.25rem;
       line-height: var(--size);

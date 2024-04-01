@@ -12,6 +12,8 @@
 	import RadioButtons from '$lib/components/inputs/RadioButtons.svelte';
   	import Tabs from '$lib/components/tabPanel/Tabs.svelte';
 	import TabPanel from '$lib/components/tabPanel/Panel.svelte';
+	import ClearFiltersButton from "$lib/components/buttons/CancelButton.svelte";
+
 	import { v4 as uuidv4 } from 'uuid';
 
 	let quiltSearchNavBarIsHovered = false;
@@ -87,6 +89,39 @@
 		activePageID = 0;
 		searchValueChanged = false;
 	};
+
+	const techniques = [
+		{
+			label: "applique",
+			value: appliqueChecked
+		},
+		{
+			label: "block piecing",
+			value: blockPiecingChecked
+		},
+		{
+			label: "hand pieced",
+			value: handPiecedChecked
+		},
+		{
+			label: "hand quilted",
+			value: handQuiltedChecked
+		},
+		{
+			label: "machine pieced",
+			value: machinePiecedChecked
+		},
+		{
+			label: "block piecing",
+			value: blockPiecingChecked
+		},
+		{
+			label: "paper piecing",
+			value: paperPiecedChecked
+		}
+	];
+
+	const techniquesByAlpha = techniques.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
 
 	const options = [
 		{
@@ -180,13 +215,13 @@
 	class="quilt_search_nav_bar"
 >
 	<div class="buttons_container">
-		<div class="button_container">
+		<div id="filter_button_container" class="button_container">
 			<div class="{(quiltSearchNavBarIsHovered) ? "icon_container_hovered" : "icon_container"}">
 				{@html Filter}
 			</div>
 			<p class="{(quiltSearchNavBarIsHovered) ? "label_hovered" : "label"}">filter</p>
 		</div>
-		<div class="button_container">
+		<div id="sort_button_container" class="button_container">
 			<div class="{(quiltSearchNavBarIsHovered) ? "icon_container_hovered" : "icon_container"}">
 				{@html Sort}
 			</div>
@@ -208,52 +243,49 @@
 				autoComplete="off"
 				on:submit|preventDefault
 			>
-				<SearchInput 
-					bind:searchValue={searchValue}
-					bind:searchValueChanged={searchValueChanged}
-				>
-					search quilts by name
-				</SearchInput>
-				<h3 class="category_name">
-					techniques:
-				</h3>
-				<div class="checkboxes">
-					<Checkbox bind:checked={appliqueChecked}>
-						applique
-					</Checkbox>
-					<Checkbox bind:checked={blockPiecingChecked}>
-						block piecing
-					</Checkbox>
-					<Checkbox bind:checked={handPiecedChecked}>
-						hand pieced
-					</Checkbox>
-					<Checkbox bind:checked={handQuiltedChecked}>
-						hand quilted
-					</Checkbox>
-					<Checkbox bind:checked={machinePiecedChecked}>
-						machine pieced
-					</Checkbox>
-					<Checkbox bind:checked={paperPiecedChecked}>
-						paper piecing
-					</Checkbox>
+				<div class="filters">
+					<SearchInput 
+						bind:searchValue={searchValue}
+						bind:searchValueChanged={searchValueChanged}
+					>
+						search quilts by name
+					</SearchInput>
+					<h3 class="category_name">
+						techniques:
+					</h3>
+					<div class="checkboxes">
+						{#each techniquesByAlpha as technique, i}
+							<Checkbox bind:checked={technique.value}>
+								{technique.label}
+							</Checkbox>
+						{/each}
+					</div>
+					<h3 class="category_name">
+						patterns:
+					</h3>
+					<div class="checkboxes">
+						<Checkbox bind:checked={flyingDutchmanChecked}>
+							flying dutchman
+						</Checkbox>
+					</div>
+					<div class="button_container">
+						<ClearFiltersButton>
+							clear filters
+						</ClearFiltersButton>
+					</div>
 				</div>
-				<h3 class="category_name">
-					pattern:
-				</h3>
-				<div class="checkboxes">
-					<Checkbox bind:checked={flyingDutchmanChecked}>
-						flying dutchman
-					</Checkbox>
+				<div class="sort">
+					<h3 class="category_name">
+						order by:
+					</h3>
+					<div class="checkboxes">
+						<RadioButtons 
+							options={options}
+							bind:userSelected={radioValue}
+						/>
+					</div>
 				</div>
-				<h3 class="category_name">
-					order by:
-				</h3>
-				<div class="checkboxes">
-					<RadioButtons 
-						options={options}
-						bind:userSelected={radioValue}
-					/>
-				</div>
+				
           </form>
 		</div>
 	</div>
@@ -274,7 +306,8 @@
 <style>
 
 	.category_name {
-		margin: 1rem auto;
+		padding: 1rem 0;
+		margin: 0 auto;
 		font-size: 1.5rem;
 	}
 
@@ -288,7 +321,7 @@
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		gap: 1rem;
+		gap: 0;
 	}
 
 	.button_container {
@@ -297,9 +330,19 @@
 		gap: 0.5rem;
 	}
 
+	#filter_button_container {
+		background-color: #FBECEC;
+		padding: 0.5rem 1rem;
+	}
+
+	#sort_button_container {
+		background-color: #DCE0E5;
+		padding: 0.5rem 1rem;
+	}
+
 	.icon_container {
 		width: 2rem;
-		height: 2rem;
+		height: auto;
 		color: #3B3E29;
 		fill: #3B3E29;
 		will-change: fill;
@@ -308,11 +351,21 @@
 
 	.icon_container_hovered {
 		width: 2rem;
-		height: 2rem;
+		height: auto;
 		color: #ED6545;
 		fill: #ED6545;
 		will-change: fill;
 		transition: fill 300ms ease-out;
+	}
+
+	.filters {
+		background-color: #FBECEC;
+		padding: 1rem;
+	}
+
+	.sort {
+		background-color: #DCE0E5;
+		padding: 0 1rem 1rem 1rem;
 	}
 
 	.label {
@@ -363,7 +416,7 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 26rem;
-		padding: 1rem;
+		padding: 0;
 		cursor: pointer;
 		gap: 1rem;
 	}
@@ -372,12 +425,14 @@
 		transform: rotateY(180deg);
 		will-change: transform;
 		transition: transform 300ms ease-out;
+		margin: auto;
 	}
 
 	.arrow_container {
 		transform: rotateY(0);
 		will-change: transform;
 		transition: transform 300ms ease-out;
+		margin: auto;
 	}
 
 	.arrow {
@@ -416,7 +471,6 @@
 
 	.quilt_search_form_open {
 		position: relative;
-		padding: 1rem;
 		width: 100%;
 		will-change: transform;
 		transform: translateX(0);
@@ -426,15 +480,12 @@
 
 	.quilt_search_form_closed {
 		position: relative;
-		padding: 1rem;
 		transform: translateX(-100%);
 		width: 100%;
 		will-change: transform;
 		transition: transform 0.3s ease-out;
 		text-align: center;
 	}
-
-	
 
 	@media (max-width: 1200px) {
 
@@ -445,7 +496,6 @@
 			align-items: flex-start;
 			width: auto;
 			margin: 0 auto;
-			padding: 0 1rem;
 		}
 
 		.quilt_search_and_results {
@@ -456,10 +506,12 @@
 
 		.quilt_search_results {
 			gap: 1.5rem;
+			padding: 1rem 0 0 0;
 		}
 
 		.quilt_search_results_full {
 			gap: 1.5rem;
+			padding: 1rem 0 0 0;
 		}
 
 		.arrow_container_active {
@@ -506,7 +558,6 @@
 
 		.quilt_search_form_open {
 			position: relative;
-			padding: 1rem;
 			width: 100%;
 			height: 100%;
 			will-change: transform;
@@ -516,7 +567,6 @@
 
 		.quilt_search_form_closed {
 			position: relative;
-			padding: 1rem;
 			width: 100%;
 			height: 100%;
 			will-change: transform;
@@ -539,7 +589,6 @@
 			align-items: flex-start;
 			width: auto;
 			margin: 0 auto;
-			padding: 0 1rem;
 		}
 
 		.icon_container {
@@ -604,7 +653,6 @@
 
 		.quilt_search_form_open {
 			position: relative;
-			padding: 1rem;
 			width: 100%;
 			height: 100%;
 			will-change: transform;
@@ -614,7 +662,6 @@
 
 		.quilt_search_form_closed {
 			position: relative;
-			padding: 1rem;
 			width: 100%;
 			height: 100%;
 			will-change: transform;

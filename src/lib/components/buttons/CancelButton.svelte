@@ -30,6 +30,7 @@
         border: none;
         background-color: #B6B3B7;
         padding: 0.125rem;
+        margin: 0 auto;
         transition: padding 300ms linear;
         will-change: padding;
         cursor: pointer;
@@ -41,6 +42,7 @@
     .cancel_button_outer_hovered {
         border: none;
         padding: 0;
+        margin: 0 auto;
         background-color: #B6B3B7;
         transition: padding 300ms linear;
         will-change: padding;
