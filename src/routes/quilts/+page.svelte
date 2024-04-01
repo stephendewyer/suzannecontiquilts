@@ -510,20 +510,9 @@
 	}}
 	class="quilt_search_nav_bar"
 >
-	<div class="buttons_container">
-		<div id="filter_button_container" class="button_container">
-			<div class="{(quiltSearchNavBarIsHovered) ? "icon_container_hovered" : "icon_container"}">
-				{@html Filter}
-			</div>
-			<p class="{(quiltSearchNavBarIsHovered) ? "label_hovered" : "label"}">filter</p>
-		</div>
-		<div id="sort_button_container" class="button_container">
-			<div class="{(quiltSearchNavBarIsHovered) ? "icon_container_hovered" : "icon_container"}">
-				{@html Sort}
-			</div>
-			<p class="{(quiltSearchNavBarIsHovered) ? "label_hovered" : "label"}">sort</p>
-		</div>
-	</div>
+	<h2 class={(quiltSearchNavBarIsHovered) ? "search_heading_hovered": "search_heading"}>
+		search
+	</h2>
 	<div class="{(searchFormIsActive) ? "arrow_container_active" : "arrow_container"}">
 		<div class="{(quiltSearchNavBarIsHovered) ? "arrow_hovered" : "arrow"}">
 			{@html Arrow}
@@ -540,6 +529,12 @@
 				on:submit|preventDefault
 			>
 				<div class="filters">
+					<div id="filter_button_container" class="button_container">
+						<div class="icon_container">
+							{@html Filter}
+						</div>
+						<p class="label">filter</p>
+					</div>
 					<SearchInput 
 						bind:searchValue={searchValue}
 						bind:searchValueChanged={searchValueChanged}
@@ -573,6 +568,12 @@
 					</div>
 				</div>
 				<div class="sort">
+					<div id="sort_button_container" class="button_container">
+						<div class="icon_container">
+							{@html Sort}
+						</div>
+						<p class="label">sort</p>
+					</div>
 					<h3 class="category_name">
 						order by:
 					</h3>
@@ -616,18 +617,28 @@
 		gap: 1rem;
 	}
 
-	.buttons_container {
+	.search_heading {
 		width: 100%;
-		display: flex;
-		justify-content: center;
-		gap: 0;
+		text-align: center;
+		color: #3B3E29;
+		will-change: color;
+		transition: color 300ms ease-out;
+	}
+
+	.search_heading_hovered {
+		width: 100%;
+		text-align: center;
+		color: #ED6545;
+		will-change: color;
+		transition: color 300ms ease-out;
 	}
 
 	.button_container {
 		display: flex;
+		justify-content: center;
 		align-items: center;
-		gap: 0.5rem;
 		padding: 1rem 0 0 0;
+		gap: 0.5rem;
 	}
 
 	#filter_button_container {
@@ -646,17 +657,7 @@
 		color: #3B3E29;
 		fill: #3B3E29;
 		will-change: fill;
-		transition: fill 300ms ease-out;
-	}
-
-	.icon_container_hovered {
-		width: 2rem;
-		height: auto;
-		color: #ED6545;
-		fill: #ED6545;
-		will-change: fill;
-		transition: fill 300ms ease-out;
-	}
+		transition: fill 300ms ease-out;	}
 
 	.filters {
 		background-color: #FBECEC;
@@ -665,19 +666,12 @@
 
 	.sort {
 		background-color: #DCE0E5;
-		padding: 0 1rem 1rem 1rem;
+		padding: 1rem;
 	}
 
 	.label {
 		font-size: 1.5rem;
 		color: #3B3E29;
-		will-change: color;
-		transition: color 300ms ease-out;
-	}
-
-	.label_hovered {
-		font-size: 1.5rem;
-		color: #ED6545;
 		will-change: color;
 		transition: color 300ms ease-out;
 	}
