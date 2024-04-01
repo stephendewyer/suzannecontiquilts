@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 468.97 8.13"><defs><style>.cls-1{fill:#3b3e29;}</style></defs><rect class="cls-1" x="132.72" y="0" width="70.81" height="8.13" rx="4" ry="4"/><rect class="cls-1" y="0" width="70.81" height="8.13" rx="4" ry="4"/><rect class="cls-1" x="265.44" y="0" width="70.81" height="8.13" rx="4" ry="4"/><rect class="cls-1" x="398.16" y="0" width="70.81" height="8.13" rx="4" ry="4"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 468.97 8.13">
+    <defs>
+        <style>
+            .stitches{fill:inherit;}
+        </style>
+    </defs>
+    <rect class="stitches" x="132.72" y="0" width="70.81" height="8.13" rx="4" ry="4"/>
+    <rect class="stitches" y="0" width="70.81" height="8.13" rx="4" ry="4"/>
+    <rect class="stitches" x="265.44" y="0" width="70.81" height="8.13" rx="4" ry="4"/>
+    <rect class="stitches" x="398.16" y="0" width="70.81" height="8.13" rx="4" ry="4"/>
+</svg>

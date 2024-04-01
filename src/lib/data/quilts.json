@@ -753,6 +753,7 @@
     },
     {
         "id": 25,
+        "quilter": "Suzanne Conti",
         "name": "Mississippi",
         "slug": "mississippi",
         "size": "98\" X 86\"",
@@ -785,6 +786,7 @@
     },
     {
         "id": 26,
+        "quilter": "Suzanne Conti",
         "name": "Massachusetts",
         "slug": "massachusetts",
         "size": "98\" X 98\"",
@@ -815,6 +817,7 @@
     },
     {
         "id": 27,
+        "quilter": "Suzanne Conti",
         "name": "New Mexico",
         "slug": "new-mexico",
         "size": "86\" X 102\"",
@@ -847,6 +850,7 @@
     },
     {
         "id": 28,
+        "quilter": "Suzanne Conti",
         "name": "Delaware",
         "slug": "delaware",
         "size": "98\" X 87\"",
@@ -878,6 +882,7 @@
     },
     {
         "id": 29,
+        "quilter": "Suzanne Conti",
         "name": "Kansas",
         "slug": "kansas",
         "size": "80.75\" X 80.75\"",
@@ -905,6 +910,7 @@
     },
     {
         "id": 30,
+        "quilter": "Katherine Guzinski",
         "name": "Katherine Guzinski Quilt 01",
         "slug": "katherine-guzinski-quilt-01",
         "size": null,
@@ -928,6 +934,7 @@
     },
     {
         "id": 31,
+        "quilter": "Katherine Guzinski",
         "name": "Katherine Guzinski Quilt 02",
         "slug": "katherine-guzinski-quilt-02",
         "size": null,
@@ -958,6 +965,7 @@
     },
     {
         "id": 32,
+        "quilter": "Katherine Guzinski",
         "name": "Katherine Guzinski Quilt 03",
         "slug": "katherine-guzinski-quilt-03",
         "size": null,

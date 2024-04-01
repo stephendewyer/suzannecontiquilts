@@ -26,21 +26,21 @@
                     </ul>
                     <ul class="footer_nav_tabs_main">
                         <li 
-                            class="{$page.url.pathname === '/quilts' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                            class={$page.url.pathname === '/quilts' ? 'footer_nav_tab_active' : 'footer_nav_tab'}
                         >
                             <a href="/quilts" aria-label="link to quilts page">
                                 quilts
                             </a>
                         </li>
                         <li 
-                            class="{$page.url.pathname === '/about' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                            class={$page.url.pathname === '/about' ? 'footer_nav_tab_active' : 'footer_nav_tab'}
                         >
                             <a href="/about" aria-label="link to about page">
                                 about
                             </a>
                         </li>
                         <li 
-                            class="{$page.url.pathname === '/contact' ? 'footer_nav_tab_active' : 'footer_nav_tab'}"
+                            class={$page.url.pathname === '/contact' ? 'footer_nav_tab_active' : 'footer_nav_tab'}
                         >
                             <a href="/contact" aria-label="link to contact page">
                                 contact
@@ -50,7 +50,7 @@
                 </div>
                 <ul class="footer_nav_tabs_secondary">
                     <li 
-                        class="{$page.url.pathname === '/colophon' ? 'footer_nav_tab_active_secondary' : 'footer_nav_tab_secondary'}"
+                        class={$page.url.pathname === '/colophon' ? 'footer_nav_tab_active_secondary' : 'footer_nav_tab_secondary'}
                     >
                         <a href="/colophon" aria-label="link to colophon page">
                             colophon
@@ -110,11 +110,12 @@
 
     .footer_nav_logo > li > a {
         fill: #ffffff;
-        transition: all 0.2s;
+        transition: fill 0.2s linear;
     }
 
     .footer_nav_logo > li > a:hover {
-        fill: rgb(242,215,249);;
+        fill: rgb(242,215,249);
+        transition: fill 0.2s linear;
     }
 
     .footer_top_nav_tabs {
@@ -137,26 +138,26 @@
     .footer_nav_tab a {
         margin: auto auto auto 2rem;
         color: #ffffff;
-        transition: all 0.2s;
+        transition: color 0.2s linear;
     }
 
     .footer_nav_tab_active a {
         margin: auto auto auto 2rem;
         color: #BFC8D1;
-        transition: all 0.2s;
+        transition: color 0.2s linear;
     }
 
     .footer_nav_tab_secondary a {
         margin: auto 1rem auto auto;
         color: #ffffff;
-        transition: all 0.2s;
+        transition: color 0.2s linear;
         font-size: 1.25rem;
     }
 
     .footer_nav_tab_active_secondary a {
         margin: auto 1.5rem auto auto;
         color: #BFC8D1;
-        transition: all 0.2s;
+        transition: color 0.2s linear;
         font-size: 1.25rem;
     }
 
@@ -167,7 +168,7 @@
 
 	nav a {
 		text-decoration: none;
-		transition: all 0.2s;
+		transition: all 0.2s linear;
 	}
 
 	nav a:hover {

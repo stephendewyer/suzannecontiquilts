@@ -1,26 +1,21 @@
 <script>
-	import { onDestroy, afterUpdate } from 'svelte';
+	import { onDestroy, beforeUpdate } from 'svelte';
 	import quilts from '$lib/data/quilts.json';
 	import { createSearchStore, searchHandler } from '$lib/stores/search';
+	import QuiltResultsPanel from '$lib/components/quiltsResultsPanel/QuiltResultsPanel.svelte';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
-	import QuiltCard from '$lib/components/cards/QuiltCard.svelte';
-	import Pagination from '$lib/components/pagination/Pagination.svelte';
 	import SearchInput from '$lib/components/inputs/SearchInput.svelte';
 	import Arrow from '$lib/images/icons/arrow.svg?raw';
 	import Filter from '$lib/images/icons/filter_icon.svg?raw';
 	import Sort from '$lib/images/icons/sort_icon.svg?raw';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import RadioButtons from '$lib/components/inputs/RadioButtons.svelte';
-	import LoadingSpinner from '../../lib/components/loadingSpinners/LoadingSpinner.svelte';
+  	import Tabs from '$lib/components/tabPanel/Tabs.svelte';
+	import TabPanel from '$lib/components/tabPanel/Panel.svelte';
+	import { v4 as uuidv4 } from 'uuid';
 
-	let quilts_cont;
 	let quiltSearchNavBarIsHovered = false;
 	let searchFormIsActive = true;
-	let activePageId = 0;
-	let page = 0;
-	let pageCount = [];
-	let currentPageQuilts = [];
-	let quiltsPerPage = 8;
 
 	// techniques
 
@@ -33,7 +28,7 @@
 
 	// patterns
 
-	let pending = true;
+	let activeQuiltsTab = 0;
 
 	let flyingDutchmanChecked = false;
 
@@ -56,10 +51,6 @@
 		unsubscribe();
 	});
 
-	// set the current page quilts use reactive
-
-	$: currentPageQuilts = pageCount.length > 0 ? pageCount[page] : [];
-
 	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : searchQuilts;
 
 	$: searchValue = "";
@@ -71,51 +62,23 @@
 	let sortedAndFilteredQuilts = [];
 
 	$: if (radioValue === "alphabetical") {
-		const quiltsByAlpha = $searchStore.filtered.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+		const quiltsByAlpha = filteredQuilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 		sortedAndFilteredQuilts = [...quiltsByAlpha];
 	} else if (radioValue === "latest") {
-		const quiltsByLatest = $searchStore.filtered.sort((a, b) => {
+		const quiltsByLatest = filteredQuilts.sort((a, b) => {
 			return new Date(b.date_finished) - new Date(a.date_finished);
 		}); 
 		sortedAndFilteredQuilts = [...quiltsByLatest];
 	} else if (radioValue === "earliest") {
-		const quiltsByEarliest = $searchStore.filtered.sort((a, b) => {
+		const quiltsByEarliest = filteredQuilts.sort((a, b) => {
 			return new Date(a.date_finished) - new Date(b.date_finished);
 		});
 		sortedAndFilteredQuilts = [...quiltsByEarliest];
 	};
 
-	const paginate = (items) => {
-		const pages = Math.ceil(items.length / quiltsPerPage);
-
-		const paginatedItems = Array.from({ length: pages }, (_, index) => {
-			const start = index * quiltsPerPage;
-			return items.slice(start, start + quiltsPerPage);
-		});
-
-		pageCount = [...paginatedItems];
-	};
-
-	afterUpdate(() => {
-		paginate(filteredQuilts);
-		pending = false;
-	});
-
-	let pageChanged = false;
-
-	$: if (pageChanged) {
-		pending = true;
-		quilts_cont.scrollIntoView({
-				behavior: 'smooth'
-		});
-		pageChanged = false;
-	};
-
 	let searchValueChanged = false;
 
 	$: if (searchValueChanged) {
-		page = 0;
-		activePageId = page;
 		$searchStore.search = searchValue;	
 		searchValueChanged = false;
 	};
@@ -132,6 +95,51 @@
 		{
 			value: "earliest",
 			label: "earliest"
+		}
+	];
+
+	let quiltsBySuzanneConti = [];
+
+	let quiltsBySuzanneContiAncestors = [];
+
+	// clear quilts by Suzanne Conti and quilts by Suzanne Conti ancestors before update to avoid duplication
+
+	beforeUpdate(() => {
+		quiltsBySuzanneConti = [];
+		quiltsBySuzanneContiAncestors = [];
+	});
+
+	$: sortedAndFilteredQuilts.forEach((quilt) => {
+		if (quilt.quilter === "Suzanne Conti") {
+			quiltsBySuzanneConti = [...quiltsBySuzanneConti, quilt];
+		} else {
+			quiltsBySuzanneContiAncestors = [...quiltsBySuzanneContiAncestors, quilt];
+		};
+	});
+
+	let quiltsTabPanels = [];
+
+	$: quiltsTabPanels = [
+		{
+			id: uuidv4(),
+			index: 0,
+			label: "all quilts",
+			panel: QuiltResultsPanel,
+			data: sortedAndFilteredQuilts
+		},
+		{
+			id: uuidv4(),
+			index: 1,
+			label: "quilts by Suzanne",
+			panel: QuiltResultsPanel,
+			data: quiltsBySuzanneConti
+		},
+		{
+			id: uuidv4(),
+			index: 2,
+			label: "quilts by ancestors of Suzanne",
+			panel: QuiltResultsPanel,
+			data: quiltsBySuzanneContiAncestors
 		}
 	];
 
@@ -242,29 +250,15 @@
 		</div>
 	</div>
 	<div class="{(searchFormIsActive) ? "quilt_search_results" : "quilt_search_results_full"}">
-		<div 
-			class="quilts_container" 	
-			bind:this={quilts_cont}	
-		>
-			{#if (pending)}
-				<div class="loading_spinner_container">
-					<LoadingSpinner/>
-				</div>
-			{:else}
-				{#each currentPageQuilts as quilt, i}
-					<a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}" class="quilt_card_container">
-						<QuiltCard quiltData={quilt} />
-					</a>
-					{:else}
-						<p>No quilts fit search criteria.</p>
-				{/each}
-			{/if}
+		<div class="quilts_tabs_container">
+			<Tabs
+				tabPanels={quiltsTabPanels}
+				bind:activeTab={activeQuiltsTab}
+			/>
 		</div>
-		<Pagination 
-			bind:page={page}
-			bind:pageChanged={pageChanged}
-			pageCount={pageCount} 
-			bind:activePageId={activePageId}
+		<TabPanel
+			tabPanels={quiltsTabPanels}
+			bind:activeTab={activeQuiltsTab}
 		/>
 	</div>
 </div>
@@ -327,10 +321,6 @@
 		transition: color 300ms ease-out;
 	}
 
-	.quilt_card_container {
-		width: auto;
-	}
-
 	.quilt_search_and_results {
 		display: flex;
 		flex-direction: row;
@@ -339,13 +329,22 @@
 
 	.quilt_search_results {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 2rem;
 		width: 100%;
-		margin: auto;
+		margin: 0;
 	}
 
 	.quilt_search_results_full {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 2rem;
 		width: 100%;
+		margin: 0;
 	}
 
 	/* begin quilt search  */
@@ -427,25 +426,7 @@
 		text-align: center;
 	}
 
-	/* end quilt search */
-
-	.quilts_container {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		gap: 1rem;
-		max-width: 2000px;
-		width: 100%;
-		padding: 1rem;
-		width: 0 auto;
-	}
-
-	.loading_spinner_container {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
+	
 
 	@media (max-width: 1200px) {
 
@@ -463,6 +444,14 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
+		}
+
+		.quilt_search_results {
+			gap: 1.5rem;
+		}
+
+		.quilt_search_results_full {
+			gap: 1.5rem;
 		}
 
 		.arrow_container_active {
@@ -527,19 +516,9 @@
 			transition: transform 0.3s ease-out;
 		}
 
-		/* end mobile quilt search */
-
-		.quilts_container {
-			justify-content: center;
-		}
-
 	}
 
 	@media (max-width: 750px) {
-
-		.quilt_card_container {
-			width: 100%;
-		}
 
 		.category_name {
 			font-size: 1.25rem;
@@ -636,6 +615,14 @@
 		}
 
 		/* end mobile quilt search */
+
+		.quilt_search_results {
+			gap: 1rem;
+		}
+
+		.quilt_search_results_full {
+			gap: 1rem;
+		}
 
 	}
 

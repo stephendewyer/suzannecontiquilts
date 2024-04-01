@@ -12,7 +12,7 @@
             role="tabpanel"
             tabindex={-i}
             aria-labelledby={`tabpanel_header_${tabPanel.label}`}
-            panel_date={tabPanel.data}
+            panel_data={tabPanel.data}
         />
     {/if} 
 {/each}
