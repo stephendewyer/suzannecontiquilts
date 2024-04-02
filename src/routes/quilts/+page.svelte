@@ -102,6 +102,8 @@
 		patternsByAlpha.forEach((pattern, index) => {
 			patternsByAlpha[index].value = false;
 		});
+		// finally, update clear filter clicked variable to false
+		clearFiltersClicked = false;
 	};
 
 	const sortByAlpha = (items) => {
