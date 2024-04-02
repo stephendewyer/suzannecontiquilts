@@ -31,6 +31,7 @@
 
     .primary_button_outer {
         background-color: #15060B;
+        color: #FDFCE8;
         padding: 0;
         border: 0.125rem solid #15060B;
         transition: background-color 300ms linear, border 300ms linear;
@@ -39,8 +40,13 @@
         border-radius: 3rem;
     }
 
+    .primary_button_outer:active {
+        background-color: #D1E9D1;
+    }
+
     .primary_button_outer_hovered {
         background-color: #FDFCE8;
+        color: #15060B;
         padding: 0;
         border: 0.125rem solid #FDFCE8;
         transition: background-color 300ms linear, border 300ms linear;
@@ -49,9 +55,13 @@
         border-radius: 3rem;
     }
 
+    .primary_button_outer_hovered:active {
+        background-color: #D1E9D1;
+    }
+
     .primary_button_inner {
         border: 0.125rem solid #FDFCE8;
-        color: #FDFCE8;
+        color: inherit;
         background-color: transparent;
         font-size: 1.5rem;
         padding: 0.5rem 1.5rem 0.5rem 1.5rem;
@@ -65,7 +75,7 @@
 
     .primary_button_inner_hovered {
         border: 0.125rem solid #15060B;
-        color: #15060B;
+        color: inherit;
         background-color: transparent;
         font-size: 1.5rem;
         padding: 0.5rem 1.5rem 0.5rem 1.5rem;

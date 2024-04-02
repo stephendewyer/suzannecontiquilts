@@ -1,6 +1,6 @@
 <script>
     import stitches from '$lib/images/icons/stitches.svg';
-
+    import arrow from "$lib/images/icons/arrow.svg?raw"
     let buttonHovered = false;
 
 </script>
@@ -23,11 +23,7 @@
     <div class="button_top">
         next quilt
         <div class="{ (buttonHovered) ? 'arrow_icon_container_hovered' : 'arrow_icon_container'}">
-            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.18 568.32">
-            <defs>
-                <style>.cls-1{fill:#15060B;}</style>
-            </defs>
-            <path class="cls-1" d="M301.3,300.76L40.62,561.44c-9.17,9.17-24.03,9.17-33.2,0l-.54-.54c-9.17-9.17-9.17-24.03,0-33.2l243.54-243.54L6.88,40.62C-2.29,31.45-2.29,16.59,6.88,7.42l.54-.54C16.59-2.29,31.45-2.29,40.62,6.88L301.3,267.56c9.17,9.17,9.17,24.03,0,33.2Z"/></svg>
+            {@html arrow}
         </div>
     </div>
     <img class="stitches" src={stitches} alt="stitches" />
