@@ -36,6 +36,7 @@
     .cancel_button_outer {
         border: none;
         background-color: #B6B3B7;
+        color: #15060B;
         padding: 0.125rem;
         margin: 0 auto;
         transition: padding 300ms linear;
@@ -46,10 +47,16 @@
         border-radius: 3rem;
     }
 
+    .cancel_button_outer:active {
+        color: #B6B3B7;
+        background-color: #15060B;
+    }
+
     .cancel_button_outer_hovered {
         border: none;
         padding: 0;
         margin: 0 auto;
+        color: #15060B;
         background-color: #B6B3B7;
         transition: padding 300ms linear;
         will-change: padding;
@@ -57,6 +64,11 @@
         display: flex;
         flex-direction: row;
         border-radius: 3rem;
+    }
+
+    .cancel_button_outer_hovered:active {
+        color: #B6B3B7;
+        background-color: #15060B;
     }
 
     .cancel_button_inner {
@@ -67,7 +79,7 @@
         will-change: padding;
         padding: 0.75rem 1.5rem 0.75rem 1.5rem;
         font-size: 1.5rem;
-        color: #15060B;
+        color: inherit;
     }
 
     .cancel_button_inner_hovered {
@@ -78,7 +90,7 @@
         will-change: padding;
         padding: 0.875rem 1.625rem 0.875rem 1.625rem;
         font-size: 1.5rem;
-        color: #15060B;
+        color: inherit;
 
     }
 

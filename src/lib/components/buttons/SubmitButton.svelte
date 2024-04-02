@@ -29,6 +29,7 @@
     .submit_button_outer {
         border: none;
         background-color: #D1E9D1;
+        color: #15060B;
         padding: 0.125rem;
         transition: padding 300ms linear;
         will-change: padding;
@@ -38,16 +39,27 @@
         border-radius: 3rem;
     }
 
+    .submit_button_outer:active {
+        background-color: #15060B;
+        color: #D1E9D1;
+    }
+
     .submit_button_outer_hovered {
         border: none;
         padding: 0;
         background-color: #D1E9D1;
+        color: #15060B;
         transition: padding 300ms linear;
         will-change: padding;
         cursor: pointer;
         display: flex;
         flex-direction: row;
         border-radius: 3rem;
+    }
+
+    .submit_button_outer_hovered:active {
+        background-color: #15060B;
+        color: #D1E9D1;
     }
 
     .submit_button_inner {
@@ -58,7 +70,7 @@
         will-change: padding;
         padding: 0.75rem 1.5rem 0.75rem 1.5rem;
         font-size: 1.5rem;
-        color: #15060B;
+        color: inherit;
     }
 
     .submit_button_inner_hovered {
@@ -69,7 +81,7 @@
         will-change: padding;
         padding: 0.875rem 1.625rem 0.875rem 1.625rem;
         font-size: 1.5rem;
-        color: #15060B;
+        color: inherit;
 
     }
 
