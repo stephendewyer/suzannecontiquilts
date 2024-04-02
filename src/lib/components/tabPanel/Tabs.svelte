@@ -2,9 +2,11 @@
     import SewingNeedle from "$lib/images/icons/sewing_needle_icon.svg?raw";
     export let tabPanels = [];
     export let activeTab = 0;
+    export let activePageID = 0;
 
     const tabSelected = (tabIndex) => {
         activeTab = tabIndex;
+        activePageID = 0;
     };
 
 </script>

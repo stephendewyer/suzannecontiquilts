@@ -1,0 +1,30 @@
+[
+    {
+        "label": "applique",
+        "value": false
+    },
+    {
+        "label": "block piecing",
+        "value": false
+    },
+    {
+        "label": "hand pieced",
+        "value": false
+    },
+    {
+        "label": "hand quilted",
+        "value": false
+    },
+    {
+        "label": "machine pieced",
+        "value": false
+    },
+    {
+        "label": "block piecing",
+        "value": false
+    },
+    {
+        "label": "paper piecing",
+        "value": false
+    }
+]

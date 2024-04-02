@@ -1,8 +1,15 @@
 <script>
+    export let clicked = false;
     let buttonHovered = false;
 </script>
 
 <div
+    on:click={() => {
+        clicked = true;
+    }}
+    on:keyup={() => {
+        clicked = true;
+    }}
     on:mouseover={() => {
         buttonHovered = true;
     }} 

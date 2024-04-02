@@ -13,6 +13,9 @@
   	import Tabs from '$lib/components/tabPanel/Tabs.svelte';
 	import TabPanel from '$lib/components/tabPanel/Panel.svelte';
 	import ClearFiltersButton from "$lib/components/buttons/CancelButton.svelte";
+	import patterns from "$lib/data/patterns.json";
+	import techniques from "$lib/data/techniques.json";
+	import options from "$lib/data/options.json";
 
 	import { v4 as uuidv4 } from 'uuid';
 
@@ -82,7 +85,7 @@
 
 	$: activePageID;
 
-	$: console.log("active page ID: ", activePageID);
+	// $: console.log("active page ID: ", activePageID);
 
 	$: if (searchValueChanged) {
 		$searchStore.search = searchValue;
@@ -90,36 +93,14 @@
 		searchValueChanged = false;
 	};
 
-	const techniques = [
-		{
-			label: "applique",
-			value: appliqueChecked
-		},
-		{
-			label: "block piecing",
-			value: blockPiecingChecked
-		},
-		{
-			label: "hand pieced",
-			value: handPiecedChecked
-		},
-		{
-			label: "hand quilted",
-			value: handQuiltedChecked
-		},
-		{
-			label: "machine pieced",
-			value: machinePiecedChecked
-		},
-		{
-			label: "block piecing",
-			value: blockPiecingChecked
-		},
-		{
-			label: "paper piecing",
-			value: paperPiecedChecked
-		}
-	];
+	let clearFiltersClicked = false;
+
+	$: if (clearFiltersClicked) {
+		console.log("clear filters checked")
+		flyingDutchmanChecked = false;
+	};
+
+	// $: console.log(flyingDutchmanChecked)
 
 	const techniquesByAlpha = techniques.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
 
@@ -181,261 +162,21 @@
 	let oddFellowChainChecked = false;
 	let farmhouseFavoriteChecked = false;
 
-	const patterns = [
-		{
-			label: "flying dutchman",
-			value: flyingDutchmanChecked
-		},
-		{
-			label: "gypsy wife",
-			value: gypsyWifeChecked
-		},
-		{
-			label: "garden",
-			value: gardenChecked
-		},
-		{
-			label: "garden maze",
-			value: gardenMazeChecked
-		},
-		{
-			label: "all over",
-			value: allOverChecked
-		},
-		{
-			label: "pinwheel",
-			value: pinwheelChecked
-		},
-		{
-			label: "old maids puzzle",
-			value: oldMaidsPuzzleChecked
-		},
-		{
-			label: "hour glass",
-			value: hourGlassChecked
-		},
-		{
-			label: "old maids puzzle",
-			value: oldMaidsPuzzleChecked
-		},
-		{
-			label: "hour glass",
-			value: hourGlassChecked
-		},
-		{
-			label: "square in a square",
-			value: squareInASquareChecked
-		},
-		{
-			label: "half-square triangles",
-			value: halfsquareTrianglesChecked
-		},
-		{
-			label: "hope of Hartford",
-			value: hopeOfHartfordChecked
-		},
-		{
-			label: "castle wall",
-			value: castleWallChecked
-		},
-		{
-			label: "patience corner",
-			value: patienceCornerChecked
-		},
-		{
-			label: "to the nines",
-			value: toTheNinesChecked
-		},
-		{
-			label: "endless stairs",
-			value: endlessStairsChecked
-		},
-		{
-			label: "star of Virginia",
-			value: starOfVirginiaChecked
-		},
-		{
-			label: "rising star",
-			value: risingStarChecked
-		},
-		{
-			label: "illusion",
-			value: illusionChecked
-		},
-		{
-			label: "center illusion",
-			value: centerIllusionChecked
-		},
-		{
-			label: "border piano keys",
-			value: borderPianoKeysChecked
-		},
-		{
-			label: "not blocks border",
-			value: notBlocksBorderChecked
-		},
-		{
-			label: "kaleidoscope kites",
-			value: kaleidoscopeKitesChecked
-		},
-		{
-			label: "honeybee",
-			value: honeybeeChecked
-		},
-		{
-			label: "animal",
-			value: animalChecked
-		},
-		{
-			label: "letter",
-			value: letterChecked
-		},
-		{
-			label: "corn cob",
-			value: cornCobChecked
-		},
-		{
-			label: "New York beauty",
-			value: NewYorkBeautyChecked
-		},
-		{
-			label: "half-circles",
-			value: halfcirclesChecked
-		},
-		{
-			label: "double aster",
-			value: doubleAsterChecked
-		},
-		{
-			label: "nautical flag",
-			value: nauticalFlagChecked
-		},
-		{
-			label: "snails trail",
-			value: snailsTrailChecked
-		},
-		{
-			label: "crowned cross",
-			value: crownedCrossChecked
-		},
-		{
-			label: "Dolly Madison star",
-			value: dollyMadisonStarChecked
-		},
-		{
-			label: "Coxey's camp",
-			value: coxeysCampChecked
-		},
-		{
-			label: "Old Tippecanoe and Tyler too",
-			value: oldTippecanoeAndTylerTooChecked
-		},
-		{
-			label: "crown of thorns",
-			value: crownOfThornsChecked
-		},
-		{
-			label: "Lincoln's log cabin",
-			value: lincolnsLogCabinChecked
-		},
-		{
-			label: "Mrs. Cleveland's choice",
-			value: mrsClevelandsChoiceChecked
-		},
-		{
-			label: "swing in the center",
-			value: swingInTheCenterChecked
-		},
-		{
-			label: "courthouse steps",
-			value: courthouseStepsChecked
-		},
-		{
-			label: "patriotic flags",
-			value: patrioticFlagsChecked
-		},
-		{
-			label: "Sherman's march",
-			value: shermansMarchChecked
-		},
-		{
-			label: "Lincoln's platform",
-			value: lincolnsPlatformChecked
-		},
-		{
-			label: "brown goose",
-			value: brownGooseChecked
-		},
-		{
-			label: "whole cloth medallion center",
-			value: wholeClothMedallionCenterChecked
-		},
-		{
-			label: "quatrefoil",
-			value: quatrefoilChecked
-		},
-		{
-			label: "center panel medallion",
-			value: centerPanelMedallionChecked
-		},
-		{
-			label: "love in mist",
-			value: loveInMistChecked
-		},
-		{
-			label: "Kansas",
-			value: kansasChecked
-		},
-		{
-			label: "Sussanah",
-			value: sussanahChecked
-		},
-		{
-			label: "Louisiana",
-			value: louisianaChecked
-		},
-		{
-			label: "attraction",
-			value: attractionChecked
-		},
-		{
-			label: "call crossing",
-			value: callCrossingChecked
-		},
-		{
-			label: "cascading quarter log cabin",
-			value: cascadingQuarterLogCabinChecked
-		},
-		{
-			label: "tumbling",
-			value: tumblingChecked
-		},
-		{
-			label: "odd fellow chain",
-			value: oddFellowChainChecked
-		},
-		{
-			label: "farmhouse favorite",
-			value: farmhouseFavoriteChecked
-		}
-	];
+	const sortPatternsByAlpha = (patterns) => {
+		const sortedPatterns = patterns.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
+		const sortedPatternsWithIDs = sortedPatterns.map((pattern, i) => ({
+			...pattern, id: i
+		}));
+		return sortedPatternsWithIDs;
+	};
 
-	const patternsByAlpha = patterns.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
+	let patternsByAlpha = [];
 
-	const options = [
-		{
-			value: "alphabetical",
-			label: "alphabetical"
-		},
-		{
-			value: "latest",
-			label: "latest"
-		},
-		{
-			value: "earliest",
-			label: "earliest"
-		}
-	];
+	$: patternsByAlpha = sortPatternsByAlpha(patterns);
+
+	let selectedPatterns = patternsByAlpha.map(() => false);
+
+	$: console.log("selected patterns: ", selectedPatterns)
 
 	let quiltsBySuzanneConti = [];
 
@@ -481,6 +222,8 @@
 			data: quiltsBySuzanneContiAncestors
 		}
 	];
+
+	// $: console.log(patternsByAlpha);
 
 </script>
 
@@ -555,14 +298,14 @@
 						patterns:
 					</h3>
 					<div class="checkboxes">
-						{#each patternsByAlpha as pattern, i}
-							<Checkbox bind:checked={pattern.value}>
+						{#each patternsByAlpha as pattern, index}
+							<Checkbox bind:checked={selectedPatterns[index]}>
 								{pattern.label}
 							</Checkbox>
 						{/each}
 					</div>
 					<div class="button_container">
-						<ClearFiltersButton>
+						<ClearFiltersButton bind:clicked={clearFiltersClicked}>
 							clear filters
 						</ClearFiltersButton>
 					</div>
@@ -593,6 +336,7 @@
 			<Tabs
 				tabPanels={quiltsTabPanels}
 				bind:activeTab={activeQuiltsTab}
+				bind:activePageID={activePageID}
 			/>
 		</div>
 		<TabPanel

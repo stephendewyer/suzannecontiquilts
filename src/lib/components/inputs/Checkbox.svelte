@@ -1,6 +1,7 @@
 <script>
   import { v4 as uuidv4 } from 'uuid';
 
+  export let value;
   export let checked = false;
 
   const unique_id = uuidv4();
@@ -32,8 +33,9 @@
 >
     <input 
       id={unique_id} 
-      type="checkbox" 
+      type="checkbox"
       class="promoted-input-checkbox"
+      value={value}
       bind:checked={checked}
     />
     <svg><use xlink:href="#checkmark-28" /></svg>
