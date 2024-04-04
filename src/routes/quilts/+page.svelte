@@ -269,37 +269,44 @@
 						</div>
 						<p class="label">filter</p>
 					</div>
-					<SearchInput 
-						bind:searchValue={searchValue}
-						bind:searchValueChanged={searchValueChanged}
-					>
-						search quilts by name
-					</SearchInput>
-					<h3 class="category_name">
-						techniques:
-					</h3>
-					<div class="checkboxes">
-						{#each techniquesByAlpha as technique, i}
-							<Checkbox 
-								bind:checked={technique.value}
-								bind:value={technique.label}
-							>
-								{technique.label}
-							</Checkbox>
-						{/each}
+					<div class="inputs_container">
+						<SearchInput 
+							bind:searchValue={searchValue}
+							bind:searchValueChanged={searchValueChanged}
+						>
+							search quilts by name
+						</SearchInput>
 					</div>
-					<h3 class="category_name">
-						patterns:
-					</h3>
-					<div class="checkboxes">
-						{#each patternsByAlpha as pattern, index}
-							<Checkbox 
-								bind:value={pattern.label}
-								bind:checked={pattern.value}
-							>
-								{pattern.label}
-							</Checkbox>
-						{/each}
+					
+					<div class="techniques_and_patterns_container">
+						<div class="inputs_container">
+							<h3 class="category_name">
+								techniques:
+							</h3>
+							<div class="checkboxes">
+								{#each techniquesByAlpha as technique, i}
+									<Checkbox 
+										bind:checked={technique.value}
+										bind:value={technique.label}
+									>
+										{technique.label}
+									</Checkbox>
+								{/each}
+							</div>
+							<h3 class="category_name">
+								patterns:
+							</h3>
+							<div class="checkboxes">
+								{#each patternsByAlpha as pattern, index}
+									<Checkbox 
+										bind:value={pattern.label}
+										bind:checked={pattern.value}
+									>
+										{pattern.label}
+									</Checkbox>
+								{/each}
+							</div>
+						</div>
 					</div>
 					<div class="button_container">
 						<ClearFiltersButton bind:clicked={clearFiltersClicked}>
@@ -366,12 +373,22 @@
 		transition: color 300ms ease-out;
 	}
 
+	.inputs_container {
+		padding: 0 1rem;
+	}
+
 	.search_heading_hovered {
 		width: 100%;
 		text-align: center;
 		color: #ED6545;
 		will-change: color;
 		transition: color 300ms ease-out;
+	}
+
+	.techniques_and_patterns_container {
+		width: 100%;
+		height: 20rem;
+		overflow-y: scroll;
 	}
 
 	.button_container {
@@ -402,7 +419,7 @@
 
 	.filters {
 		background-color: #FBECEC;
-		padding: 1rem;
+		padding: 1rem 0;
 	}
 
 	.sort {
