@@ -95,7 +95,6 @@
 		gap: 1rem;
 		width: 100%;
 		padding: 1rem;
-		width: 0 auto;
 	}
 
 	.loading_spinner_container {
