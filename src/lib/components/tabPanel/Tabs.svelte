@@ -56,6 +56,10 @@
         transition: color 300ms ease-out;
     }
 
+    .tab:active {
+        color: #858B6A;
+    }
+
     .tab:hover {
         color: #ED6545;
         transition: color 300ms ease-out;
@@ -75,6 +79,10 @@
         transition: color 300ms ease-out;
     }
 
+    .active_tab:active {
+        color: #858B6A;
+    }
+
     .active_tab:hover {
         color: #ED6545;
         transition: color 300ms ease-out;
@@ -83,6 +91,10 @@
     .active_tab > .sewing_needle_container {
         fill: #3B3E29;
         transition: fill 300ms ease-out;
+    }
+
+    .active_tab:active > .sewing_needle_container {
+        fill: #858B6A;
     }
 
     .active_tab:hover > .sewing_needle_container {

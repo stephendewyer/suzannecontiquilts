@@ -22,5 +22,9 @@
     {
         "label": "paper piecing",
         "value": false
+    },
+    {
+        "label": "hand cross stitched",
+        "value": false
     }
 ]

@@ -31,8 +31,28 @@
 
 	$: searchQuilts = quilts.map((quilt) => ({
 		...quilt,
-		search_terms: `${quilt.name}`
+		searchTerms: {
+			name: `${quilt.name}`,
+			patterns: quilt.patterns,
+			techniques: quilt.techniques
+		}
 	}));
+
+	const sortByAlpha = (items) => {
+		const sortedItems = items.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
+		const sortedItemsWithIDs = sortedItems.map((item, index) => ({
+			...item, id: index
+		}));
+		return sortedItemsWithIDs;
+	};
+
+	let techniquesByAlpha = [];
+
+	$: techniquesByAlpha = sortByAlpha(techniques);
+
+	let patternsByAlpha = [];
+
+	$: patternsByAlpha = sortByAlpha(patterns);
 
 	// begin filters
 
@@ -49,6 +69,37 @@
 	$: filteredQuilts = ($searchStore.filtered) ? $searchStore.filtered : searchQuilts;
 
 	let searchValue = "";
+	let quiltPatternsSearchValues = [];
+	let quiltTechniquesSearchValues = [];
+
+	// load all the selected patterns in an array
+
+	$: patternsByAlpha.forEach((item, index) => {
+		if (item.value === true && !quiltPatternsSearchValues.includes(item.label)) {
+			quiltPatternsSearchValues = [...quiltPatternsSearchValues, item.label];
+		} else if (item.value === false && quiltPatternsSearchValues.includes(item.label)) {
+			if (index === 0 && quiltPatternsSearchValues.length === 1) {
+				quiltPatternsSearchValues = [];
+			} else {
+				quiltPatternsSearchValues = [...quiltPatternsSearchValues.splice(index, 1)];
+			};
+			
+		};
+	});
+
+	$: techniquesByAlpha.forEach((item, index) => {
+		if (item.value === true && !quiltTechniquesSearchValues.includes(item.label)) {
+			quiltTechniquesSearchValues = [...quiltTechniquesSearchValues, item.label];
+		} else if (item.value === false && quiltTechniquesSearchValues.includes(item.label)) {
+			if (index === 0 && quiltTechniquesSearchValues.length === 1) {
+				quiltTechniquesSearchValues = [];
+			} else {
+				quiltTechniquesSearchValues = [...quiltTechniquesSearchValues.splice(index, 1)];
+			};			
+		};
+	});
+
+	// load all the selected techniques in an array
 
 	// sort the filtered quilts SORT AFTER FILTER!!
 
@@ -81,10 +132,14 @@
 	// update the pagination activePageID to first page (0)
 	// finally, update searchValueChanged to false
 	$: if (searchValueChanged) {
-		$searchStore.search = searchValue;
+		$searchStore.search.name = searchValue;
 		activePageID = 0;
 		searchValueChanged = false;
 	};
+
+	$: $searchStore.search.patterns = [...quiltPatternsSearchValues];
+
+	$: $searchStore.search.techniques = [...quiltTechniquesSearchValues];
 
 	let clearFiltersClicked = false;
 
@@ -94,10 +149,18 @@
 			searchValue = "";
 			searchValueChanged = true;
 		};
+
+		// clear the quilt patterns search input values
+		quiltPatternsSearchValues = [];
+
+		// clear the quilt techniques search input values
+		quiltTechniquesSearchValues = [];
+		
 		// clear the techniques filters
 		techniquesByAlpha.forEach((technique, index) => {
 			techniquesByAlpha[index].value = false;
 		});
+
 		// clear the patterns filters
 		patternsByAlpha.forEach((pattern, index) => {
 			patternsByAlpha[index].value = false;
@@ -105,87 +168,6 @@
 		// finally, update clear filter clicked variable to false
 		clearFiltersClicked = false;
 	};
-
-	const sortByAlpha = (items) => {
-		const sortedItems = items.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
-		const sortedItemsWithIDs = sortedItems.map((item, index) => ({
-			...item, id: index
-		}));
-		return sortedItemsWithIDs;
-	};
-
-	let techniquesByAlpha = [];
-
-	$: techniquesByAlpha = sortByAlpha(techniques);
-
-	$: appliqueChecked = techniquesByAlpha[0].value;
-	$: blockPiecingChecked = techniquesByAlpha[1].value;
-	$: handPiecedChecked = techniquesByAlpha[2].value;
-	$: handQuiltedChecked = techniquesByAlpha[3].value;
-	$: machinePiecedChecked = techniquesByAlpha[4].value;
-	$: paperPiecedChecked = techniquesByAlpha[5].value;
-
-	let patternsByAlpha = [];
-
-	$: patternsByAlpha = sortByAlpha(patterns);
-
-	$: flyingDutchmanChecked = patternsByAlpha[19].value;
-	$: gypsyWifeChecked = patternsByAlpha[22].value;
-	$: gardenChecked = patternsByAlpha[19].value;
-	$: gardenMazeChecked = patternsByAlpha[21].value;
-	$: allOverChecked = patternsByAlpha[0].value;
-	$: pinwheelChecked = patternsByAlpha[47].value;
-	$: oldMaidsPuzzleChecked = patternsByAlpha[42].value;
-	$: hourGlassChecked = patternsByAlpha[27].value;
-	$: squareInASquareChecked = patternsByAlpha[50].value;
-	$: halfsquareTrianglesChecked = patternsByAlpha[24].value;
-	$: hopeOfHartfordChecked = patternsByAlpha[26].value;
-	$: castleWallChecked = patternsByAlpha[7].value;
-	$: patienceCornerChecked = patternsByAlpha[43].value;
-	$: toTheNinesChecked = patternsByAlpha[54].value;
-	$: endlessStairsChecked = patternsByAlpha[17].value;
-	$: starOfVirginiaChecked = patternsByAlpha[51].value;
-	$: risingStarChecked = patternsByAlpha[47].value;
-	$: illusionChecked = patternsByAlpha[28].value;
-	$: centerIllusionChecked = patternsByAlpha[8].value;
-	$: borderPianoKeysChecked = patternsByAlpha[3].value;
-	$: notBlocksBorderChecked = patternsByAlpha[39].value;
-	$: kaleidoscopeKitesChecked = patternsByAlpha[29].value;
-	$: honeybeeChecked = patternsByAlpha[25].value;
-	$: animalChecked = patternsByAlpha[1].value;
-	$: letterChecked = patternsByAlpha[31].value;
-	$: cornCobChecked = patternsByAlpha[10].value;
-	$: NewYorkBeautyChecked = patternsByAlpha[38].value;
-	$: halfcirclesChecked = patternsByAlpha[23].value;
-	$: doubleAsterChecked = patternsByAlpha[16].value;
-	$: nauticalFlagChecked = patternsByAlpha[37].value;
-	$: snailsTrailChecked = patternsByAlpha[49].value;
-	$: crownedCrossChecked = patternsByAlpha[14].value;
-	$: dollyMadisonStarChecked = patternsByAlpha[15].value;
-	$: coxeysCampChecked = patternsByAlpha[12].value;
-	$: oldTippecanoeAndTylerTooChecked = patternsByAlpha[42].value;
-	$: crownOfThornsChecked = patternsByAlpha[13].value;
-	$: lincolnsLogCabinChecked = patternsByAlpha[32].value;
-	$: mrsClevelandsChoiceChecked = patternsByAlpha[36].value;
-	$: swingInTheCenterChecked = patternsByAlpha[53].value;
-	$: courthouseStepsChecked = patternsByAlpha[11].value;
-	$: patrioticFlagsChecked = patternsByAlpha[44].value;
-	$: shermansMarchChecked = patternsByAlpha[48].value;
-	$: lincolnsPlatformChecked = patternsByAlpha[33].value;
-	$: brownGooseChecked = patternsByAlpha[4].value;
-	$: wholeClothMedallionCenterChecked = patternsByAlpha[56].value;
-	$: quatrefoilChecked = patternsByAlpha[46].value;
-	$: centerPanelMedallionChecked = patternsByAlpha[9].value;
-	$: loveInMistChecked = patternsByAlpha[35].value;
-	$: kansasChecked = patternsByAlpha[30].value;
-	$: sussanahChecked = patternsByAlpha[52].value;
-	$: louisianaChecked = patternsByAlpha[34].value;
-	$: attractionChecked = patternsByAlpha[2].value;
-	$: callCrossingChecked = patternsByAlpha[5].value;
-	$: cascadingQuarterLogCabinChecked = patternsByAlpha[6].value;
-	$: tumblingChecked = patternsByAlpha[55].value;
-	$: oddFellowChainChecked = patternsByAlpha[40].value;
-	$: farmhouseFavoriteChecked = patternsByAlpha[18].value;
 
 	let quiltsBySuzanneConti = [];
 
@@ -197,6 +179,8 @@
 		quiltsBySuzanneConti = [];
 		quiltsBySuzanneContiAncestors = [];
 	});
+
+	// create new arrays for quilts by Suzanne Conti and quilts by ancestors of Suzanne Conti
 
 	$: sortedAndFilteredQuilts.forEach((quilt) => {
 		if (quilt.quilter === "Suzanne Conti") {
@@ -296,7 +280,10 @@
 					</h3>
 					<div class="checkboxes">
 						{#each techniquesByAlpha as technique, i}
-							<Checkbox bind:checked={technique.value}>
+							<Checkbox 
+								bind:checked={technique.value}
+								bind:value={technique.label}
+							>
 								{technique.label}
 							</Checkbox>
 						{/each}
@@ -307,7 +294,7 @@
 					<div class="checkboxes">
 						{#each patternsByAlpha as pattern, index}
 							<Checkbox 
-								value={pattern.label}
+								bind:value={pattern.label}
 								bind:checked={pattern.value}
 							>
 								{pattern.label}

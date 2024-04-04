@@ -57,33 +57,6 @@
         nextQuiltID = 1;
     };
 
-    // construct the techniques list
-
-    let techniques = [];
-
-    afterUpdate(() => {
-
-        techniques = [];
-
-        if (currentQuilt.length > 0) {
-            if (currentQuilt[0].machine_pieced === true) {
-                techniques = [...techniques, "machine pieced"];
-            };
-            if (currentQuilt[0].hand_quilted === true) {
-                techniques = [...techniques, "hand quilted"];
-            };
-            if (currentQuilt[0].hand_pieced === true) {
-                techniques = [...techniques, "hand pieced"];
-            };
-            if (currentQuilt[0].applique === true) {
-                techniques = [...techniques, "applique"];
-            };
-            if (currentQuilt[0].paper_pieced === true) {
-                techniques = [...techniques, "paper pieced"];
-            };
-        };
-    });
-
     // begin Splide
     
     let main = Splide;
@@ -211,7 +184,7 @@
                                 Techniques:
                             </h3>
                             <p class="quilt_info_paragraphs">
-                                {techniques.join(", ")}
+                                {quilt.techniques.join(", ")}
                             </p>
                         </li>
                         <li class="quilt_info_list_item list_item_background">
@@ -236,11 +209,11 @@
                         </li>
                         <li class="quilt_info_list_item list_item_background">
                             <h3 class="quilt_info_heading">
-                                Pattern:
+                                Patterns:
                             </h3>
-                            {#if (quilt.pattern)}
+                            {#if (quilt.patterns)}
                                 <p class="quilt_info_paragraphs">
-                                    {quilt.pattern}
+                                    {quilt.patterns.join(", ")}
                                 </p>
                             {/if}
                         </li>

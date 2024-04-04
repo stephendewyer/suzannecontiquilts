@@ -14,7 +14,7 @@
 	let page = 0;
 	let pageCount = [];
 	let currentPageQuilts = [];
-	let quiltsPerPage = 8;
+	let quiltsPerPage = 9;
 
     let pending = true;
 
@@ -93,7 +93,6 @@
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		gap: 1rem;
-		max-width: 2000px;
 		width: 100%;
 		padding: 1rem;
 		width: 0 auto;
