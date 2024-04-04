@@ -1,5 +1,5 @@
 <script>
-	import { onDestroy, beforeUpdate } from 'svelte';
+	import { onDestroy, beforeUpdate, afterUpdate } from 'svelte';
 	import quilts from '$lib/data/quilts.json';
 	import { createSearchStore, searchHandler } from '$lib/stores/search';
 	import QuiltResultsPanel from '$lib/components/quiltsResultsPanel/QuiltResultsPanel.svelte';
@@ -135,6 +135,15 @@
 		$searchStore.search.name = searchValue;
 		activePageID = 0;
 		searchValueChanged = false;
+	};
+
+	// if the user changes a checkbox, set activePageID to 0 and updated the checkboxValueChanged to false
+
+	let checkboxValueChanged = false;
+
+	$: if (checkboxValueChanged) {
+		activePageID = 0;
+		checkboxValueChanged = false;
 	};
 
 	$: $searchStore.search.patterns = [...quiltPatternsSearchValues];
@@ -288,6 +297,7 @@
 									<Checkbox 
 										bind:checked={technique.value}
 										bind:value={technique.label}
+										bind:valueChanged={checkboxValueChanged}
 									>
 										{technique.label}
 									</Checkbox>
@@ -301,6 +311,7 @@
 									<Checkbox 
 										bind:value={pattern.label}
 										bind:checked={pattern.value}
+										bind:valueChanged={checkboxValueChanged}
 									>
 										{pattern.label}
 									</Checkbox>

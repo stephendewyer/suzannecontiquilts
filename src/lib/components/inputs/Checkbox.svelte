@@ -3,6 +3,7 @@
 
   export let value;
   export let checked = false;
+  export let valueChanged = false;
 
   const unique_id = uuidv4();
 
@@ -37,6 +38,8 @@
       class="promoted-input-checkbox"
       value={value}
       bind:checked={checked}
+      on:click={() => valueChanged = true}
+      on:keyup={() => valueChanged = true}
     />
     <svg><use xlink:href="#checkmark-28" /></svg>
     <label 
