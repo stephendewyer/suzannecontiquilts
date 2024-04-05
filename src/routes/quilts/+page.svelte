@@ -46,13 +46,9 @@
 		return sortedItemsWithIDs;
 	};
 
-	let techniquesByAlpha = [];
+	let techniquesByAlpha = sortByAlpha(techniques);
 
-	$: techniquesByAlpha = sortByAlpha(techniques);
-
-	let patternsByAlpha = [];
-
-	$: patternsByAlpha = sortByAlpha(patterns);
+	let patternsByAlpha = sortByAlpha(patterns);
 
 	// begin filters
 
@@ -74,58 +70,11 @@
 
 	// load all the selected patterns in an array
 
-	$: patternsByAlpha.forEach((item, index) => {
-		if (item.value === true && !quiltPatternsSearchValues.includes(item.label)) {
-			quiltPatternsSearchValues = [...quiltPatternsSearchValues, item.label];
-		} else if (item.value === false && quiltPatternsSearchValues.includes(item.label)) {
-			if (index === 0 && quiltPatternsSearchValues.length === 1) {
-				quiltPatternsSearchValues = [];
-			} else {
-				quiltPatternsSearchValues = [...quiltPatternsSearchValues.splice(index, 1)];
-			};
-			
-		};
-	});
+	// initialize the pagination activePageID to 0
+	let activePageID = 0;
 
-	$: techniquesByAlpha.forEach((item, index) => {
-		if (item.value === true && !quiltTechniquesSearchValues.includes(item.label)) {
-			quiltTechniquesSearchValues = [...quiltTechniquesSearchValues, item.label];
-		} else if (item.value === false && quiltTechniquesSearchValues.includes(item.label)) {
-			if (index === 0 && quiltTechniquesSearchValues.length === 1) {
-				quiltTechniquesSearchValues = [];
-			} else {
-				quiltTechniquesSearchValues = [...quiltTechniquesSearchValues.splice(index, 1)];
-			};			
-		};
-	});
-
-	// load all the selected techniques in an array
-
-	// sort the filtered quilts SORT AFTER FILTER!!
-
-	let radioValue = "alphabetical";
-
-	let sortedAndFilteredQuilts = [];
-
-	$: if (radioValue === "alphabetical") {
-		const quiltsByAlpha = filteredQuilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-		sortedAndFilteredQuilts = [...quiltsByAlpha];
-	} else if (radioValue === "latest") {
-		const quiltsByLatest = filteredQuilts.sort((a, b) => {
-			return new Date(b.date_finished) - new Date(a.date_finished);
-		}); 
-		sortedAndFilteredQuilts = [...quiltsByLatest];
-	} else if (radioValue === "earliest") {
-		const quiltsByEarliest = filteredQuilts.sort((a, b) => {
-			return new Date(a.date_finished) - new Date(b.date_finished);
-		});
-		sortedAndFilteredQuilts = [...quiltsByEarliest];
-	};
 	// initialize the search quilts by name input value change variable to false
 	let searchValueChanged = false;
-
-	// initialize the pagination activePageID to 0 and make reactive
-	let activePageID = 0;
 
 	// if the search quilts by name input value has changed, 
 	// update the searchStore.search value to empty input value
@@ -142,8 +91,28 @@
 	let checkboxValueChanged = false;
 
 	$: if (checkboxValueChanged) {
+
 		activePageID = 0;
+		
+		afterUpdate(() => {
+			quiltPatternsSearchValues = [];
+			// load all the selected patterns in an array
+			patternsByAlpha.forEach((item) => {
+				if (item.value === true) {
+					quiltPatternsSearchValues = [...quiltPatternsSearchValues, item.label];
+				};
+			});
+			quiltTechniquesSearchValues = [];
+			// load all the selected techniques in an array
+			techniquesByAlpha.forEach((item) => {
+				if (item.value === true) {
+					quiltTechniquesSearchValues = [...quiltTechniquesSearchValues, item.label];
+				};
+			});
+		});
+		
 		checkboxValueChanged = false;
+
 	};
 
 	$: $searchStore.search.patterns = [...quiltPatternsSearchValues];
@@ -178,6 +147,27 @@
 		clearFiltersClicked = false;
 	};
 
+	// sort the filtered quilts SORT AFTER FILTER!!
+
+	let radioValue = "alphabetical";
+
+	let sortedAndFilteredQuilts = [];
+
+	$: if (radioValue === "alphabetical") {
+		const quiltsByAlpha = filteredQuilts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+		sortedAndFilteredQuilts = [...quiltsByAlpha];
+	} else if (radioValue === "latest") {
+		const quiltsByLatest = filteredQuilts.sort((a, b) => {
+			return new Date(b.date_finished) - new Date(a.date_finished);
+		}); 
+		sortedAndFilteredQuilts = [...quiltsByLatest];
+	} else if (radioValue === "earliest") {
+		const quiltsByEarliest = filteredQuilts.sort((a, b) => {
+			return new Date(a.date_finished) - new Date(b.date_finished);
+		});
+		sortedAndFilteredQuilts = [...quiltsByEarliest];
+	};
+	
 	let quiltsBySuzanneConti = [];
 
 	let quiltsBySuzanneContiAncestors = [];
