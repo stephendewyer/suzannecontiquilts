@@ -27,7 +27,7 @@
         if (pageSlug === quilt.slug) {
             title = quilt.name;
             quiltID = quilt.id;
-            currentQuiltPoster = quilt.images[0];
+            currentQuiltPoster = `/images/quilts${quilt.images[0]}`;
             return quilt;
         };
     });
@@ -119,7 +119,7 @@
                         <SplideSlide>
                             <img 
                                 class="slide_image"
-                                src={`/images/quilts/${quiltImage}`} 
+                                src={`/images/quilts${quiltImage}`} 
                                 alt="{quilt.name} image {ix}" 
                             />
                         </SplideSlide>
@@ -136,7 +136,7 @@
                         {#each quilt.images as quiltImage, ix}
                             <SplideSlide>
                                 <img 
-                                    src={`/images/quilts/${quiltImage}`} 
+                                    src={`/images/quilts${quiltImage}`} 
                                     alt="{quilt.name} image {ix}"
                                 />
                             </SplideSlide>

@@ -7,7 +7,7 @@
 <svelte:head>
 	<title>index - Suzanne Conti Quilts</title>
 	<meta name="description" content="Suzanne Conti Quilts index" />
-	<meta property="og:image" content="{quiltHeader}" />
+	<meta property="og:image" content={quiltHeader} />
 </svelte:head>
 
 <section>
