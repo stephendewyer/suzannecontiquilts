@@ -19,12 +19,15 @@
 
     let quiltCount = 0;
 
-    let currentQuilt;
+    let currentQuilt = [];
+
+    let currentQuiltPoster = "";
 
     $: currentQuilt = quilts.filter(quilt => {
         if (pageSlug === quilt.slug) {
             title = quilt.name;
             quiltID = quilt.id;
+            currentQuiltPoster = quilt.images[0];
             return quilt;
         };
     });
@@ -100,6 +103,7 @@
 <svelte:head>
 	<title>{title} - Suzanne Conti Quilts</title>
 	<meta name="description" content="search Suzanne Conti Quilts" />
+    <meta property="og:image" content={currentQuiltPoster} />
 </svelte:head>
 
 <div class="quilt">
