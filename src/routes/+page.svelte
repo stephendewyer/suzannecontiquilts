@@ -1,5 +1,5 @@
 <script>
-	import quiltBanner from '$lib/images/quilts/Nebraska/Suzanne_Conti_Nebraska_07.jpg';
+	import quiltBanner from '$lib/images/quilts/Oregon/Suzanne_Conti_Oregon_04.jpg';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import floatingQuilt from '$lib/images/quilts/floating_quilts/Suzanne_Conti_Massachusetts_floating.png';
 </script>
@@ -12,8 +12,8 @@
 
 <section>
 	<div class="index_banner">
-		<a href="/quilts/nebraska" aria-label="link to Nebraska Quilt page">
-			<img src={quiltBanner} alt="Nebraska Quilt banner" />
+		<a href="/quilts/oregon" aria-label="link to Oregon Quilt page">
+			<img src={quiltBanner} alt="Oregon Quilt banner" />
 		</a>
 	</div>
 	<div class="index_quilt_floating">
