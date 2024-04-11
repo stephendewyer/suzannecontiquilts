@@ -65,7 +65,11 @@
             </div>
         {:else}
             {#each currentPageQuilts as quilt, i}
-                <a href={`/quilts/${quilt.slug}`} aria-label="link to ${quilt.name}" class="quilt_card_container">
+                <a 
+                    class="quilt_card_container"
+                    href={`/quilts/${quilt.slug}`} 
+                    aria-label="link to ${quilt.name}"
+                >
                     <QuiltCard quiltData={quilt} />
                 </a>
                 {:else}
@@ -81,9 +85,6 @@
     />
 </div>
 <style>
-    .quilt_card_container {
-		width: auto;
-	}
 
     /* end quilt search */
 
@@ -92,10 +93,15 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		gap: 1rem;
+		/* gap: 1rem; */
 		width: 100%;
 		padding: 1rem;
 	}
+
+    .quilt_card_container {
+        width: 33.33%;
+        padding: 0.5rem;
+    }
 
 	.loading_spinner_container {
 		width: 100%;
@@ -103,18 +109,18 @@
 		justify-content: center;
 	}
 
-    @media (max-width: 1200px) {
-        /* end mobile quilt search */
-
-		.quilts_container {
-			justify-content: center;
-		}
+    @media (max-width: 1900px) {
+        .quilt_card_container {
+            width: 50%;
+            padding: 0.5rem;
+        }
     }
 
     @media (max-width: 750px) {
         .quilt_card_container {
-			width: 100%;
-		}
+            width: 100%;
+            padding: 0.5rem;
+        }
     }
 
 </style>

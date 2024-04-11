@@ -388,8 +388,7 @@
 
 	.techniques_and_patterns_container {
 		width: 100%;
-		height: 20rem;
-		overflow-y: scroll;
+
 	}
 
 	.button_container {

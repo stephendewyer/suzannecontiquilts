@@ -78,32 +78,37 @@
 <style>
     .quilt_card {
 		position: relative;
-		max-width: 24rem;
-        min-width: 24rem;
-		height: 26rem;
-		width: 100%;
+        width: 100%;
+        margin: 0;
+		height: 34rem;
         will-change: filter;
         transition: filter 0.2s linear;
 		filter: none;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 	}
 
     .quilt_card_hovered {
 		position: relative;
-		max-width: 24rem;
-        min-width: 24rem;
-		height: 26rem;
 		width: 100%;
+        height: 34rem;
         will-change: filter;
         transition: filter 0.2s linear;
 		filter: drop-shadow(0 0.5rem 0.5rem rgba(0, 0, 0, 0.25));
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 	}
 
 	.quilt_thumbnail {
-		position: absolute;
+		position: relative;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: bottom;
+		object-position: 50% 50%;
 	}
 
 	.quilt_info_container {
@@ -117,19 +122,38 @@
 		flex-direction: column;
 		justify-content: flex-end;
 		align-items: center;
-		background: rgb(233,237,255);
-		background: linear-gradient(0deg, rgba(233,237,255,1) 0%, rgba(233,237,255,0.7525385154061625) 35%, rgba(0,0,0,0) 100%);
+
 	}
 
-    @media (max-width: 750px) {
+    @media (max-width: 1900px) {
         .quilt_card {
-            max-width: 100%;
-            min-width: 100%;
+            height: 30rem;
         }
 
         .quilt_card_hovered {
-            max-width: 100%;
-            min-width: 100%;
+            height: 30rem;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .quilt_card {
+            height: 26rem;
+        }
+
+        .quilt_card_hovered {
+            height: 26rem;
+        }
+
+    }
+
+    @media (max-width: 750px) {
+
+        .quilt_card {
+            height: 22rem;
+        }
+
+        .quilt_card_hovered {
+            height: 22rem;
         }
     }
 
