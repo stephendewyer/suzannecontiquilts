@@ -14,9 +14,9 @@
         return module.default;
     });
 
-    const quiltImageFileNameNoFileExtension = (quiltData.images[0].split(".")[0]).split("/")[2];
+    $: quiltImageFileNameNoFileExtension = (quiltData.images[0].split(".")[0]).split("/")[2];
 
-    const imageSrc = imageUrls.filter((imageUrl) => {
+    $: imageSrc = imageUrls.filter((imageUrl) => {
         const splitImageUrl = imageUrl.split("/");
         const fileNameNoFileExtension = splitImageUrl[splitImageUrl.length - 1].split(".")[0];
         if (fileNameNoFileExtension === quiltImageFileNameNoFileExtension) {
