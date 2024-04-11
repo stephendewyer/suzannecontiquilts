@@ -19,8 +19,6 @@
 
     let quiltCount = 0;
 
-    let currentQuilt = [];
-
     let currentQuiltPoster = "";
 
     $: currentQuilt = quilts.filter(quilt => {
@@ -31,6 +29,35 @@
             return quilt;
         };
     });
+
+    const imageModules = import.meta.glob("$lib/images/quilts/**/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp}", {
+        eager: true
+    });
+
+    const imageUrls = Object.values(imageModules).map((module) => {
+        return module.default;
+    });
+
+    $: quiltImages = []; 
+
+    $: currentQuiltImagesFileNamesNoFileExtensions = currentQuilt[0].images.map((image) => {
+        return (image.split(".")[0]).split("/")[2];
+    });
+
+    $: if (currentQuilt) {
+        quiltImages = []; 
+        currentQuiltImagesFileNamesNoFileExtensions.forEach((quiltImage) => {
+            imageUrls.filter((imageUrl) => {
+                const splitImageUrl = imageUrl.split("/");
+                const fileNameNoFileExtension = splitImageUrl[splitImageUrl.length - 1].split(".")[0];
+                if (fileNameNoFileExtension === quiltImage) {
+                    quiltImages = [...quiltImages, imageUrl];
+                } else {
+                    return;
+                };
+            });
+        });
+    };
 
     $: quiltCount = quilts.length;
 
@@ -115,11 +142,11 @@
                     options={ mainOptions } 
                     bind:this={ main }
                 >
-                    {#each quilt.images as quiltImage, ix}
+                    {#each quiltImages as quiltImage, ix}
                         <SplideSlide>
                             <img 
                                 class="slide_image"
-                                src={`/images/quilts${quiltImage}`} 
+                                src={quiltImage} 
                                 alt="{quilt.name} image {ix}" 
                             />
                         </SplideSlide>
@@ -133,10 +160,10 @@
                         options={ thumbsOptions }
                         bind:this={ thumbs }
                     >
-                        {#each quilt.images as quiltImage, ix}
+                        {#each quiltImages as quiltImage, ix}
                             <SplideSlide>
                                 <img 
-                                    src={`/images/quilts${quiltImage}`} 
+                                    src={quiltImage} 
                                     alt="{quilt.name} image {ix}"
                                 />
                             </SplideSlide>

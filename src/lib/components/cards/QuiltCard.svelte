@@ -5,6 +5,26 @@
     export let quiltData;
 
     $: quiltData;
+        
+    const imageModules = import.meta.glob("$lib/images/thumbnails_quilts/**/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp}", {
+        eager: true
+    });
+
+    const imageUrls = Object.values(imageModules).map((module) => {
+        return module.default;
+    });
+
+    const quiltImageFileNameNoFileExtension = (quiltData.images[0].split(".")[0]).split("/")[2];
+
+    const imageSrc = imageUrls.filter((imageUrl) => {
+        const splitImageUrl = imageUrl.split("/");
+        const fileNameNoFileExtension = splitImageUrl[splitImageUrl.length - 1].split(".")[0];
+        if (fileNameNoFileExtension === quiltImageFileNameNoFileExtension) {
+            return imageUrl;
+        } else {
+            return;
+        };
+    });
 
     let cardHovered = false;
 
@@ -44,7 +64,7 @@
     >
         <img 
             class="quilt_thumbnail"
-            src="/images/quilts/thumbnails{quiltData.images[0]}" 
+            src={imageSrc} 
             alt="{quiltData.name} thumbnail" 
         />
         <div class="quilt_info_container">
