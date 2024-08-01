@@ -784,7 +784,7 @@
 	@media (max-width: 750px) {
 
 		.quilts_tabs_container {
-			padding-bottom: 0.5rem;
+			padding: 0 0.5rem 0.5rem 0.5rem;
 		}
 
 		.category_name {
