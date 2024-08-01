@@ -29,16 +29,18 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		gap: 0.5rem;
 	}
 
 	.label {
 		font-size: 1.5rem;
+		font-weight: 600;
 	}
 	
     .search_input {
 		height: 3rem;
 		width: 100%;
-		font-size: 1.75rem;
+		font-size: 1.5rem;
 		background-color: #ECF7FA;
 		border-color: #BAE1D7;
 		border-width: 3px;
@@ -54,6 +56,17 @@
 	.search_input:focus {
 		outline: none;
         border-color: #3B3E29;
+	}
+
+	@media screen and (max-width: 1200px) {
+		.search_input {
+			font-size: 1.375rem;
+			border-width: 2px;
+		}
+
+		.label {
+			font-size: 1.375rem;
+		}
 	}
 
     @media (max-width: 750px) {

@@ -43,9 +43,6 @@
 
     $: if (pageChanged) {
 		pending = true;
-		quilts_cont.scrollIntoView({
-				behavior: 'smooth'
-		});
 		pageChanged = false;
 	};
 
@@ -54,7 +51,7 @@
     });
 
 </script>
-<div>
+<div style="width: 100%;">
     <div 
         class="quilts_container" 	
         bind:this={quilts_cont}	
@@ -92,15 +89,13 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: flex-start;
-		/* gap: 1rem; */
+		justify-content: center;
 		width: 100%;
-		padding: 1rem;
+        gap: 1rem;
 	}
 
     .quilt_card_container {
-        width: 33.33%;
-        padding: 0.5rem;
+        width: 32.5%;
     }
 
 	.loading_spinner_container {
@@ -111,15 +106,23 @@
 
     @media (max-width: 1900px) {
         .quilt_card_container {
-            width: 50%;
-            padding: 0.5rem;
+            width: 48%;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .quilts_container {
+            gap: 0.75rem;
         }
     }
 
     @media (max-width: 750px) {
         .quilt_card_container {
             width: 100%;
-            padding: 0.5rem;
+        }
+
+        .quilts_container {
+            gap: 0.5rem;
         }
     }
 

@@ -121,7 +121,7 @@
             gap: 0.75rem;
         }
         li {
-            font-size: 1.25rem;
+            font-size: 1.375rem;
         }
     }
 
@@ -131,7 +131,7 @@
         }
 
         li {
-            font-size: 1rem;
+            font-size: 1.25rem;
         }
 
         .sewing_needle_container {
