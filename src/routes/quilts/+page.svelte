@@ -20,7 +20,16 @@
 	import { v4 as uuidv4 } from "uuid";
 
 	let quiltSearchNavBarIsHovered = false;
-	let searchFormIsActive = true;
+
+	let searchFormIsActive = false;
+
+	onMount(() => {
+		if (innerWidth <= 1200) {
+			searchFormIsActive = false;
+		} else if (innerWidth > 1200) {
+			searchFormIsActive = true;
+		};	
+	});
 
 	// initialize the active quilts tab to 0
 	let activeQuiltsTab = 0;
