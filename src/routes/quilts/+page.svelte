@@ -252,6 +252,8 @@
         currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
     });
 
+	// $: console.log(searchAbsolute)
+
 	afterUpdate(() =>  {
 		if (innerWidth <= 1200) {
 			searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - quiltsNavHeight);
@@ -263,10 +265,13 @@
     $: if (y > currentQuiltsTabsStickyPosition && y <= searchAbsolutePosition) {
         quiltsTabsSticky = true;
 		searchAbsolute = false;
-    } else if (y > currentQuiltsTabsStickyPosition && y > searchAbsolutePosition) {
+    } else if ((y > currentQuiltsTabsStickyPosition) && (y > searchAbsolutePosition) && (innerWidth > 1200)) {
         quiltsTabsSticky = true;
 		searchAbsolute = true;
-    } else if (y <= currentQuiltsTabsStickyPosition && y <= searchAbsolutePosition) {
+    } else if ((y > currentQuiltsTabsStickyPosition) && (y > searchAbsolutePosition) && (innerWidth <= 1200)) { 
+		quiltsTabsSticky = true;
+		searchAbsolute = false;
+	} else if (y <= currentQuiltsTabsStickyPosition && y <= searchAbsolutePosition) {
 		quiltsTabsSticky = false;
 		searchAbsolute = false;
 	};
