@@ -248,11 +248,16 @@
 
 	let clearFiltersButtonHeight = 0;
 
+	let quiltSearchResultsHeight = 0;
+
+	$: console.log(quiltSearchResultsHeight)
+	$: console.log()
+
     onMount(() => {
         currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
     });
 
-	// $: console.log(searchAbsolute)
+	// $: console.log("searchContainerElement.top: ", searchContainerElement?.getBoundingClientRect().top, " + window.scrollY: ", y, " + (searchContainerHeight: ", searchContainerHeight, " - searchHeight: ", searchHeight, " - quiltsNavHeight: ", quiltsNavHeight, ")");
 
 	afterUpdate(() =>  {
 		if (innerWidth <= 1200) {
@@ -265,7 +270,12 @@
     $: if (y > currentQuiltsTabsStickyPosition && y <= searchAbsolutePosition) {
         quiltsTabsSticky = true;
 		searchAbsolute = false;
-    } else if ((y > currentQuiltsTabsStickyPosition) && (y > searchAbsolutePosition) && (innerWidth > 1200)) {
+    } else if (
+			(y > currentQuiltsTabsStickyPosition) && 
+			(y > searchAbsolutePosition) && 
+			(innerWidth > 1200) &&
+			(quiltSearchResultsHeight > scrollableSearchHeight + clearFiltersButtonHeight)
+ 	) {
         quiltsTabsSticky = true;
 		searchAbsolute = true;
     } else if ((y > currentQuiltsTabsStickyPosition) && (y > searchAbsolutePosition) && (innerWidth <= 1200)) { 
@@ -282,7 +292,6 @@
 	let innerHeight = 0;
 
 	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerElement?.getBoundingClientRect().top;
-
 	
 </script>
 
@@ -454,7 +463,10 @@
 				</div>
 			</form>
 		</div>
-		<div class="quilt_search_results">
+		<div 
+			class="quilt_search_results"
+			bind:clientHeight={quiltSearchResultsHeight}
+		>
 			<TabPanel
 				tabPanels={quiltsTabPanels}
 				bind:activeTab={activeQuiltsTab}
