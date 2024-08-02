@@ -313,18 +313,22 @@
 		};
 	};
 
-	$: console.log("search results height: ", quiltSearchResultsHeight)
+	// $: console.log("search results height: ", quiltSearchResultsHeight)
 
 	// set the height of the scollable search
 	let scrollableSearchHeight = 0;
 
 	let innerHeight = 0;
 
-	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerElement?.getBoundingClientRect().top;
+	// $: console.log("search height: ", searchHeight);
 
-	const windowResizeHandler = () => {
+	$: if (searchContainerElement) {
+		scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerElement?.getBoundingClientRect().top;
+	};
+
+	const windowResizeHandler = () => {		
 		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
-		currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
+		// currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top;
 	};
 
 	$: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
