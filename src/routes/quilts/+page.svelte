@@ -259,17 +259,24 @@
 	// $: console.log("scrollable search height: ", scrollableSearchHeight)
 	// $: console.log("search container top position: ", searchContainerTopPosition);
 
+	let mobileScrollableSearchHeight = 0;
+
+	let scrollableSearchHeight = 0;
+
+	let innerHeight = 0;
+
     onMount(() => {
-		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
-        currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
+		if (searchContainerElement) {
+			searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
+		};
+		if (searchQuiltsNavBarElement) {
+			currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
+		};
     });
 
-	// $: console.log("searchContainerElement.top: ", searchContainerElement?.getBoundingClientRect().top, " + window.scrollY: ", y, " + (searchContainerHeight: ", searchContainerHeight, " - searchHeight: ", searchHeight, " - quiltsNavHeight: ", quiltsNavHeight, ")");
-
 	afterUpdate(() =>  {
-		if (innerWidth <= 1200) {
-			searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - quiltsNavHeight);
-		} else {
+		if (searchContainerElement) {
+			mobileScrollableSearchHeight =  innerHeight - searchContainerElement?.getBoundingClientRect().top - clearFiltersButtonHeight;
 			searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
 		};
 	});
@@ -314,12 +321,6 @@
 	};
 
 	// $: console.log("search results height: ", quiltSearchResultsHeight)
-
-	// set the height of the scollable search
-	let scrollableSearchHeight = 0;
-
-	let innerHeight = 0;
-
 	// $: console.log("search height: ", searchHeight);
 
 	$: if (searchContainerElement) {
@@ -327,11 +328,11 @@
 	};
 
 	const windowResizeHandler = () => {		
-		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
-		// currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top;
+		if (searchContainerElement) {
+			searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
+		};
 	};
-
-	$: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
+	// $: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
 	
 </script>
 
@@ -374,7 +375,8 @@
 				on:mouseout={() => {
 					quiltSearchNavBarIsHovered = false;
 				}}
-			>
+			> 
+				
 				<div class="toggle_button_items">
 					<div class="button_container">
 						<div 
@@ -419,91 +421,172 @@
 				bind:activePageID={activePageID}
 			/>
 		</div>
+		{#if (innerWidth <= 1200)}
+			<div 
+				id="quilts_search_form_container_mobile"
+				class="{(searchFormIsActive) ? "quilt_search_form_container_open" : "quilt_search_form_container_closed"}"
+				style={ searchFormIsActive ? `height: ${searchHeight}px` : 'height: 0px;' }
+				bind:this={searchContainerElement}
+			>
+				<form 
+					id="search"
+					noValidate 
+					autoComplete="off"
+					on:submit|preventDefault
+					bind:clientHeight={searchHeight}
+				>
+					<div 
+						class="scrollable_search_container"
+						style={`height: ${mobileScrollableSearchHeight}px;`}
+					>
+						<div class="filters">
+							<SearchInput 
+								bind:searchValue={searchValue}
+								bind:searchValueChanged={searchValueChanged}
+							>
+								search quilts by name
+							</SearchInput>
+							<div class="inputs_container">
+								<h3 class="category_name">
+									techniques
+								</h3>
+								<div class="checkboxes">
+									{#each techniquesByAlpha as technique, i}
+										<Checkbox 
+											bind:checked={technique.value}
+											bind:value={technique.label}
+											bind:valueChanged={checkboxValueChanged}
+										>
+											{technique.label}
+										</Checkbox>
+									{/each}
+								</div>
+								<h3 class="category_name">
+									patterns
+								</h3>
+								<div class="checkboxes">
+									{#each patternsByAlpha as pattern, index}
+										<Checkbox 
+											bind:value={pattern.label}
+											bind:checked={pattern.value}
+											bind:valueChanged={checkboxValueChanged}
+										>
+											{pattern.label}
+										</Checkbox>
+									{/each}
+								</div>
+							</div>
+						</div>
+						<div class="sort">
+							<h3 class="category_name">
+								order by
+							</h3>
+							<div class="radio_buttons">
+								<RadioButtons 
+									options={options}
+									bind:userSelected={radioValue}
+								/>
+							</div>
+						</div>
+					</div>
+					<div 
+						class="clear_filters_container"
+						bind:clientHeight={clearFiltersButtonHeight}
+					>
+						<ClearFiltersButton bind:clicked={clearFiltersClicked}>
+							clear filters
+						</ClearFiltersButton>
+					</div>
+				</form>
+			</div>
+		{/if}
 	</div>
 	<div 
 		class="quilt_search_and_results"
 		style={searchContainerSticky ? `padding-top: ${quiltsNavHeight}px;` : "padding-top: 0px;"}
 	>
-		<div 
-			id="quilts_search_form_container"
-			class="{(searchFormIsActive) ? "quilt_search_form_container_open" : "quilt_search_form_container_closed"}"
-			style={ (innerWidth <= 1200) ? searchFormIsActive ? `height: ${searchHeight}px` : 'height: 0px;' : "" }
-			bind:this={searchContainerElement}
-			bind:clientHeight={searchContainerHeight}
-		>
-			<form 
-				id="search"
-				noValidate 
-				autoComplete="off"
-				on:submit|preventDefault
-				bind:clientHeight={searchHeight}
-				class={(innerWidth > 1200) ? searchContainerSticky ? !searchAbsolute ? "search_sticky" : "search_absolute" : "search_relative" : "search_relative"}
-				style={(innerWidth > 1200) ? searchContainerSticky ? searchAbsolute ? "" : `top: ${quiltsNavHeight}px;` : "top: 0;": ""}
+		{#if (innerWidth > 1200)}
+			<div 
+				id="quilts_search_form_container"
+				class="{(searchFormIsActive) ? "quilt_search_form_container_open" : "quilt_search_form_container_closed"}"
+				style={ (innerWidth <= 1200) ? searchFormIsActive ? `height: ${searchHeight}px` : 'height: 0px;' : "" }
+				bind:this={searchContainerElement}
+				bind:clientHeight={searchContainerHeight}
 			>
-				<div 
-					class="scrollable_search_container"
-					style={(innerWidth > 1200 ? `height: ${scrollableSearchHeight}px;` : "height: auto;")}
+				<form 
+					id="search"
+					noValidate 
+					autoComplete="off"
+					on:submit|preventDefault
+					bind:clientHeight={searchHeight}
+					class={ searchContainerSticky ? !searchAbsolute ? "search_sticky" : "search_absolute" : "search_relative" }
+					style={ searchContainerSticky ? searchAbsolute ? "" : `top: ${quiltsNavHeight}px;` : "top: 0;"}
 				>
-					<div class="filters">
-						<SearchInput 
-							bind:searchValue={searchValue}
-							bind:searchValueChanged={searchValueChanged}
-						>
-							search quilts by name
-						</SearchInput>
-						<div class="inputs_container">
-							<h3 class="category_name">
-								techniques
-							</h3>
-							<div class="checkboxes">
-								{#each techniquesByAlpha as technique, i}
-									<Checkbox 
-										bind:checked={technique.value}
-										bind:value={technique.label}
-										bind:valueChanged={checkboxValueChanged}
-									>
-										{technique.label}
-									</Checkbox>
-								{/each}
+					<div 
+						class="scrollable_search_container"
+						style={`height: ${scrollableSearchHeight}px;`}
+					>
+						<div class="filters">
+							<SearchInput 
+								bind:searchValue={searchValue}
+								bind:searchValueChanged={searchValueChanged}
+							>
+								search quilts by name
+							</SearchInput>
+							<div class="inputs_container">
+								<h3 class="category_name">
+									techniques
+								</h3>
+								<div class="checkboxes">
+									{#each techniquesByAlpha as technique, i}
+										<Checkbox 
+											bind:checked={technique.value}
+											bind:value={technique.label}
+											bind:valueChanged={checkboxValueChanged}
+										>
+											{technique.label}
+										</Checkbox>
+									{/each}
+								</div>
+								<h3 class="category_name">
+									patterns
+								</h3>
+								<div class="checkboxes">
+									{#each patternsByAlpha as pattern, index}
+										<Checkbox 
+											bind:value={pattern.label}
+											bind:checked={pattern.value}
+											bind:valueChanged={checkboxValueChanged}
+										>
+											{pattern.label}
+										</Checkbox>
+									{/each}
+								</div>
 							</div>
+						</div>
+						<div class="sort">
 							<h3 class="category_name">
-								patterns
+								order by
 							</h3>
-							<div class="checkboxes">
-								{#each patternsByAlpha as pattern, index}
-									<Checkbox 
-										bind:value={pattern.label}
-										bind:checked={pattern.value}
-										bind:valueChanged={checkboxValueChanged}
-									>
-										{pattern.label}
-									</Checkbox>
-								{/each}
+							<div class="radio_buttons">
+								<RadioButtons 
+									options={options}
+									bind:userSelected={radioValue}
+								/>
 							</div>
 						</div>
 					</div>
-					<div class="sort">
-						<h3 class="category_name">
-							order by
-						</h3>
-						<div class="radio_buttons">
-							<RadioButtons 
-								options={options}
-								bind:userSelected={radioValue}
-							/>
-						</div>
+					<div 
+						class="clear_filters_container"
+						bind:clientHeight={clearFiltersButtonHeight}
+					>
+						<ClearFiltersButton bind:clicked={clearFiltersClicked}>
+							clear filters
+						</ClearFiltersButton>
 					</div>
-				</div>
-				<div 
-					class="clear_filters_container"
-					bind:clientHeight={clearFiltersButtonHeight}
-				>
-					<ClearFiltersButton bind:clicked={clearFiltersClicked}>
-						clear filters
-					</ClearFiltersButton>
-				</div>
-			</form>
-		</div>
+				</form>
+			</div>
+		{/if}
 		<div 
 			class="quilt_search_results"
 			bind:clientHeight={quiltSearchResultsHeight}
@@ -550,6 +633,12 @@
 		min-width: 26rem;
 		will-change: margin-left;
 		transition: margin-left 0.3s ease-out;
+	}
+
+	#quilts_search_form_container_mobile {
+		position: absolute;
+		background-color: #FBECEC;
+		top: 10rem;
 	}
 
 	.quilt_search_form_container_open {
@@ -793,6 +882,12 @@
 			justify-content: flex-start;
 		}
 
+		.toggle_button_items {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
 		.filters {
 			gap: 0.75rem;
 		}
@@ -821,14 +916,47 @@
 			width: 0.9rem;
 		}
 
-		#quilts_search_form_container {
-			position: relative;
+		#quilts_search_form_container_mobile {
+			position: absolute;
 			width: 100%;
 			overflow-y: hidden;
 			will-change: height;
         	transition: height 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
 			min-width: 100%;
+			z-index: 1;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		.quilt_search_form_container_open {
+			width: 100%;
+			min-width: 100%;
 			margin-left: 0;
+			height: 100%;
+			will-change: height;
+			overflow: hidden;
+			transition: height 0.3s ease-out;
+		}
+
+		.quilt_search_form_container_closed {
+			width: 100%;
+			min-width: 100%;
+			margin-left: 0;
+			height: 0;
+			will-change: height;
+			overflow: hidden;
+			transition: height 0.3s ease-out;
+		}
+
+		#search {
+			position: relative;
+		}
+
+
+		.scrollable_search_container {
+			position: relative;
+			overflow-y: auto;
 		}
 
 		.sort {
@@ -840,10 +968,6 @@
 
 		.quilts_tabs_container {
 			padding-bottom: 0.75rem;
-		}
-
-		.button_container {
-			padding: 0.75rem;
 		}
 
 	}
@@ -887,29 +1011,7 @@
 
 		.arrow_hovered {
 			width: 0.8rem;
-		}
-
-		.quilt_search_form_container_open {
-			position: relative;
-			width: 100%;
-			min-width: 100%;
-			margin-left: 0;
-			height: 100%;
-			will-change: height;
-			overflow: hidden;
-			transition: height 0.3s ease-out;
-		}
-
-		.quilt_search_form_container_closed {
-			position: relative;
-			width: 100%;
-			min-width: 100%;
-			margin-left: 0;
-			height: 0;
-			will-change: height;
-			overflow: hidden;
-			transition: height 0.3s ease-out;
-		}
+		}		
 
 		.filters {
 			gap: 0.5rem;
@@ -925,11 +1027,6 @@
 		.quilt_search_results {
 			padding: 0.5rem;
 		}
-
-		.button_container {
-			padding: 0.5rem;
-		}
-
 	}
 
 </style>

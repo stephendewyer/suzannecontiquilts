@@ -76,13 +76,13 @@
 
 	header {
 		width: 100%;
-		padding: 1.5rem 1rem 1.5rem 1rem;
 	}
 
 	nav {
 		width: 100%;
 		max-width: 1096px;
 		margin: 0 auto 0 auto;
+		padding: 1.5rem 1rem;
 		display: flex;
 		flex-direction: row;
 	}
@@ -158,7 +158,17 @@
 		top: 1.5rem;
 	}
 
-	@media (min-width: 750px) {
+	@media screen and (max-width: 1200px) {
+		header {
+			width: 100%;
+		}
+
+		nav {
+			padding: 1rem 0.5rem;
+		}
+	}
+
+	@media screen and (min-width: 750px) {
 
 		.mobile_nav_toggle_button {
 			display: none;
@@ -166,7 +176,7 @@
 
 	}
 
-	@media (max-width: 750px) {
+	@media screen and (max-width: 750px) {
 
 		.main_nav_tabs_left {
 			display: none;
@@ -181,12 +191,13 @@
 			margin: 0;
 			justify-content: space-between;
 			align-items: center;
-			padding: 0 1rem 0 1rem;
+			padding: 0.5rem;
 		}
 
 		.logo_container {
 			width: 100%;
 			align-items: flex-start;
+			padding: 1rem;
 		}
 
 		.logo {
