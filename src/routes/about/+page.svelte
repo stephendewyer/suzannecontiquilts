@@ -201,6 +201,7 @@
 		width: 100%;
 		gap: 1rem;
 		padding: 0 1rem 1rem 1rem;
+		margin: 0 auto;
 	}
 
 	@media screen and (max-width: 1200px) {
@@ -213,6 +214,7 @@
 
 		.inspiration_container {
 			flex-direction: column;
+			margin: 0;
 		}
 		.quilt_pattern_background {
 			padding: 1rem;
