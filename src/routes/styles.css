@@ -50,8 +50,8 @@ p {
 
 input {
 	font-family: "calibri-font-family";
-	font-size: 1.75rem;
-	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	font-size: 1.5rem;
+	padding: 0.25rem 1rem 0.25rem 1rem;
 	border-color: #3B3E29;
 	border-style: solid;
 	border-width: 2px;
@@ -60,6 +60,7 @@ input {
 	box-sizing: border-box;
 	white-space: nowrap;
 	overflow: hidden;
+	height: 3rem;
 }
 
 input:focus {
@@ -87,8 +88,8 @@ input[type="search"]::-webkit-search-cancel-button {
 
 textarea {
 	font-family: "calibri-font-family";
-	font-size: 1.75rem;
-	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	font-size: 1.5rem;
+	padding: 0.25rem 1rem 0.25rem 1rem;
 	color: #3B3E29;
 	border-color: #3B3E29;
 	border-style: solid;
@@ -97,12 +98,25 @@ textarea {
 	box-sizing: border-box;
 	white-space: nowrap;
 	overflow: hidden;
+	height: 8rem;
 }
 
 textarea:focus {
 	border-color: #3B3E29;
 	border-width: 2px;
 	outline: none;
+}
+
+@media screen and (max-width: 1200px) {
+	input {
+		font-size: 1.375rem;
+		border-width: 2px;
+	}
+
+	textarea {
+		font-size: 1.375rem;
+		border-width: 2px;
+	}
 }
 
 @media (max-width: 750px) {
@@ -125,10 +139,12 @@ textarea:focus {
 	}
 
 	input {
-		font-size: 1rem;
+		font-size: 1.25rem;
+		border-width: 2px;
 	}
 
 	textarea {
-		font-size: 1rem;
+		font-size: 1.25rem;
+		border-width: 2px;
 	}
 }

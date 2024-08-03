@@ -5,9 +5,6 @@
 	import QuiltResultsPanel from '$lib/components/quiltsResultsPanel/QuiltResultsPanel.svelte';
 	import quiltHeader from '$lib/images/quilts/New_Mexico/Suzanne_Conti_New_Mexico_01.jpg';
 	import SearchInput from '$lib/components/inputs/SearchInput.svelte';
-	import Arrow from '$lib/images/icons/arrow.svg?raw';
-	import Filter from '$lib/images/icons/filter_icon.svg?raw';
-	import Sort from '$lib/images/icons/sort_icon.svg?raw';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import RadioButtons from '$lib/components/inputs/RadioButtons.svelte';
   	import Tabs from '$lib/components/tabPanel/Tabs.svelte';
@@ -16,10 +13,8 @@
 	import patterns from "$lib/data/patterns.json";
 	import techniques from "$lib/data/techniques.json";
 	import options from "$lib/data/options.json";
-
+	import SearchToggleButton from "$lib/components/buttons/SearchToggleButton.svelte";
 	import { v4 as uuidv4 } from "uuid";
-
-	let quiltSearchNavBarIsHovered = false;
 
 	let searchFormIsActive = false;
 
@@ -355,64 +350,7 @@
 		bind:clientHeight={quiltsNavHeight}
 	>
 		<div class="toggle_filters_and_sort_container">
-			<div 
-				class="toggle_filters_and_sort"
-				on:click={() => {
-					searchFormIsActive = !searchFormIsActive;
-				}}
-				on:keydown={() => {
-					searchFormIsActive = !searchFormIsActive;
-				}}
-				on:mouseover={() => {
-					quiltSearchNavBarIsHovered = true;
-				}} 
-				on:focus={() => {
-					quiltSearchNavBarIsHovered = true;
-				}}
-				on:blur={() => {
-					quiltSearchNavBarIsHovered = false;
-				}}
-				on:mouseout={() => {
-					quiltSearchNavBarIsHovered = false;
-				}}
-			> 
-				
-				<div class="toggle_button_items">
-					<div class="button_container">
-						<div 
-							class="icon_container"
-							style={quiltSearchNavBarIsHovered ? "fill: #ED6545;" : "fill: #3B3E29;"}
-						>
-							{@html Filter}
-						</div>
-						<h3 
-							class="label"
-							style={quiltSearchNavBarIsHovered ? "color: #ED6545;" : "color: #3B3E29;"}
-						>
-							filters
-						</h3>
-					</div>
-					<div class="button_container">
-						<div 
-							class="icon_container"
-							style={quiltSearchNavBarIsHovered ? "fill: #ED6545;" : "fill: #3B3E29;"}
-						>
-							{@html Sort}
-						</div>
-						<h3 
-							class="label"
-							style={quiltSearchNavBarIsHovered ? "color: #ED6545;" : "color: #3B3E29;"}
-						>
-							sort
-						</h3>
-					</div>	
-				</div>
-				<div class="{(searchFormIsActive) ? "arrow_container_active" : "arrow_container"}">
-					<div class="{(quiltSearchNavBarIsHovered) ? "arrow_hovered" : "arrow"}" >
-						{@html Arrow}
-					</div>
-				</div>
-			</div>
+			<SearchToggleButton bind:searchFormIsActive />
 		</div>
 		<div class="quilts_tabs_container">
 			<Tabs
@@ -679,65 +617,14 @@
 
 	.toggle_filters_and_sort_container {
 		position: absolute;
-		right: 2rem;
+		padding: 0.5rem 1rem;
 		top: 0;
 		bottom: 0;
+		right: 0;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		gap: 1rem;
-	}
-
-	.toggle_filters_and_sort {
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		cursor: pointer;
-		gap: 1rem;
-	}
-
-	.toggle_button_items {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.arrow_container_active {
-		transform: rotateY(180deg);
-		will-change: transform;
-		transition: transform 300ms ease-out;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.arrow_container {
-		transform: rotateY(0);
-		will-change: transform;
-		transition: transform 300ms ease-out;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.arrow {
-		width: 1.25rem;
-    	color: #3B3E29;
-		fill: #3B3E29;
-		will-change: fill;
-		transition: fill 300ms ease-out;
-	}
-
-	.arrow_hovered {
-		width: 1.25rem;
-		color: #ED6545;
-    	fill: #ED6545;
-		will-change: fill;
-		transition: fill 300ms ease-out;
 	}
 
 	.quilts_tabs_container {
@@ -771,13 +658,6 @@
 		padding: 0 1rem;
 	}
 
-	.button_container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 0.25rem;
-	}
-
 	.clear_filters_container {
 		display: flex;
 		justify-content: center;
@@ -785,15 +665,6 @@
 		gap: 0.25rem;
 		width: 100%;
 		padding: 1rem;
-	}
-
-	.icon_container {
-		width: 2rem;
-		height: auto;
-		color: #3B3E29;
-		fill: #3B3E29;
-		will-change: fill;
-		transition: fill 300ms ease-out;	
 	}
 
 	.filters {
@@ -811,14 +682,6 @@
 		padding: 0 1rem 1rem 1rem;
 		background-color: #DCE0E5;
 		width: 100%;
-	}
-
-	.label {
-		font-size: 1.25rem;
-		font-weight: 800;
-		color: #3B3E29;
-		will-change: color;
-		transition: color 300ms ease-out;
 	}
 
 	.quilt_search_and_results {
@@ -859,34 +722,10 @@
 			justify-content: flex-end;
 		}
 
-		.toggle_filters_and_sort {
-			position: relative;
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			cursor: pointer;
-			gap: 1rem;
-			padding: 0 1.5rem;
-		}
-
-		.icon_container {
-			width: 1.75rem;
-		}
-
-		.label {
-			font-size: 1rem;
-		}
-
 		.quilt_search_and_results {
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
-		}
-
-		.toggle_button_items {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
 		}
 
 		.filters {
@@ -895,26 +734,6 @@
 
 		.quilt_search_results {
 			padding: 0.75rem;
-		}
-
-		.arrow_container_active {
-			transform: rotateY(0) rotateX(180deg) rotate(90deg);
-			will-change: transform;
-			transition: transform 300ms ease-out;
-		}
-
-		.arrow_container {
-			transform: rotateY(0) rotateX(0) rotate(90deg);
-			will-change: transform;
-			transition: transform 300ms ease-out;
-		}
-
-		.arrow {
-			width: 0.9rem;
-		}
-
-		.arrow_hovered {
-			width: 0.9rem;
 		}
 
 		#quilts_search_form_container_mobile {
@@ -979,40 +798,15 @@
 			padding: 0 0.5rem 0.5rem 0.5rem;
 		}
 
+		.toggle_filters_and_sort_container {
+			padding: 0.25rem 0.5rem;
+		}
+
 		.category_name {
 			font-size: 1.25rem;
 		}
 
 		/* begin mobile quilt search  */
-
-		.icon_container {
-			width: 1.5rem;
-			height: auto;
-		}
-
-		.label {
-			font-size: 0.85rem;
-		}
-
-		.arrow_container_active {
-			transform: rotateY(0) rotateX(180deg) rotate(90deg);
-			will-change: transform;
-			transition: transform 300ms ease-out;
-		}
-
-		.arrow_container {
-			transform: rotateY(0) rotateX(0) rotate(90deg);
-			will-change: transform;
-			transition: transform 300ms ease-out;
-		}
-
-		.arrow {
-			width: 0.8rem;
-		}
-
-		.arrow_hovered {
-			width: 0.8rem;
-		}		
 
 		.filters {
 			gap: 0.5rem;

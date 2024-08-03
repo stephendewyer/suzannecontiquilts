@@ -418,7 +418,6 @@
 	
 	.form_input {
 		width: 100%;
-		display: inline-block;
 	}
 
 	.input_error_message {
@@ -433,7 +432,6 @@
 
 	.form_para_input {
 		width: 100%;
-		display: inline-block;
 	}
 
 	.form_buttons_container {
