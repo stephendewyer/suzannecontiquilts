@@ -323,7 +323,6 @@
 	};
 
 	const windowResizeHandler = () => {		
-		currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
 		if (searchContainerElement) {
 			searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
 		};
