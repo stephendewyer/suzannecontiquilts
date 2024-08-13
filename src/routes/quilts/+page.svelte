@@ -252,7 +252,7 @@
 	// $: console.log("quilts search results height: ", quiltSearchResultsHeight);
 	// $: console.log("search quilts absolute position: ", searchAbsolutePosition);
 	// $: console.log("scrollable search height: ", scrollableSearchHeight)
-	// $: console.log("search container top position: ", searchContainerTopPosition);
+	$: console.log("search container top position: ", searchContainerTopPosition);
 
 	let mobileScrollableSearchHeight = 0;
 
@@ -261,19 +261,13 @@
 	let innerHeight = 0;
 
     onMount(() => {
-		if (searchContainerElement) {
-			searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
-		};
-		if (searchQuiltsNavBarElement) {
-			currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
-		};
+		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
+		currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
     });
 
 	afterUpdate(() =>  {
-		if (searchContainerElement) {
-			mobileScrollableSearchHeight =  innerHeight - searchContainerElement?.getBoundingClientRect().top - clearFiltersButtonHeight;
-			searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
-		};
+		mobileScrollableSearchHeight =  innerHeight - searchContainerElement?.getBoundingClientRect().top - clearFiltersButtonHeight;
+		searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
 	});
 
     $: if (quiltSearchResultsHeight <= (scrollableSearchHeight + clearFiltersButtonHeight)) {
@@ -318,16 +312,16 @@
 	// $: console.log("search results height: ", quiltSearchResultsHeight)
 	// $: console.log("search height: ", searchHeight);
 
-	$: if (searchContainerElement) {
-		scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerElement?.getBoundingClientRect().top;
-	};
+	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerElement?.getBoundingClientRect().top;
 
-	const windowResizeHandler = () => {		
-		if (searchContainerElement) {
-			searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
-		};
+	let pageElement;
+
+	const windowResizeHandler = () => {
+		currentQuiltsTabsStickyPosition = pageElement?.getBoundingClientRect().top + window.scrollY;
+		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY;
+
 	};
-	// $: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
+	$: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
 	
 </script>
 
@@ -342,7 +336,10 @@
 	bind:innerHeight
 	on:resize={() => windowResizeHandler()}
 />
-<div class="page">
+<div 
+	class="page"
+	bind:this={pageElement}
+>
 	<div 
 		id="quilts_nav_bar"
 		bind:this={searchQuiltsNavBarElement}
