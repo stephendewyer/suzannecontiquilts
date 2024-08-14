@@ -252,7 +252,7 @@
 	// $: console.log("quilts search results height: ", quiltSearchResultsHeight);
 	// $: console.log("search quilts absolute position: ", searchAbsolutePosition);
 	// $: console.log("scrollable search height: ", scrollableSearchHeight)
-	$: console.log("search container top position: ", searchContainerTopPosition);
+	// $: console.log("search container top position: ", searchContainerTopPosition);
 
 	let mobileScrollableSearchHeight = 0;
 
@@ -261,12 +261,12 @@
 	let innerHeight = 0;
 
     onMount(() => {
-		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top;
+		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY;
 		currentQuiltsTabsStickyPosition = searchQuiltsNavBarElement?.getBoundingClientRect().top + window.scrollY;
     });
 
 	afterUpdate(() =>  {
-		mobileScrollableSearchHeight =  innerHeight - searchContainerElement?.getBoundingClientRect().top - clearFiltersButtonHeight;
+		mobileScrollableSearchHeight =  innerHeight - (searchContainerElement?.getBoundingClientRect().top  + window.scrollY) - clearFiltersButtonHeight;
 		searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
 	});
 
@@ -312,7 +312,7 @@
 	// $: console.log("search results height: ", quiltSearchResultsHeight)
 	// $: console.log("search height: ", searchHeight);
 
-	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerElement?.getBoundingClientRect().top;
+	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - (searchContainerElement?.getBoundingClientRect().top + window.scrollY);
 
 	let pageElement;
 
@@ -321,7 +321,7 @@
 		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY;
 
 	};
-	$: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
+	// $: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
 	
 </script>
 
@@ -362,6 +362,7 @@
 				class="{(searchFormIsActive) ? "quilt_search_form_container_open" : "quilt_search_form_container_closed"}"
 				style={ searchFormIsActive ? `height: ${searchHeight}px` : 'height: 0px;' }
 				bind:this={searchContainerElement}
+				bind:clientHeight={searchContainerHeight}
 			>
 				<form 
 					id="search"
