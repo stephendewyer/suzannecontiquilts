@@ -312,7 +312,7 @@
 	// $: console.log("search results height: ", quiltSearchResultsHeight)
 	// $: console.log("search height: ", searchHeight);
 
-	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - (searchContainerElement?.getBoundingClientRect().top + window.scrollY);
+	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - (searchContainerTopPosition);
 
 	let pageElement;
 
