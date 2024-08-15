@@ -266,7 +266,7 @@
     });
 
 	afterUpdate(() =>  {
-		mobileScrollableSearchHeight =  innerHeight - (searchContainerElement?.getBoundingClientRect().top  + window.scrollY) - clearFiltersButtonHeight;
+		mobileScrollableSearchHeight =  innerHeight - (searchContainerElement?.getBoundingClientRect().top) - clearFiltersButtonHeight;
 		searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
 	});
 
@@ -319,7 +319,6 @@
 	const windowResizeHandler = () => {
 		currentQuiltsTabsStickyPosition = pageElement?.getBoundingClientRect().top + window.scrollY;
 		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY;
-
 	};
 	// $: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
 	
