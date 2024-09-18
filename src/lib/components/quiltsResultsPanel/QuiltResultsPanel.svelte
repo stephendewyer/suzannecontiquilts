@@ -3,6 +3,7 @@
     import QuiltCard from "$lib/components/cards/QuiltCard.svelte";
     import LoadingSpinner from "$lib/components/loadingSpinners/LoadingSpinner.svelte";
     import { onDestroy, afterUpdate } from "svelte";
+    import { fade } from "svelte/transition";
 
     export let panel_data;
     export let activePageID;
@@ -51,29 +52,36 @@
     });
 
 </script>
-<div style="width: 100%;">
-    <div 
-        class="quilts_container" 	
-        bind:this={quilts_cont}	
-    >
-        {#if (pending)}
-            <div class="loading_spinner_container">
-                <LoadingSpinner/>
+<div 
+    class="quilts_container"
+    in:fade={{ delay: 250, duration: 300 }}
+    style="width: 100%;"
+>
+    {#if (pending)}
+        <div class="loading_spinner_container">
+            <LoadingSpinner/>
+        </div>
+    {:else}
+        {#key activePageID}
+            <div 
+                class="quilts" 	
+                bind:this={quilts_cont}	
+                in:fade={{ delay: 250, duration: 300 }}
+            >
+                {#each currentPageQuilts as quilt, i}
+                    <a 
+                        class="quilt_card_container"
+                        href={`/quilts/${quilt.slug}`} 
+                        aria-label="link to ${quilt.name}"
+                    >
+                        <QuiltCard quiltData={quilt} />
+                    </a>
+                    {:else}
+                        <p>No quilts fit search criteria.</p>
+                {/each}
             </div>
-        {:else}
-            {#each currentPageQuilts as quilt, i}
-                <a 
-                    class="quilt_card_container"
-                    href={`/quilts/${quilt.slug}`} 
-                    aria-label="link to ${quilt.name}"
-                >
-                    <QuiltCard quiltData={quilt} />
-                </a>
-                {:else}
-                    <p>No quilts fit search criteria.</p>
-            {/each}
-        {/if}
-    </div>
+        {/key}
+    {/if}
     <Pagination 
         bind:page={page}
         bind:pageChanged={pageChanged}
@@ -85,7 +93,14 @@
 
     /* end quilt search */
 
-	.quilts_container {
+    .quilts_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+	.quilts {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -111,7 +126,7 @@
     }
 
     @media screen and (max-width: 1200px) {
-        .quilts_container {
+        .quilts {
             gap: 0.75rem;
         }
     }
@@ -121,7 +136,7 @@
             width: 100%;
         }
 
-        .quilts_container {
+        .quilts {
             gap: 0.5rem;
         }
     }

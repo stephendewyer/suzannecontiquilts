@@ -770,7 +770,6 @@
 			position: relative;
 		}
 
-
 		.scrollable_search_container {
 			position: relative;
 			overflow-y: auto;

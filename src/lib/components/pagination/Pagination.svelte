@@ -10,9 +10,9 @@
 		if (p >= 0 && p < pageCount.length) {
 			page = p;
 			activePageID = page;
-		};
+		}
         pageChanged = true;
-	};
+	}
 
 </script>
 
