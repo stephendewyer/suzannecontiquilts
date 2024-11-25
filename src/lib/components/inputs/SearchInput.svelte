@@ -16,7 +16,7 @@
 		type="search" 
 		name="quilt_search" 
 		class="search_input"
-		placeholder="sample"
+		placeholder="quilt name"
 		bind:value={searchValue}
 		on:keyup={() => searchValueChanged = true}
 		on:input={() => searchValueChanged = true}
@@ -33,7 +33,7 @@
 	}
 
 	.label {
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		font-weight: 600;
 	}
 	
@@ -60,23 +60,23 @@
 
 	@media screen and (max-width: 1200px) {
 		.search_input {
-			font-size: 1.375rem;
+			font-size: 1.175rem;
 			border-width: 2px;
 		}
 
 		.label {
-			font-size: 1.375rem;
+			font-size: 1.175rem;
 		}
 	}
 
     @media (max-width: 750px) {
         .search_input {
-			font-size: 1.25rem;
+			font-size: 1rem;
 			border-width: 2px;
 		}
 
 		.label {
-			font-size: 1.25rem;
+			font-size: 1rem;
 		}
     }
 </style>

@@ -54,7 +54,6 @@
 </script>
 <div 
     class="quilts_container"
-    in:fade={{ delay: 250, duration: 300 }}
     style="width: 100%;"
 >
     {#if (pending)}
@@ -104,7 +103,7 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: flex-start;
 		width: 100%;
         gap: 1rem;
 	}

@@ -22,8 +22,10 @@
             on:click={tabSelected(tab.index)}
             on:keydown={tabSelected(tab.index)}
             id={`tabpanel_header_${tab.label}`}
-        >
-            {tab.label}
+        >   
+            <p class="label">
+                {tab.label}
+            </p>
             {#if (activeTab === tab.index)}
                 <div 
                     class="sewing_needle_container" 
@@ -45,27 +47,41 @@
         position: relative;
         list-style: none;
         margin: 0;
-        padding: 0;
+        padding: 0.25rem 0;
         display: flex;
         gap: 1rem;
         justify-content: center;
+        align-items: center;
     }
 
     li {
         position: relative;
-        pointer-events:all;
-        font-weight: 600;
+        pointer-events: all;
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-align: center;
-        justify-content: flex-end;
+        justify-content: space-between;
         width: 100%;
-        max-width: 12rem;
+        height: 100%;
+        max-width: 15rem;
         margin: 0;
         cursor: pointer;
-        transition: color 300ms ease-out, opacity 300ms linear;
-        font-size: 1.5rem;
+        gap: 0.5rem;
+    }
+
+    .label {
+        position: relative;
+        font-size: 1.25rem;
+        font-weight: 600;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: color 300ms ease-out, opacity 300ms linear; 
+        margin: 0;
+        padding: 0;
+        text-align: center;
     }
 
     .tab {
@@ -85,6 +101,7 @@
     .active_tab {
         opacity: 100%;
         color: #3B3E29;
+        transition: color 300ms ease-out;
     }
 
     .active_tab:active {
@@ -113,30 +130,39 @@
     .sewing_needle_container {
         position: relative;
         width: 10rem;
-        text-align: center;
+        display: flex;
+        transition: fill 300ms ease-out;
     }
 
     @media (max-width: 1200px) {
+
         .tabs_container {
             gap: 0.75rem;
         }
-        li {
-            font-size: 1.375rem;
+
+        .label {
+            font-size: 1.175rem;
         }
+
     }
 
     @media (max-width: 750px) {
+
         .tabs_container {
             gap: 0.5rem;
+            padding: 0 0.5rem;
         }
 
-        li {
-            font-size: 1.25rem;
+        .label {
+            font-size: 1rem;
+            min-width: 5rem;
         }
 
         .sewing_needle_container {
-            width: 5rem;
+            width: 100%;
+            max-width: 5rem;
             text-align: center;
         }
+        
     }
 </style>

@@ -41,13 +41,13 @@
 	];
 
 	const options = {
-		rewind  : true,
-		gap     : '1rem',
+		rewind: true,
+		gap: '1rem',
 		autoplay: true,
-		type      : 'loop',
-		arrows  : true,
+		type: 'loop',
+		arrows: true,
 		perPage: 1,
-	}
+	};
 </script>
 
 <svelte:head>

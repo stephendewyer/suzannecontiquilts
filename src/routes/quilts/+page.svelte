@@ -312,6 +312,8 @@
 	// $: console.log("search results height: ", quiltSearchResultsHeight)
 	// $: console.log("search height: ", searchHeight);
 
+	// $: console.log("quiltsNavHeight: ", quiltsNavHeight);
+
 	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - (searchContainerTopPosition);
 
 	let pageElement;
@@ -359,7 +361,7 @@
 			<div 
 				id="quilts_search_form_container_mobile"
 				class="{(searchFormIsActive) ? "quilt_search_form_container_open" : "quilt_search_form_container_closed"}"
-				style={ searchFormIsActive ? `height: ${searchHeight}px` : 'height: 0px;' }
+				style={ searchFormIsActive ? `height: ${searchHeight}px; top: ${quiltsNavHeight}px;` : `height: 0px; top: ${quiltsNavHeight}px;` }
 				bind:this={searchContainerElement}
 				bind:clientHeight={searchContainerHeight}
 			>
@@ -535,9 +537,7 @@
 	</div>
 </div>
 
-
 <style>
-
 	.page {
 		position: relative;
 		width: 100%;
@@ -548,7 +548,7 @@
 	#quilts_nav_bar {
 		padding: 0;
 		background-color: #F2D7F9;
-		width: 100%;	
+		width: 100%;
 	}
 
 	.search_quilts_nav_bar_relative {
@@ -573,7 +573,7 @@
 	#quilts_search_form_container_mobile {
 		position: absolute;
 		background-color: #FBECEC;
-		top: 10rem;
+		top: 0;
 	}
 
 	.quilt_search_form_container_open {
@@ -618,23 +618,20 @@
 		top: 0;
 		bottom: 0;
 		right: 0;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 1rem;
 	}
 
 	.quilts_tabs_container {
-		margin: 0 auto;
-		width: auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 		pointer-events: none;
-		padding-bottom: 1rem;
 	}
 
 	.category_name {
 		padding: 1rem 0;
 		margin: 0 auto;
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		font-weight: 600;
 	}
 
@@ -652,7 +649,7 @@
 	}
 
 	.inputs_container {
-		padding: 0 1rem;
+		padding: 0;
 	}
 
 	.clear_filters_container {
@@ -669,14 +666,13 @@
 		padding: 1rem;
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;;
 	}
 
 	.sort {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
-		padding: 0 1rem 1rem 1rem;
+		gap: 0.5rem;
+		padding: 0;
 		background-color: #DCE0E5;
 		width: 100%;
 	}
@@ -724,11 +720,7 @@
 			flex-direction: column;
 			justify-content: flex-start;
 		}
-
-		.filters {
-			gap: 0.75rem;
-		}
-
+		
 		.quilt_search_results {
 			padding: 0.75rem;
 		}
@@ -776,7 +768,6 @@
 		}
 
 		.sort {
-			gap: 0.75rem;
 			padding: 0 0.75rem 0.75rem 0.75rem;
 			width: 100%;
 			min-width: 100%;
@@ -786,37 +777,50 @@
 			padding-bottom: 0.75rem;
 		}
 
+		.category_name {
+			padding: 1rem 0;
+			font-size: 1.175rem;
+		}
+
 	}
 
 	@media (max-width: 750px) {
 
-		.quilts_tabs_container {
-			padding: 0 0.5rem 0.5rem 0.5rem;
-		}
-
 		.toggle_filters_and_sort_container {
-			padding: 0.25rem 0.5rem;
+			padding: 0.25rem;
 		}
 
 		.category_name {
-			font-size: 1.25rem;
+			font-size: 1rem;
 		}
 
 		/* begin mobile quilt search  */
+
+		.filters {
+			padding: 0.5rem;
+		}
 
 		.filters {
 			gap: 0.5rem;
 		}
 
 		.sort {
-			gap: 0.5rem;
-			padding: 0 0.5rem 0.5rem 0.5rem;
+			gap: 0.25rem;
+			padding: 0 0.5rem 0.25rem 0.5rem;
+		}
+
+		.inputs_container {
+			padding: 0;
+		}
+
+		.radio_buttons {
+			padding: 0 0.25rem;
 		}
 
 		/* end mobile quilt search */
 
 		.quilt_search_results {
-			padding: 0.5rem;
+			padding: 0.25rem;
 		}
 	}
 

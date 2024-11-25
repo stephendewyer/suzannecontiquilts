@@ -80,7 +80,7 @@
 		cursor: pointer;
 		gap: 1rem;
         transition: border 300ms ease-out;
-        padding: 0 0.5rem;;
+        padding: 0.5rem 1rem;
 	}
 
     .toggle_filters_and_sort:hover {
@@ -115,7 +115,7 @@
 	}
 
 	.arrow {
-		width: 1.25rem;
+		width: 1rem;
     	color: #3B3E29;
 		fill: #3B3E29;
 		will-change: fill;
@@ -124,7 +124,7 @@
 	}
 
 	.arrow_hovered {
-		width: 1.25rem;
+		width: 1rem;
 		color: #ED6545;
     	fill: #ED6545;
 		will-change: fill;
@@ -140,7 +140,7 @@
 	}
 
     .icon_container {
-		width: 2rem;
+		width: 1rem;
 		height: auto;
 		color: #3B3E29;
 		fill: #3B3E29;
@@ -150,15 +150,12 @@
 
     .label {
 		font-size: 1rem;
+        margin: 0;
 		font-weight: 800;
 		color: #3B3E29;
 		will-change: color;
 		transition: color 300ms ease-out;
 	}
-
-    .icon_container {
-        width: 1.75rem;
-    }
 
     @media screen and (max-width: 1200px) {
 
@@ -195,7 +192,7 @@
         }
 
         .icon_container {
-			width: 1.5rem;
+			width: 0.8rem;
 			height: auto;
 		}
 
