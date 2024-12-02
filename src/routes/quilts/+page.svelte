@@ -213,7 +213,7 @@
 		{
 			id: uuidv4(),
 			index: 2,
-			label: "quilts by Suzanne's ancestors",
+			label: "Suzanne's ancestors' quilts",
 			panel: QuiltResultsPanel,
 			data: quiltsBySuzanneContiAncestors
 		}

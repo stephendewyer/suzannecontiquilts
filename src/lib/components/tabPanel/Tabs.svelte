@@ -47,11 +47,12 @@
         position: relative;
         list-style: none;
         margin: 0;
-        padding: 0.25rem 0;
+        padding: 1rem 0;
         display: flex;
         gap: 1rem;
         justify-content: center;
         align-items: center;
+        width: 50rem;
     }
 
     li {
@@ -63,7 +64,6 @@
         justify-content: space-between;
         width: 100%;
         height: 100%;
-        max-width: 15rem;
         margin: 0;
         cursor: pointer;
         gap: 0.5rem;
@@ -73,6 +73,7 @@
         position: relative;
         font-size: 1.25rem;
         font-weight: 600;
+        width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -138,6 +139,7 @@
 
         .tabs_container {
             gap: 0.75rem;
+            padding: 0.75rem 0;
         }
 
         .label {
@@ -150,7 +152,7 @@
 
         .tabs_container {
             gap: 0.5rem;
-            padding: 0 0.5rem;
+            padding: 0.5rem 0.5rem;
         }
 
         .label {
