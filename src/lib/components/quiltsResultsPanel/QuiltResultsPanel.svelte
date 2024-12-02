@@ -100,16 +100,15 @@
     }
 
 	.quilts {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-start;
+		display: grid;
 		width: 100%;
-        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 1rem;
+        row-gap: 1rem;
 	}
 
     .quilt_card_container {
-        width: 32.5%;
+        width: 100%;
     }
 
 	.loading_spinner_container {
@@ -119,14 +118,24 @@
 	}
 
     @media (max-width: 1900px) {
-        .quilt_card_container {
-            width: 48%;
+        .quilts {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
     }
 
     @media screen and (max-width: 1200px) {
         .quilts {
-            gap: 0.75rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 1rem;
+            row-gap: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 1080px) {
+        .quilts {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            column-gap: 0.75rem;
+            row-gap: 0.75rem;
         }
     }
 
@@ -136,7 +145,9 @@
         }
 
         .quilts {
-            gap: 0.5rem;
+            grid-template-columns: repeat(1, minmax(0, 1fr));;
+            column-gap: 0.5rem;
+            row-gap: 0.5rem;
         }
     }
 

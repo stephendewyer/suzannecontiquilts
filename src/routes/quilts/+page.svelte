@@ -773,10 +773,6 @@
 			min-width: 100%;
 		}
 
-		.quilts_tabs_container {
-			padding-bottom: 0.75rem;
-		}
-
 		.category_name {
 			padding: 1rem 0;
 			font-size: 1.175rem;
@@ -820,7 +816,7 @@
 		/* end mobile quilt search */
 
 		.quilt_search_results {
-			padding: 0.25rem;
+			padding: 0.5rem;
 		}
 	}
 

@@ -80,7 +80,7 @@
 		position: relative;
         width: 100%;
         margin: 0;
-		height: 34rem;
+		height: 38rem;
         will-change: filter;
         transition: filter 0.2s linear;
 		filter: none;
@@ -93,7 +93,7 @@
     .quilt_card_hovered {
 		position: relative;
 		width: 100%;
-        height: 34rem;
+        height: 38rem;
         will-change: filter;
         transition: filter 0.2s linear;
 		filter: drop-shadow(0 0.5rem 0.5rem rgba(0, 0, 0, 0.25));
@@ -127,21 +127,31 @@
 
     @media (max-width: 1900px) {
         .quilt_card {
-            height: 30rem;
+            height: 32rem;
         }
 
         .quilt_card_hovered {
-            height: 30rem;
+            height: 32rem;
+        }
+    }
+
+    @media (max-width: 1900px) {
+        .quilt_card {
+            height: 28rem;
+        }
+
+        .quilt_card_hovered {
+            height: 28rem;
         }
     }
 
     @media (max-width: 1200px) {
         .quilt_card {
-            height: 26rem;
+            height: 24rem;
         }
 
         .quilt_card_hovered {
-            height: 26rem;
+            height: 24rem;
         }
 
     }
@@ -149,11 +159,11 @@
     @media (max-width: 750px) {
 
         .quilt_card {
-            height: 22rem;
+            height: 20rem;
         }
 
         .quilt_card_hovered {
-            height: 22rem;
+            height: 20rem;
         }
     }
 
