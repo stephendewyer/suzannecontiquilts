@@ -127,6 +127,7 @@
 		width: 6rem;
 		display: flex;
 		flex-direction: column;
+		text-align: center;
 		margin: auto 1rem auto 1rem;
 	}
 

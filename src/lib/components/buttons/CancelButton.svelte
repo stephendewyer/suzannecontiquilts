@@ -1,4 +1,5 @@
 <script>
+    export let disabled = false;
     export let clicked = false;
     let buttonHovered = false;
 </script>
@@ -22,10 +23,11 @@
     on:mouseout={() => {
         buttonHovered = false;
     }}
-    class="{ (buttonHovered) ? 'cancel_button_outer_hovered' : 'cancel_button_outer'}"
+    id="cancel_button"
+    class="{(disabled) ? 'cancel_button_outer_disable' : 'cancel_button_outer'}"
 >   
     <div 
-        class="{ (buttonHovered) ? 'cancel_button_inner_hovered' : 'cancel_button_inner'}"
+        class="{ (buttonHovered && !disabled) ? 'cancel_button_inner_hovered' : 'cancel_button_inner'}"
     >
         <slot/>
     </div>
@@ -47,12 +49,30 @@
         border-radius: 3rem;
     }
 
-    .cancel_button_outer:active {
+    .cancel_button_outer_disable {
+        border: none;
+        background-color: #B6B3B7;
+        color: #15060B;
+        padding: 0.125rem;
+        margin: 0 auto;
+        transition: padding 300ms linear;
+        will-change: padding;
+        display: flex;
+        flex-direction: row;
+        border-radius: 3rem;
+        opacity: 50%;
+    }
+
+    #cancel_button:disabled {
+        opacity: 50%;
+    }
+
+    #cancel_button:active {
         color: #B6B3B7;
         background-color: #15060B;
     }
 
-    .cancel_button_outer_hovered {
+    .cancel_button_outer:hover {
         border: none;
         padding: 0;
         margin: 0 auto;
@@ -64,11 +84,6 @@
         display: flex;
         flex-direction: row;
         border-radius: 3rem;
-    }
-
-    .cancel_button_outer_hovered:active {
-        color: #B6B3B7;
-        background-color: #15060B;
     }
 
     .cancel_button_inner {

@@ -15,6 +15,7 @@
 	import options from "$lib/data/options.json";
 	import SearchToggleButton from "$lib/components/buttons/SearchToggleButton.svelte";
 	import { v4 as uuidv4 } from "uuid";
+  	import ArrowButton from '../../lib/components/buttons/ArrowButton.svelte';
 
 	let searchFormIsActive = false;
 
@@ -220,44 +221,22 @@
 	];
 
 	let y = 0;
-
 	let innerWidth = 0;
-
 	let searchContainerHeight = 0;
-
 	let searchHeight = 0;
-
 	let quiltsNavHeight = 0;
-
 	let searchQuiltsNavBarElement;
-
 	let searchContainerElement;
-
 	let searchContainerTopPosition = 0;
-
     let quiltsTabsSticky = false;
-
 	let searchContainerSticky = false;
-
     let currentQuiltsTabsStickyPosition = 0;
-
 	let searchAbsolutePosition = 0;
-
 	let searchAbsolute = false;
-
 	let clearFiltersButtonHeight = 0;
-
 	let quiltSearchResultsHeight = 0;
-
-	// $: console.log("quilts search results height: ", quiltSearchResultsHeight);
-	// $: console.log("search quilts absolute position: ", searchAbsolutePosition);
-	// $: console.log("scrollable search height: ", scrollableSearchHeight)
-	// $: console.log("search container top position: ", searchContainerTopPosition);
-
 	let mobileScrollableSearchHeight = 0;
-
 	let scrollableSearchHeight = 0;
-
 	let innerHeight = 0;
 
     onMount(() => {
@@ -309,11 +288,6 @@
 		};
 	};
 
-	// $: console.log("search results height: ", quiltSearchResultsHeight)
-	// $: console.log("search height: ", searchHeight);
-
-	// $: console.log("quiltsNavHeight: ", quiltsNavHeight);
-
 	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - (searchContainerTopPosition);
 
 	let pageElement;
@@ -322,7 +296,19 @@
 		currentQuiltsTabsStickyPosition = pageElement?.getBoundingClientRect().top + window.scrollY;
 		searchContainerTopPosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY;
 	};
-	// $: console.log("current quilts tabs sticky position: ", currentQuiltsTabsStickyPosition);
+
+	let disableClearFiltersButton = false;
+
+	$: if (searchValue !== "") {
+		disableClearFiltersButton = false;
+	} else if (quiltPatternsSearchValues.length > 0) {
+		disableClearFiltersButton = false;
+	} else if (quiltTechniquesSearchValues.length > 0) {
+		disableClearFiltersButton = false;
+	} else {
+		disableClearFiltersButton = true;
+	};
+
 	
 </script>
 
@@ -376,6 +362,8 @@
 						class="scrollable_search_container"
 						style={`height: ${mobileScrollableSearchHeight}px;`}
 					>
+						<ArrowButton bind:openFilters={searchFormIsActive} />
+						<h2>filters</h2>
 						<div class="filters">
 							<SearchInput 
 								bind:searchValue={searchValue}
@@ -415,9 +403,7 @@
 							</div>
 						</div>
 						<div class="sort">
-							<h3 class="category_name">
-								order by
-							</h3>
+							<h2>sort</h2>
 							<div class="radio_buttons">
 								<RadioButtons 
 									options={options}
@@ -430,7 +416,9 @@
 						class="clear_filters_container"
 						bind:clientHeight={clearFiltersButtonHeight}
 					>
-						<ClearFiltersButton bind:clicked={clearFiltersClicked}>
+						<ClearFiltersButton 
+							bind:clicked={clearFiltersClicked}
+							disabled={disableClearFiltersButton}>
 							clear filters
 						</ClearFiltersButton>
 					</div>
@@ -463,6 +451,8 @@
 						class="scrollable_search_container"
 						style={`height: ${scrollableSearchHeight}px;`}
 					>
+					<ArrowButton bind:openFilters={searchFormIsActive} />
+					<h2>filters</h2>
 						<div class="filters">
 							<SearchInput 
 								bind:searchValue={searchValue}
@@ -502,9 +492,7 @@
 							</div>
 						</div>
 						<div class="sort">
-							<h3 class="category_name">
-								order by
-							</h3>
+							<h2>sort</h2>
 							<div class="radio_buttons">
 								<RadioButtons 
 									options={options}
@@ -517,7 +505,10 @@
 						class="clear_filters_container"
 						bind:clientHeight={clearFiltersButtonHeight}
 					>
-						<ClearFiltersButton bind:clicked={clearFiltersClicked}>
+						<ClearFiltersButton 
+							bind:clicked={clearFiltersClicked}
+							disabled={disableClearFiltersButton}
+						>
 							clear filters
 						</ClearFiltersButton>
 					</div>
@@ -659,6 +650,12 @@
 		gap: 0.25rem;
 		width: 100%;
 		padding: 1rem;
+		border-top: 1px;
+        border-right: 0;
+        border-left: 0;
+        border-bottom: 0;
+        border-style: solid;
+        border-color: #3B3E29;
 	}
 
 	.filters {
@@ -672,7 +669,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		padding: 0;
+		padding: 0 0 1rem 0;
 		background-color: #DCE0E5;
 		width: 100%;
 	}

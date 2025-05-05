@@ -1,4 +1,6 @@
 <script>
+    export let disabled = false;
+
     let buttonHovered = false;
 </script>
 
@@ -15,10 +17,11 @@
     on:mouseout={() => {
         buttonHovered = false;
     }}
-    class="{ (buttonHovered) ? 'submit_button_outer_hovered' : 'submit_button_outer'}"
+    class="{ (disabled) ? 'submit_button_disable' : 'submit_button'}"
+    disabled={disabled}
 >   
     <div 
-        class="{ (buttonHovered) ? 'submit_button_inner_hovered' : 'submit_button_inner'}"
+        class="{ (buttonHovered && !disabled) ? 'submit_button_inner_hovered' : 'submit_button_inner'}"
     >
         <slot/>
     </div>
@@ -26,7 +29,7 @@
 
 <style>
 
-    .submit_button_outer {
+    .submit_button {
         border: none;
         background-color: #D1E9D1;
         color: #15060B;
@@ -39,12 +42,7 @@
         border-radius: 3rem;
     }
 
-    .submit_button_outer:active {
-        background-color: #15060B;
-        color: #D1E9D1;
-    }
-
-    .submit_button_outer_hovered {
+    .submit_button:hover {
         border: none;
         padding: 0;
         background-color: #D1E9D1;
@@ -57,9 +55,26 @@
         border-radius: 3rem;
     }
 
-    .submit_button_outer_hovered:active {
+    .submit_button:active {
         background-color: #15060B;
         color: #D1E9D1;
+    }
+
+    .submit_button_disable {
+        border: none;
+        background-color: #D1E9D1;
+        color: #15060B;
+        padding: 0.125rem;
+        transition: padding 300ms linear;
+        will-change: padding;
+        display: flex;
+        flex-direction: row;
+        border-radius: 3rem;
+        opacity: 50%;
+    }
+
+    button:disabled {
+        opacity: 50%;
     }
 
     .submit_button_inner {
