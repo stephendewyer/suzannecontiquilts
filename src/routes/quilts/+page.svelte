@@ -249,7 +249,7 @@
 		searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
 	});
 
-    $: if (quiltSearchResultsHeight <= (scrollableSearchHeight + clearFiltersButtonHeight)) {
+    $: if (quiltSearchResultsHeight <= (searchHeight)) {
 		// quilt search results height is less than search container = no search absolute position
 		// handle for both mobile and desktop
 		searchAbsolute = false;
@@ -288,7 +288,7 @@
 		};
 	};
 
-	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - (searchContainerTopPosition);
+	$: scrollableSearchHeight = innerHeight - clearFiltersButtonHeight - searchContainerTopPosition;
 
 	let pageElement;
 
