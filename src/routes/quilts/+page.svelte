@@ -249,7 +249,7 @@
 		searchAbsolutePosition = searchContainerElement?.getBoundingClientRect().top + window.scrollY + (searchContainerHeight - searchHeight- quiltsNavHeight);
 	});
 
-    $: if (quiltSearchResultsHeight <= (searchHeight)) {
+    $: if (quiltSearchResultsHeight <= searchHeight) {
 		// quilt search results height is less than search container = no search absolute position
 		// handle for both mobile and desktop
 		searchAbsolute = false;
