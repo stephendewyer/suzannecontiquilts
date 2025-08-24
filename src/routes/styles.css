@@ -24,16 +24,19 @@ img {
 h1 {
 	font-weight: 200;
 	font-size: 1.75rem;
+	margin: 0;
 }
 
 h2 {
 	font-weight: 200;
 	font-size: 1.75rem;
+	margin: 0;
 }
 
 h3 {
 	font-weight: 200;
 	font-size: 1.75rem;
+	margin: 0;
 }
 
 button {

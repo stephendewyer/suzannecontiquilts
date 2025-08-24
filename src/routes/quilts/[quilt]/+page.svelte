@@ -381,12 +381,12 @@
         height: 100%;
         font-size: 1.75rem;
         text-align: left;
-        font-weight: bold;
     }
 
     .quilt_info_paragraphs {
         margin: 0;
         width: 60%;
+        font-weight: bold;
     }
 
     .buttons_container {

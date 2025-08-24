@@ -200,7 +200,7 @@
 		<div class="contact_content_container">
 			<div class="contact_form">
 				<h1 class="contact_heading">
-					send a message
+					send a Suzanne a message
 				</h1>
 				<img 
 					class="stitches"

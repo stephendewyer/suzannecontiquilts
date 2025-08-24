@@ -38,6 +38,7 @@
         font-size: 1.75rem;
         display: flex;
         flex-direction: column;
+        align-items: flex-end;
         background: none;
         border: none;
         cursor: pointer;
@@ -68,11 +69,11 @@
         transition: all 0.33s ease-out;
     }
 
-    .previous_button > .button_top > .arrow_icon_container > svg > path {
+    .arrow_icon_container {
         fill: #3B3E29;
     }
 
-    .previous_button > .button_top > .arrow_icon_container_hovered > svg > path {
+    .arrow_icon_container_hovered {
         fill: #3B3E29;
     }
 
