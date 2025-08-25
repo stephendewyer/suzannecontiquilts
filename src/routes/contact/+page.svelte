@@ -7,6 +7,7 @@
 	import ErrorFlashMessage from '$lib/components/flash_messages/Error.svelte';
 	import SuccessFlashMessage from '$lib/components/flash_messages/Success.svelte';
 	import PendingFlashMessage from '$lib/components/flash_messages/Pending.svelte';
+	import { PUBLIC_DOMAIN } from '$env/static/public';
 
 	let nameFirst = "";
 	let nameLast = "";
@@ -187,9 +188,14 @@
 </script>
 
 <svelte:head>
-	<title>contact - Suzanne Conti Quilts</title>
-	<meta name="description" content="contact Suzanne Conti Quilts" />
-	<meta property="og:image" content="{quiltHeader}" />
+	<title>Contact Suzanne Conti Quilts</title>
+	<meta name="description" content="Get in touch with Suzanne Conti to share something about her quilts or her ancestors' quilts." />
+	<link rel="canonical" href="https://suzannecontiquilts.vercel.app/contact" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Contact Suzanne Conti Quilts" />
+	<meta property="og:description" content="Get in touch with Suzanne Conti to share something about her quilts or her ancestors' quilts." />
+	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/contact" />
+	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltHeader}`} />
 </svelte:head>
 
 <div class="text-column">
@@ -200,8 +206,9 @@
 		<div class="contact_content_container">
 			<div class="contact_form">
 				<h1 class="contact_heading">
-					send a Suzanne a message
+					Have something to share about Suzanne's and her ancestors' quilts?
 				</h1>
+				<p>Suzanne would like to hear from you.  Please use the form to send a message.</p>
 				<img 
 					class="stitches"
 					src="{stitches}" 
@@ -379,13 +386,15 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: rgba(255,255,255,0.7);
+		background: rgba(255,255,255,0.7);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
 		border-radius: 3rem;
 	}
 
 	.contact_heading {
 		margin: 0 auto;
-		text-align: center;
+		text-align: left;
 		font-size: 2.5rem;
 	}
 

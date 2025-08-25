@@ -7,6 +7,7 @@
     import stitches from '$lib/images/icons/stitches.svg';
     import NextButton from '$lib/components/buttons/NextButton.svelte';
     import PrevButton from '$lib/components/buttons/PreviousButton.svelte';
+    import { PUBLIC_DOMAIN } from '$env/static/public';
 
     $: pagePath = $page.url.pathname;
     $: pageSlug = pagePath.slice(8);
@@ -26,6 +27,7 @@
             title = quilt.name;
             quiltID = quilt.id;
             currentQuiltPoster = `/images/quilts${quilt.images[0]}`;
+
             return quilt;
         };
     });
@@ -129,8 +131,14 @@
 
 <svelte:head>
 	<title>{title} - Suzanne Conti Quilts</title>
-	<meta name="description" content="search Suzanne Conti Quilts" />
-    <meta property="og:image" content={currentQuiltPoster} />
+	<meta name="description" content={`Explore the ‘${title}’ quilt by Suzanne Conti—an exquisite textile piece crafted with precision and creativity.`} />
+    <meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltImages[0].substring(1)}`} />
+    <link rel="canonical" href={`https://suzannecontiquilts.vercel.app/quilts/${pageSlug}` }/>
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Alaska North Pole Quilt | Suzanne Conti Quilts" />
+    <meta property="og:description" content={`Explore the ‘${title}’ quilt by Suzanne Conti—an exquisite textile piece crafted with precision and creativity.`}/>
+    <meta property="og:url" content={`https://suzannecontiquilts.vercel.app/quilts/${pageSlug}` } />
+
 </svelte:head>
 
 <div class="quilt">

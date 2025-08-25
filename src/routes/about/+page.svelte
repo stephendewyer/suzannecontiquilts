@@ -12,6 +12,7 @@
 	import inspiration01 from '$lib/images/inspiration/inspiration-Katherine_Marie_Jurkiewicz.jpg';
 	import inspiration02 from '$lib/images/inspiration/inspiration-grandson.jpg';
 	import inspiration04 from '$lib/images/inspiration/inspiration-Savannah,_Georgia.jpg';
+	import { PUBLIC_DOMAIN } from '$env/static/public';
 
 	const inspiration = [
 		{
@@ -51,9 +52,14 @@
 </script>
 
 <svelte:head>
-	<title>about - Suzanne Conti Quilts</title>
-	<meta name="description" content="about Suzanne Conti" />
-	<meta property="og:image" content="{quiltHeader}" />
+	<title>About Suzanne Conti | Quilt Artist</title>
+	<meta name="description" content="Discover the story of Suzanne Conti, a quilt artist dedicated to craftsmanship, creativity, and preserving the beauty of textile traditions." />
+	<link rel="canonical" href="https://suzannecontiquilts.vercel.app/about" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="About Suzanne Conti | Quilt Artist" />
+	<meta property="og:description" content="Discover the story of Suzanne Conti, a quilt artist dedicated to craftsmanship, creativity, and textile traditions." />
+	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/about" />
+	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${aboutImage01}`} />
 </svelte:head>
 
 <div class="text-column">
@@ -163,7 +169,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: rgba(255,255,255,0.7);
+		background: rgba(255,255,255,0.7);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
 		border-radius: 3rem;
 	}
 

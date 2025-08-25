@@ -16,6 +16,7 @@
 	import SearchToggleButton from "$lib/components/buttons/SearchToggleButton.svelte";
 	import { v4 as uuidv4 } from "uuid";
   	import ArrowButton from '../../lib/components/buttons/ArrowButton.svelte';
+	import { PUBLIC_DOMAIN } from '$env/static/public';
 
 	let searchFormIsActive = false;
 
@@ -313,9 +314,14 @@
 </script>
 
 <svelte:head>
-	<title>search quilts - Suzanne Conti Quilts</title>
-	<meta name="description" content="search Suzanne Conti Quilts" />
-	<meta property="og:image" content="{quiltHeader}" />
+	<title>Quilt Gallery | Suzanne Conti Quilts</title>
+	<meta name="description" content="Browse the quilt gallery by Suzanne Conti and her ancestors. Each quilt tells a story through patterns, fabrics, and craftsmanship." />
+	<link rel="canonical" href="https://suzannecontiquilts.vercel.app/quilts" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Quilt Gallery | Suzanne Conti Quilts" />
+	<meta property="og:description" content="Browse the quilt gallery by Suzanne Conti and her ancestors. Each quilt tells a story through patterns, fabrics, and craftsmanship." />
+	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/quilts" />
+	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltHeader}`} />
 </svelte:head>
 <svelte:window 
 	bind:innerWidth 
