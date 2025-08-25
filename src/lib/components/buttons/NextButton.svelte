@@ -41,6 +41,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    text-align: left;
 }
 
 .button_top {
