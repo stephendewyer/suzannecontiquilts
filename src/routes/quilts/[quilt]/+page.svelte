@@ -132,7 +132,7 @@
 <svelte:head>
 	<title>{title} - Suzanne Conti Quilts</title>
 	<meta name="description" content={`Explore the ‘${title}’ quilt by Suzanne Conti—an exquisite textile piece crafted with precision and creativity.`} />
-    <meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltImages[0].substring(1)}`} />
+    <meta property="og:image" content={`${PUBLIC_DOMAIN}${quiltImages[0].substring(1)}`} />
     <link rel="canonical" href={`https://suzannecontiquilts.vercel.app/quilts/${pageSlug}` }/>
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Alaska North Pole Quilt | Suzanne Conti Quilts" />

@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="canonical" href="https://suzannecontiquilts.vercel.app/" />
 	<meta property="og:title" content="Suzanne Conti Quilts | Fine Quilts & Textile Art" />
-	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltHeader}`} />
+	<meta property="og:image" content={`${PUBLIC_DOMAIN}${quiltHeader}`} />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/" />
 </svelte:head>

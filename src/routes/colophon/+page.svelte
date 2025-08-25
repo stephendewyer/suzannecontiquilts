@@ -15,7 +15,7 @@
     <meta property="og:title" content="Colophon | Suzanne Conti Quilts" />
     <meta property="og:description" content="Discover the design, development, and creative credits behind the Suzanne Conti Quilts website." />
     <meta property="og:url" content="https://suzannecontiquilts.vercel.app/colophon" />
-    <meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltHeader}`} />
+    <meta property="og:image" content={`${PUBLIC_DOMAIN}${quiltHeader}`} />
 </svelte:head>
 
 <section 

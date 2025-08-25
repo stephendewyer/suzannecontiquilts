@@ -195,7 +195,7 @@
 	<meta property="og:title" content="Contact Suzanne Conti Quilts" />
 	<meta property="og:description" content="Get in touch with Suzanne Conti to share something about her quilts or her ancestors' quilts." />
 	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/contact" />
-	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltHeader}`} />
+	<meta property="og:image" content={`${PUBLIC_DOMAIN}${quiltHeader}`} />
 </svelte:head>
 
 <div class="text-column">

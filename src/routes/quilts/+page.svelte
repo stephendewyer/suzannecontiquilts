@@ -321,7 +321,7 @@
 	<meta property="og:title" content="Quilt Gallery | Suzanne Conti Quilts" />
 	<meta property="og:description" content="Browse the quilt gallery by Suzanne Conti and her ancestors. Each quilt tells a story through patterns, fabrics, and craftsmanship." />
 	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/quilts" />
-	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${quiltHeader}`} />
+	<meta property="og:image" content={`${PUBLIC_DOMAIN}${quiltHeader}`} />
 </svelte:head>
 <svelte:window 
 	bind:innerWidth 

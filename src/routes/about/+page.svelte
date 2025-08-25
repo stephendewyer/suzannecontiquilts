@@ -59,7 +59,7 @@
 	<meta property="og:title" content="About Suzanne Conti | Quilt Artist" />
 	<meta property="og:description" content="Discover the story of Suzanne Conti, a quilt artist dedicated to craftsmanship, creativity, and textile traditions." />
 	<meta property="og:url" content="https://suzannecontiquilts.vercel.app/about" />
-	<meta property="og:image" content={`https://${PUBLIC_DOMAIN}${aboutImage01}`} />
+	<meta property="og:image" content={`${PUBLIC_DOMAIN}${aboutImage01}`} />
 </svelte:head>
 
 <div class="text-column">
